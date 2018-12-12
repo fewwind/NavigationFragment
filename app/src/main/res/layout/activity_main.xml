@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <android.support.design.widget.CoordinatorLayout
@@ -28,23 +29,26 @@
                 android:id="@+id/collbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#39b7b0"
+                android:background="@color/colorPrimary"
                 android:fitsSystemWindows="true"
                 app:toolbarId="@+id/tool_bar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <com.chaozhuo.parentmanager.weight.AlignTextView
+                    android:id="@+id/header_bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
                     android:gravity="center"
                     android:text="toolbar"
                     android:textSize="25dp"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/tool_bar"
+                    android:fitsSystemWindows="true"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="#39b7b0"
+                    android:background="@color/colorPrimary"
                     android:elevation="0dp"
                     app:layout_collapseMode="pin"
                     app:titleTextColor="@android:color/white"></android.support.v7.widget.Toolbar>

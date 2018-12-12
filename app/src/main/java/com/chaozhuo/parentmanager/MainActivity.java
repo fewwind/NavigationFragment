@@ -15,11 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.chaozhuo.parentmanager.fragment.ManagerFragment;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
+import com.chaozhuo.parentmanager.weight.AlignTextView;
 import com.chaozhuo.utils.ui.ToastUtils;
 import com.orhanobut.logger.Logger;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolBar;
     private AppBarLayout mAppBar;
     private CollapsingToolbarLayout mCollLayout;
-
+    private AlignTextView mHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         mToolBar = findViewById(R.id.tool_bar);
         mAppBar = findViewById(R.id.appbar);
         mCollLayout = findViewById(R.id.collbar);
+        mHeader = findViewById(R.id.header_bg);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         if (savedInstanceState == null) {
@@ -54,34 +55,28 @@ public class MainActivity extends AppCompatActivity {
             mCurTag = savedInstanceState.getString("TAG");
         }
         initToolBar(mCurTag);
-        mCollLayout.getBackground().setAlpha(0);
-        mToolBar.getBackground().setAlpha(0);
+//        mHeader.getBackground().setAlpha(0);
         mAppBar.addOnOffsetChangedListener(new AppBarLayout.BaseOnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
                 Logger.v(" appBar = " + i);
                 float alpha = Math.abs(i) / 300f;
                 alpha = Math.min(alpha, 1.0f);
-                mCollLayout.getBackground().setAlpha((int) (255 * alpha));
-                mToolBar.getBackground().setAlpha((int) (255 * alpha));
+                mHeader.getBackground().setAlpha((int) (255 * alpha));
+//                mToolBar.getBackground().setAlpha((int) (255 * alpha));
             }
         });
-        mCollLayout.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-            @Override
-            public void onViewAttachedToWindow(View view) {
-                Logger.w("attatch");
-            }
-
-            @Override
-            public void onViewDetachedFromWindow(View view) {
-                Logger.e("detach");
-            }
-        });
+        mAppBar.setExpanded(true);
     }
 
     private void initToolBar(String mCurTag) {
 //        mToolBar.setVisibility(mCurTag.equals(STATISTICS_FRAGMENT) ? View.GONE : View.VISIBLE);
-//        mToolBar.setTitle(mCurTag);
+        mToolBar.setTitle("Learn");
+        if (mCurTag.equals(STATISTICS_FRAGMENT)){
+
+        } else {
+            mAppBar.setExpanded(false);
+        }
     }
 
     private String mCurTag;
