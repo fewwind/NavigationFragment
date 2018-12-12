@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,7 +40,7 @@ public class StatisticsFragmentToday extends BaseRefreshFragment {
         if (getArguments() != null) {
         }
         for (int i = 0; i < 20; i++) {
-            mDatas.add("==" + i);
+//            mDatas.add("==" + i);
         }
     }
 
@@ -61,12 +60,8 @@ public class StatisticsFragmentToday extends BaseRefreshFragment {
             }
         };
         mAdapter = new HeaderWrapperAdapter(adapterRV);
-        TextView tv = new TextView(getActivity());
-        tv.setText("I am Header");
-        tv.setTextSize(16);
-        tv.setGravity(Gravity.CENTER);
 
-        mAdapter.addHeaderView(tv);
+        mAdapter.addHeaderView(mEmptyView);
         mRv.setAdapter(mAdapter);
         mRv.postDelayed(new Runnable() {
             @Override
@@ -75,14 +70,20 @@ public class StatisticsFragmentToday extends BaseRefreshFragment {
             }
         }, 2000);
     }
+
     int count = 0;
+
     @Override
     public void onRefresh() {
         for (int i = 0; i < 1; i++) {
             mDatas.add(0, "new  =" + count);
         }
         count++;
-        mAdapter.notifyItemInserted(1);
+        TextView tv = new TextView(getActivity());
+        tv.setText("I am Header");
+        mAdapter.removeHeaderView(mEmptyView);
+        mAdapter.addHeaderView(tv);
+        mAdapter.notifyDataSetChanged();
         mRefreshLayout.setRefreshing(false);
     }
 }

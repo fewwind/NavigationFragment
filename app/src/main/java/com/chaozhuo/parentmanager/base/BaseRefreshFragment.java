@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.chaozhuo.parentmanager.R;
+import com.chaozhuo.parentmanager.weight.EmptyView;
 
 /**
  * Created by fewwind on 18-12-4.
@@ -14,12 +15,13 @@ import com.chaozhuo.parentmanager.R;
 public abstract class BaseRefreshFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     protected SwipeRefreshLayout mRefreshLayout;
-
+    protected EmptyView mEmptyView;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
         mRefreshLayout.setRefreshing(true);
         mRefreshLayout.setOnRefreshListener(this);
+        if (mEmptyView == null) mEmptyView = new EmptyView(view.getContext());
+        super.onViewCreated(view, savedInstanceState);
     }
 }

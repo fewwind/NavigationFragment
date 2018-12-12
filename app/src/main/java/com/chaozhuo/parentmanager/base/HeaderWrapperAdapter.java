@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
+
 /**
  * Created by fewwind on 18-12-4.
  */
@@ -18,6 +20,7 @@ public class HeaderWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
     private SparseArrayCompat<View> mFootViews = new SparseArrayCompat<>();
+    private View mEmptyView;
     private RecyclerView.Adapter mInnerAdapter;
 
     public HeaderWrapperAdapter(RecyclerView.Adapter adapter) {
@@ -27,6 +30,7 @@ public class HeaderWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        Logger.v(i + " * CreatHOlder = " + mHeaderViews.get(i));
         if (mHeaderViews.get(i) != null) {
             return ViewHolderRV.createViewHolder(viewGroup.getContext(), mHeaderViews.get(i));
         } else if (mFootViews.get(i) != null) {
@@ -77,7 +81,18 @@ public class HeaderWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 
     public void addHeaderView(View view) {
+        int indexOfValue = mHeaderViews.indexOfValue(view);
+        if (indexOfValue >= 0) return;
         mHeaderViews.put(mHeaderViews.size() + BASE_ITEM_TYPE_HEADER, view);
+        notifyItemInserted(mHeaderViews.indexOfValue(view));
+    }
+
+    public void removeHeaderView(View view) {
+        int indexOfValue = mHeaderViews.indexOfValue(view);
+        if (indexOfValue < 0) return;
+        mHeaderViews.removeAt(indexOfValue);
+        notifyItemRemoved(indexOfValue);
+        if (mRecyclerView != null) mRecyclerView.removeView(view);
     }
 
     public void addFootView(View view) {
@@ -92,9 +107,12 @@ public class HeaderWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
         return mFootViews.size();
     }
 
+    private RecyclerView mRecyclerView;
+
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
         mInnerAdapter.onAttachedToRecyclerView(recyclerView);
         final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
@@ -115,5 +133,11 @@ public class HeaderWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
             });
             gridLayoutManager.setSpanCount(gridLayoutManager.getSpanCount());
         }
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        mRecyclerView = null;
     }
 }
