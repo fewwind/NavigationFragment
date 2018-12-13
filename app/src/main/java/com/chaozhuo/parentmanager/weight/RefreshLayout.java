@@ -57,6 +57,14 @@ public class RefreshLayout extends LinearLayout {
         setLayoutParams(paramsLayout);
         mScroll = getChildAt(1);
     }
+/*    public void setY(float y) {
+        setTranslationY(y - mTop);
+    }
+    指的是view相对于父view顶部的绝对值，
+    setTranslationY（）
+    指的是相对于父view的偏移量
+    假如当前view距离父view顶部200，如果setY（100）。此view会向上移动100，setTranslationY（100），次view会向下移动100
+    setY()和scrollTo()很相似，都是向对于某个位置，二setTranslationY scrollBy都是绝对位置，指的是偏移量*/
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -92,7 +100,14 @@ public class RefreshLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 int offset = (int) (ev.getY() - touchY);
+                MarginLayoutParams layoutParams = (MarginLayoutParams) getLayoutParams();
+                Logger.d(layoutParams.topMargin + " = " + ev.getY() + " ** " + touchY + " ** " + offset);
                 scrollTo(0, -offset / 2);
+
+//                setY(offset/2);
+
+//                scrollBy(0,-offset/2);
+//                touchY = (int) ev.getY();
                 break;
             case MotionEvent.ACTION_UP:
                 touchY = 0;
