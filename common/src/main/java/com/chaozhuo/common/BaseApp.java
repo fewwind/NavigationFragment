@@ -1,4 +1,4 @@
-package com.chaozhuo.parentmanager;
+package com.chaozhuo.common;
 
 import android.app.Application;
 
@@ -6,14 +6,15 @@ import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
 /**
- * Created by fewwind on 18-12-4.
+ * Created by fewwind on 18-12-26.
  */
 
-public class App extends Application {
-
+public class BaseApp extends Application {
+    public static BaseApp app;
     @Override
     public void onCreate() {
         super.onCreate();
+        app = this;
         Logger.init("ParentMG").setLogLevel(BuildConfig.DEBUG ? LogLevel.FULL : LogLevel.NONE);
     }
 }

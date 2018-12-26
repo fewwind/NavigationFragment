@@ -21,7 +21,6 @@ import com.chaozhuo.parentmanager.fragment.ManagerFragment;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
-import com.chaozhuo.utils.ui.ToastUtils;
 import com.orhanobut.logger.Logger;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,29 +28,22 @@ public class MainActivity extends AppCompatActivity {
     public static final String STATISTICS_FRAGMENT = "statistics_fragment";
     public static final String MANAGER_FRAGMENT = "manager_fragment";
     public static final String MY_FRAGMENT = "my_fragment";
-
+    public static final String EXTRA_FRAGMENT = "start_fragment";
     private ContentFragmentFactory mFactory;
     private Toolbar mToolBar;
     private AppBarLayout mAppBar;
     private CollapsingToolbarLayout mCollLayout;
     private AlignTextView mHeader;
+    private BottomNavigationView navigation;
+    private String mCurTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (mFactory == null) mFactory = new ContentFragmentFactory();
-        mToolBar = findViewById(R.id.tool_bar);
-        mAppBar = findViewById(R.id.appbar);
-        mCollLayout = findViewById(R.id.collbar);
-        mHeader = findViewById(R.id.header_bg);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initView();
         if (savedInstanceState == null) {
-            FragmentManager fm = getFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            transaction.add(R.id.main_container, mFactory.getFragment(STATISTICS_FRAGMENT), STATISTICS_FRAGMENT).commitAllowingStateLoss();
-            mCurTag = STATISTICS_FRAGMENT;
+            showFragByIntent(getIntent());
         } else {
             mCurTag = savedInstanceState.getString("TAG");
         }
@@ -71,17 +63,35 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
+    private void initView() {
+        if (mFactory == null) mFactory = new ContentFragmentFactory();
+        mToolBar = findViewById(R.id.tool_bar);
+        mAppBar = findViewById(R.id.appbar);
+        mCollLayout = findViewById(R.id.collbar);
+        mHeader = findViewById(R.id.header_bg);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
     private void initToolBar(String mCurTag) {
 //        mToolBar.setVisibility(mCurTag.equals(STATISTICS_FRAGMENT) ? View.GONE : View.VISIBLE);
         mToolBar.setTitle("Learn");
-        if (mCurTag.equals(STATISTICS_FRAGMENT)){
-
+        if (mCurTag.equals(STATISTICS_FRAGMENT)) {
         } else {
             mAppBar.setExpanded(false);
         }
     }
 
-    private String mCurTag;
+    public void showFragByIntent(Intent intent) {
+        String stringExtra = intent.getStringExtra(EXTRA_FRAGMENT);
+        if (TextUtils.isEmpty(stringExtra)) {
+            if (TextUtils.isEmpty(mCurTag)) switchFragmentByTag(STATISTICS_FRAGMENT);
+        } else {
+            switchFragmentByTag(stringExtra);
+        }
+        if (mCurTag.equals(MANAGER_FRAGMENT))
+            navigation.setSelectedItemId(R.id.navigation_dashboard);
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -162,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
             launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             ctx.startActivity(launch);
         } catch (Exception e) {
-            ToastUtils.showToast(ctx, "打开失败");
             e.printStackTrace();
         }
     }
