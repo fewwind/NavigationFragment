@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.MenuItem;
 
+import com.chaozhuo.login.LoginActivity;
 import com.chaozhuo.parentmanager.fragment.ManagerFragment;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mAppBar.setExpanded(true);
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     private void initToolBar(String mCurTag) {
