@@ -101,10 +101,11 @@ public class RefreshLayout extends LinearLayout {
             case MotionEvent.ACTION_MOVE:
                 int offset = (int) (ev.getY() - touchY);
                 MarginLayoutParams layoutParams = (MarginLayoutParams) getLayoutParams();
-                Logger.d(layoutParams.topMargin + " = " + ev.getY() + " ** " + touchY + " ** " + offset);
+                Logger.d(getY() + " = " + ev.getY() + " ** " + touchY + " ** " + offset);
                 scrollTo(0, -offset / 2);
 
-//                setY(offset/2);
+//                setTranslationY(offset/2);
+                //TranslationY 配合 up 时translationY(0)也可以实现下拉刷洗和回弹效果,getY() = transY +getTop();
 
 //                scrollBy(0,-offset/2);
 //                touchY = (int) ev.getY();
@@ -114,6 +115,8 @@ public class RefreshLayout extends LinearLayout {
                 if (mHeight <= Math.abs(getScrollY()))
                     onRefresh();
                 else reset();
+
+//                animate().translationY(0).setDuration(366);
                 break;
         }
         return super.onTouchEvent(ev);
