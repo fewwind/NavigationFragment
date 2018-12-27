@@ -16,12 +16,11 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.MenuItem;
 
-import com.chaozhuo.login.LoginActivity;
 import com.chaozhuo.parentmanager.fragment.ManagerFragment;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
+import com.chaozhuo.parentmanager.test.simpleplugin.LoadPlugin;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
-import com.orhanobut.logger.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mAppBar.addOnOffsetChangedListener(new AppBarLayout.BaseOnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-                Logger.v(" appBar = " + i);
+//                Logger.v(" appBar = " + i);
                 float alpha = Math.abs(i) / 300f;
                 alpha = Math.min(alpha, 1.0f);
                 mHeader.getBackground().setAlpha((int) (255 * alpha));
@@ -60,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mAppBar.setExpanded(true);
-        startActivity(new Intent(this, LoginActivity.class));
+//        startActivity(new Intent(this, LoginActivity.class));
+        LoadPlugin.load();
     }
 
     private void initView() {

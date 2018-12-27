@@ -15,6 +15,6 @@ public class BaseApp extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        Logger.init("ParentMG").setLogLevel(BuildConfig.DEBUG ? LogLevel.FULL : LogLevel.NONE);
+        Logger.init("Keep").setLogLevel(BuildConfig.DEBUG ? LogLevel.FULL : LogLevel.NONE);
     }
 }
