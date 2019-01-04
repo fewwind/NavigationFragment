@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mAppBar.setExpanded(true);
-//        startActivity(new Intent(this, LoginActivity.class));
         LoadPlugin.load();
     }
 
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         mAppBar = findViewById(R.id.appbar);
         mCollLayout = findViewById(R.id.collbar);
         mHeader = findViewById(R.id.header_bg);
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 

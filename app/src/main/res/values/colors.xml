@@ -7,4 +7,9 @@
 
     <color name="bottom_select">#333333</color>
     <color name="bottom_normal">#BBBBBB</color>
+
+    <color name="progress_0">#FF5DDD45</color>
+    <color name="progress_1">#FF0091FF</color>
+    <color name="progress_2">#FFFFD944</color>
+    <color name="progress_3">#FFFF443A</color>
 </resources>
