@@ -16,10 +16,10 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.MenuItem;
 
+import com.chaozhuo.parentmanager.activity.Sub0Activity;
 import com.chaozhuo.parentmanager.fragment.ManagerFragment;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
-import com.chaozhuo.parentmanager.test.simpleplugin.LoadPlugin;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mAppBar.setExpanded(true);
-        LoadPlugin.load();
+//        LoadPlugin.load();
     }
 
     private void initView() {
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     switchFragmentByTag(STATISTICS_FRAGMENT);
+                    Sub0Activity.start(MainActivity.this);
                     return true;
                 case R.id.navigation_dashboard:
                     switchFragmentByTag(MANAGER_FRAGMENT);

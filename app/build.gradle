@@ -45,4 +45,5 @@ dependencies {
         implementation project(':login')
     }
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
