@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     switchFragmentByTag(STATISTICS_FRAGMENT);
+                    com.chaozhuo.parentmanager.weight.window.ViewManager.get().addAllView();
                     Sub0Activity.start(MainActivity.this);
                     return true;
                 case R.id.navigation_dashboard:
