@@ -86,7 +86,7 @@ public class RefreshLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_UP:
                 Logger.i("ACTION_UP " + vS);
-                return true;
+//                return true;
         }
         return super.onInterceptTouchEvent(ev);
     }

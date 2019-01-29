@@ -7,7 +7,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.meishe.sdkdemo.MSApplication;
+
+import com.chaozhuo.parentmanager.App;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class MediaScannerUtil {
     private static final String TAG = "MediaScannerUtil";
     private static final MediaScannerClient client = new MediaScannerClient();
-    private static MediaScannerConnection mediaScanConn = new MediaScannerConnection(MSApplication.getmContext().getApplicationContext(), client);
+    private static MediaScannerConnection mediaScanConn = new MediaScannerConnection(App.app.getApplicationContext(), client);
     private static List<MediaScannerCallBack> callBackList = new ArrayList<>();
 
     private static final Queue<Entity> sPendingScanList = new ConcurrentLinkedQueue<>();
