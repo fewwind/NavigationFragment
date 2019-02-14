@@ -10,21 +10,27 @@ import android.util.ArrayMap;
 public class FragmentFactory {
     public static ArrayMap<String, Fragment> mFragments = new ArrayMap<>();
 
-    public static Fragment creat(String type) {
-        Fragment fragment = mFragments.get(type);
+    public static Fragment creat(Class<? extends Fragment> type) {
+        Fragment fragment = mFragments.get(type.getSimpleName());
         if (fragment != null) return fragment;
-        switch (type) {
-            case LearnListFragment.VP_FRAG:
-                fragment = ManagerFragment.newInstance();
-                break;
-            case LearnListFragment.TOUCH_FRAG:
-                fragment = TouchFragment.newInstance();
-                break;
-            case LearnListFragment.VIEW_FRAG:
-                fragment = ManagerFragment.newInstance();
-                break;
+        try {
+            fragment = type.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mFragments.put(type, fragment);
+        mFragments.put(type.getSimpleName(), fragment);
         return fragment;
     }
+
+//    public static <T extends Fragment> Fragment creat(Class<T> type) {
+//        T fragment = (T) mFragments.get(type.getSimpleName());
+//        if (fragment != null) return fragment;
+//        try {
+//            fragment = type.newInstance();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        mFragments.put(type.getSimpleName(), fragment);
+//        return fragment;
+//    }
 }

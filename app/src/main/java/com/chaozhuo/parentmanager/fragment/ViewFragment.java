@@ -7,15 +7,15 @@ import android.view.View;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
 
-public class ManagerFragment extends BaseFragment {
+public class ViewFragment extends BaseFragment {
 
-    public ManagerFragment() {
+    public ViewFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
     public static Fragment newInstance() {
-        ManagerFragment fragment = new ManagerFragment();
+        ViewFragment fragment = new ViewFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

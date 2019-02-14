@@ -85,8 +85,8 @@ public class RefreshLayout extends LinearLayout {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                Logger.i("ACTION_UP " + vS);
-//                return true;
+//                Logger.i("ACTION_UP " + vS);
+//                return true; // 返回true 子view会收不到up,导致点击事件失效
         }
         return super.onInterceptTouchEvent(ev);
     }

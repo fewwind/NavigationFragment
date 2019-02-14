@@ -27,7 +27,7 @@ public abstract class BasePresenter<V extends IBaseView, M extends IBaseModel> {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 if (isViewAlive()) {
-                    return method.invoke(args);
+                    return method.invoke(weakReference.get(), args);
                 }
                 return null;
             }
@@ -48,10 +48,11 @@ public abstract class BasePresenter<V extends IBaseView, M extends IBaseModel> {
         return mView;
     }
 
-    protected void showLoading(){
+    protected void showLoading() {
         getView().showLoaind();
     }
-    protected void dismissLoading(){
+
+    protected void dismissLoading() {
         getView().dismissLoad();
     }
 

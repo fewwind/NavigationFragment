@@ -15,19 +15,17 @@
  */
 package com.chaozhuo.parentmanager.test.okhttp;
 
-import java.io.IOException;
-
 /**
  * Observes, modifies, and potentially short-circuits requests going out and the corresponding
  * responses coming back in. Typically interceptors add, remove, or transform headers on the request
  * or response.
  */
 public interface Interceptor {
-    String intercept(Chain chain) throws IOException;
+    String intercept(Chain chain);
 
     interface Chain {
         String request();
-        String proceed(String request) throws IOException;
 
+        String proceed(String request);
     }
 }

@@ -53,11 +53,11 @@ public class LearnListFragment extends BaseFragment {
         CommonAdapterRV adapterRV = new CommonAdapterRV<FragmentBean>(getActivity(), mDatas, R.layout.item_apply_history) {
             @Override
             public void convert(ViewHolderRV holder, final FragmentBean bean) {
-                holder.setText(R.id.manager_history_agree, bean.name);
+                holder.setText(R.id.manager_history_agree, bean.fragment.getSimpleName());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (mListener != null) mListener.click(bean.name);
+                        if (mListener != null) mListener.click(bean.fragment);
                     }
                 });
             }
@@ -69,7 +69,7 @@ public class LearnListFragment extends BaseFragment {
     public IFragClick mListener;
 
     public interface IFragClick {
-        void click(String type);
+        void click(Class type);
     }
 
     @Override
@@ -81,12 +81,13 @@ public class LearnListFragment extends BaseFragment {
     }
 
     private void makeList() {
-        mDatas.add(new FragmentBean(VP_FRAG));
-        mDatas.add(new FragmentBean(VIEW_FRAG));
-        mDatas.add(new FragmentBean(TOUCH_FRAG));
+        mDatas.add(new FragmentBean(ViewFragment.class));
+        mDatas.add(new FragmentBean(TouchFragment.class));
+        mDatas.add(new FragmentBean(NetFragment.class));
     }
 
-    public static final String VP_FRAG = "ViewPager_Fragment";
-    public static final String VIEW_FRAG = "view_Fragment";
-    public static final String TOUCH_FRAG = "touch_Fragment";
+//    public static final String VP_FRAG = "ViewPager_Fragment";
+//    public static final String VIEW_FRAG = "view_Fragment";
+//    public static final String TOUCH_FRAG = "touch_Fragment";
+//    public static final String NET_FRAG = "net_Fragment";
 }

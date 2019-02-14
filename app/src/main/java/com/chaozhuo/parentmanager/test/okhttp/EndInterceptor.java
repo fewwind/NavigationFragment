@@ -1,8 +1,6 @@
 package com.chaozhuo.parentmanager.test.okhttp;
 
-import com.orhanobut.logger.Logger;
-
-import java.io.IOException;
+import java.util.Random;
 
 /**
  * Created by fewwind on 18-12-28.
@@ -10,8 +8,11 @@ import java.io.IOException;
 
 public class EndInterceptor implements Interceptor {
     @Override
-    public String intercept(Chain chain) throws IOException {
-        Logger.e("EndInterceptor ");
-        return "EndInterceptor";
+    public String intercept(Chain chain) {
+        if (new Random().nextInt(10) % 2 == 0) {
+            return "EndInterceptor Error";
+        } else {
+            return "EndInterceptor";
+        }
     }
 }

@@ -29,7 +29,8 @@ public class FrameLayoutB extends FrameLayout {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Logger.v(getClass().getSimpleName() + " = dispatch -- " + ev.toString());
-        return super.dispatchTouchEvent(ev);
+        return false;
+//        return super.dispatchTouchEvent(ev);
     }
 
     @Override

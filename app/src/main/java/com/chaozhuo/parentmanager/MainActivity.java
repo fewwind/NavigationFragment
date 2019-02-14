@@ -17,7 +17,7 @@ import android.util.ArrayMap;
 import android.view.MenuItem;
 
 import com.chaozhuo.parentmanager.activity.Sub0Activity;
-import com.chaozhuo.parentmanager.fragment.ManagerFragment;
+import com.chaozhuo.parentmanager.fragment.ViewFragment;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             if (tag.equals(STATISTICS_FRAGMENT)) {
                 return StatisticsFragment.newInstance();
             } else if (tag.equals(MANAGER_FRAGMENT)) {
-                return ManagerFragment.newInstance();
+                return ViewFragment.newInstance();
             } else if (tag.equals(MY_FRAGMENT)) {
                 return MyFragment.newInstance();
             }
@@ -174,5 +174,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void start(Context ctx) {
+        ctx.startActivity(new Intent(ctx, MainActivity.class));
     }
 }
