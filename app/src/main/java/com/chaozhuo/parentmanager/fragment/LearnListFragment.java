@@ -43,7 +43,7 @@ public class LearnListFragment extends BaseFragment {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.fragment_my;
+        return R.layout.fragment_list;
     }
 
     @Override

@@ -53,15 +53,15 @@ public class MyFragment extends BaseFragment {
     protected void initViewsAndEvents(View view) {
         mRv = view.findViewById(R.id.recycler_view);
         mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CommonAdapterRV adapterRV = new CommonAdapterRV<String>(getActivity(), mDatas, R.layout.item_apply_history) {
+        final CommonAdapterRV adapterRV = new CommonAdapterRV<String>(getActivity(), mDatas, R.layout.item_apply_history) {
             @Override
             public void convert(ViewHolderRV holder, String s) {
-//                holder.setText(android.R.id.text1, s);
+                holder.setText(R.id.manager_history_agree, s);
+                Logger.v("BindHolder--> " + s);
             }
         };
-        Logger.v("initVIew");
-        mAdapter = new HeaderWrapperAdapter(adapterRV);
-        mRv.setAdapter(mAdapter);
+//        mAdapter = new HeaderWrapperAdapter(adapterRV);
+        mRv.setAdapter(adapterRV);
         mRv.setNestedScrollingEnabled(false);
         mRv.postDelayed(new Runnable() {
             @Override
@@ -69,6 +69,12 @@ public class MyFragment extends BaseFragment {
 //                mRv.setY(100);
             }
         }, 200);
+        view.findViewById(R.id.notify).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterRV.notifyDataSetChanged();
+            }
+        });
     }
 
 }

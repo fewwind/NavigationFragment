@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.chaozhuo.parentmanager.MainActivity;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
+import com.chaozhuo.route_api.RouteDemo;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -29,7 +29,8 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.start(SplashActivity.this);
+                RouteDemo.getInstance().open("main");
+//                MainActivity.start(SplashActivity.this);
             }
         });
     }

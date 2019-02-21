@@ -17,11 +17,16 @@ import android.util.ArrayMap;
 import android.view.MenuItem;
 
 import com.chaozhuo.parentmanager.activity.Sub0Activity;
-import com.chaozhuo.parentmanager.fragment.ViewFragment;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
+import com.chaozhuo.parentmanager.fragment.ViewFragment;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
+import com.chaozhuo.rounte_annotation.Route;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+@Route("main")
 public class MainActivity extends AppCompatActivity {
 
     public static final String STATISTICS_FRAGMENT = "statistics_fragment";
@@ -29,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String MY_FRAGMENT = "my_fragment";
     public static final String EXTRA_FRAGMENT = "start_fragment";
     private ContentFragmentFactory mFactory;
-    private Toolbar mToolBar;
-    private AppBarLayout mAppBar;
+    @Bind(R.id.tool_bar)
+    Toolbar mToolBar;
+    @Bind(R.id.appbar)
+    AppBarLayout mAppBar;
     private CollapsingToolbarLayout mCollLayout;
     private AlignTextView mHeader;
     private BottomNavigationView navigation;
@@ -69,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         mCollLayout = findViewById(R.id.collbar);
         mHeader = findViewById(R.id.header_bg);
         navigation = findViewById(R.id.navigation);
+        ButterKnife.bind(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 

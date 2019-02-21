@@ -3,6 +3,7 @@ package com.chaozhuo.parentmanager;
 import android.content.Context;
 
 import com.chaozhuo.common.BaseApp;
+import com.chaozhuo.route_api.RouteDemo;
 
 /**
  * Created by fewwind on 19-1-7.
@@ -19,6 +20,7 @@ public class App extends BaseApp {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        RouteDemo.getInstance().init(this);
     }
 
     @Override
