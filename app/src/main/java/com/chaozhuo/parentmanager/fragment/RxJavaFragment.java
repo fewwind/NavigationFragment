@@ -6,6 +6,10 @@ import android.view.View;
 
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
+import com.chaozhuo.parentmanager.myrxjava.FObservable;
+import com.chaozhuo.parentmanager.myrxjava.FObservableOnSubscribe;
+import com.chaozhuo.parentmanager.myrxjava.FObserver;
+import com.chaozhuo.parentmanager.myrxjava.IFilter;
 import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
@@ -71,6 +75,35 @@ public class RxJavaFragment extends BaseFragment {
             }
         });
     }
+    private void testCustomRx(){
+        //每个操作符都创建Observable，同时Observable 的subscribe方法接收observer对象，接收下游的observer对象后创建新的Observer，并把下游传过来的obs作为成员变量
+        FObservable.creat(new FObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(FObserver<String> observer) {
+                Logger.w("Creat subscribe "+observer);
+                observer.onNext("One");
+            }
+        }).observeOn(Schedulers.io()).filter(new IFilter<String>() {
+            @Override
+            public boolean test(String s) {
+                return true;
+            }
+        }).subscribe(new FObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                Logger.e("ONNext "+s);
+            }
 
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
 
 }

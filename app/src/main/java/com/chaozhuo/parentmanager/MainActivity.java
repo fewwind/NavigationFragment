@@ -26,7 +26,7 @@ import com.chaozhuo.rounte_annotation.Route;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-@Route("main")
+@Route({"main","2"})
 public class MainActivity extends AppCompatActivity {
 
     public static final String STATISTICS_FRAGMENT = "statistics_fragment";

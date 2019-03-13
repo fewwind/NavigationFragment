@@ -9,8 +9,14 @@ import android.view.View;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
+import com.chaozhuo.parentmanager.myrxjava.FObservable;
+import com.chaozhuo.parentmanager.myrxjava.FObservableOnSubscribe;
+import com.chaozhuo.parentmanager.myrxjava.FObserver;
+import com.chaozhuo.parentmanager.myrxjava.IFilter;
 import com.chaozhuo.route_api.RouteDemo;
 import com.orhanobut.logger.Logger;
+
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by fewwind on 19-1-7.
@@ -29,7 +35,7 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouteDemo.getInstance().open("main");
+                RouteDemo.getInstance().build("main").start();
 //                MainActivity.start(SplashActivity.this);
             }
         });

@@ -17,6 +17,7 @@ public class RouteDemo {
     private static HashMap<String, Class> activityMap = new HashMap<>();
     private static Application mApp;
     private volatile static RouteDemo instance = null;
+    private Intent mIntent;
 
     public static RouteDemo getInstance() {
         if (instance == null) {
@@ -40,12 +41,23 @@ public class RouteDemo {
         }
     }
 
-    public void open(String url) {
+    public RouteDemo build(String url) {
         Class aClass = activityMap.get(url);
         if (aClass != null) {
-            Intent intent = new Intent(mApp, aClass);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mApp.startActivity(intent);
+            mIntent = new Intent(mApp, aClass);
+            return this;
+        } else {
+            throw new IllegalArgumentException();
         }
+    }
+
+    public RouteDemo widthString(String key, String value) {
+        mIntent.putExtra(key, value);
+        return this;
+    }
+
+    public void start() {
+        mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mApp.startActivity(mIntent);
     }
 }
