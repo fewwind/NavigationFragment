@@ -6,8 +6,17 @@ import android.view.View;
 
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
-import com.chaozhuo.parentmanager.test.okhttp.RealInterceptorChain;
+import com.chaozhuo.parentmanager.test.okhttp.CacheIntercept;
+import com.chaozhuo.parentmanager.test.okhttp.Intercept;
+import com.chaozhuo.parentmanager.test.okhttp.LogIntercept;
+import com.chaozhuo.parentmanager.test.okhttp.NetIntercept;
+import com.chaozhuo.parentmanager.test.okhttp.RealChain;
 import com.orhanobut.logger.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Request;
 
 public class NetFragment extends BaseFragment {
 
@@ -37,8 +46,14 @@ public class NetFragment extends BaseFragment {
                 Logger.e("viewC Click");
             }
         });
-        RealInterceptorChain chain = new RealInterceptorChain(0);
-        chain.proceed("request");
+
+        List<Intercept> list = new ArrayList<>();
+        list.add(new CacheIntercept());
+        list.add(new LogIntercept());
+        list.add(new NetIntercept());
+        Request request = new Request.Builder().url("http://www.qq.com").method("start", null).build();
+        RealChain realChain = new RealChain(list, 0, request);
+        realChain.process(request);
     }
 
 
