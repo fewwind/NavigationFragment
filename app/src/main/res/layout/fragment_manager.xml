@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_purple"
     android:orientation="vertical"
     tools:context="com.chaozhuo.parentmanager.fragment.StatisticsFragment">
 
@@ -25,5 +26,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></com.chaozhuo.parentmanager.weight.CustomSeekBarV>
+
+    <com.chaozhuo.parentmanager.weight.TimeLineView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
