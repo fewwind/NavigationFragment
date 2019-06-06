@@ -98,4 +98,22 @@ public class SortFragment extends BaseFragment {
         }
     }
 
+    private int removeDuplicates(int[] arr) {//有序数组去重
+        int [] array = {0,1,2,2,5,6,6,8};
+        int i = 0;
+        int j;
+        for (j = 1; j < arr.length; j++) {
+            if (arr[j] != arr[i]) {
+                arr[++i] = arr[j];
+            }
+        }
+        //j=1 -A1=1 i=1
+        //j=2 -A2=2 i=2
+        //j=3
+        //j=4 -A3=5 i=3
+        //j=5 -A4=6 i=4
+        //j=6
+        //j=7 -A5=8 i=5
+        return i + 1;
+    }
 }
