@@ -37,7 +37,7 @@ public class MvvmFragment extends android.support.v4.app.Fragment {
         });
 
         getLifecycle().addObserver(new MyObserver());
-        ConfigViewModel viewModel = ViewModelProviders.of(this).get(ConfigViewModel.class);
+        ConfigViewModel viewModel = ViewModelProviders.of(getActivity()).get(ConfigViewModel.class);
         viewModel.getConfig().observe(this, new Observer<OnLineConfigBean>() {
             @Override
             public void onChanged(@Nullable OnLineConfigBean onLineConfigBean) {

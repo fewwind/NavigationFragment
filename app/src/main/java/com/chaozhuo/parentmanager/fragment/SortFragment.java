@@ -99,7 +99,7 @@ public class SortFragment extends BaseFragment {
     }
 
     private int removeDuplicates(int[] arr) {//有序数组去重
-        int [] array = {0,1,2,2,5,6,6,8};
+        int[] array = {0, 1, 2, 2, 5, 6, 6, 8};
         int i = 0;
         int j;
         for (j = 1; j < arr.length; j++) {
@@ -115,5 +115,62 @@ public class SortFragment extends BaseFragment {
         //j=6
         //j=7 -A5=8 i=5
         return i + 1;
+    }
+
+    class Node {
+        int val;
+        Node next;
+
+        public Node(int val) {
+            this.val = val;
+        }
+    }
+
+    // 单链表反转
+    private void revaseLink(Node head) {
+        Node next = null;
+        Node pre = null;
+        // 每次循环head都在改变，一次是链表的node，第一次node1，第二次node2 ...
+        while (head != null) {
+            next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+    }
+
+    private int get(int n) {
+        if (n <= 2) return 1;
+        return get(n - 1) + get(n - 2);
+    }
+
+    public long fibonacci(int n) {
+        // 当输入非正整数的时候返回0
+        if (n <= 0) {
+            return 0;
+        }
+        // 输入1或者2的时候返回1
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        // 第n-2个的Fibonacci数的值
+        long prePre = 1;
+        // 第n-1个的Fibonacci数的值
+        long pre = 1;
+        // 第n个的Fibonacci数的值
+        long current = 2;
+        // 求解第n个的Fibonacci数的值
+        for (int i = 3; i <= n; i++) {
+            // 求第i个的Fibonacci数的值
+            current = prePre + pre;
+            // 更新记录的结果，prePre原先记录第i-2个Fibonacci数的值
+            // 现在记录第i-1个Fibonacci数的值
+            prePre = pre;
+            // 更新记录的结果，pre原先记录第i-1个Fibonacci数的值
+            // 现在记录第i个Fibonacci数的值
+            pre = current;
+        }
+        // 返回所求的结果
+        return current;
     }
 }
