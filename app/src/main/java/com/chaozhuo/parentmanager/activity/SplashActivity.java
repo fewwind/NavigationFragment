@@ -9,14 +9,9 @@ import android.view.View;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
-import com.chaozhuo.parentmanager.myrxjava.FObservable;
-import com.chaozhuo.parentmanager.myrxjava.FObservableOnSubscribe;
-import com.chaozhuo.parentmanager.myrxjava.FObserver;
-import com.chaozhuo.parentmanager.myrxjava.IFilter;
+import com.chaozhuo.parentmanager.mvvm.CheckLogin;
 import com.chaozhuo.route_api.RouteDemo;
 import com.orhanobut.logger.Logger;
-
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by fewwind on 19-1-7.
@@ -51,11 +46,16 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         Logger.e("Activity Touch = " + event);
         return super.onTouchEvent(event);
     }
-
+    @CheckLogin(param = "login")
     @Override
     public void click(Class type) {
         mType = type;
         getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
+        switchFragment();
+
+    }
+    private void switchFragment(){
+
     }
 
     @Override
