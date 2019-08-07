@@ -10,6 +10,7 @@ import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
 import com.chaozhuo.parentmanager.mvvm.CheckLogin;
+import com.chaozhuo.parentmanager.test.KotlinTest;
 import com.chaozhuo.route_api.RouteDemo;
 import com.orhanobut.logger.Logger;
 
@@ -30,6 +31,7 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 RouteDemo.getInstance().build("main").start();
 //                MainActivity.start(SplashActivity.this);
             }
@@ -46,16 +48,24 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         Logger.e("Activity Touch = " + event);
         return super.onTouchEvent(event);
     }
+
     @CheckLogin(param = "login")
     @Override
     public void click(Class type) {
         mType = type;
-        getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
-        switchFragment();
+//        getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
+//        switchFragment();
+        KotlinTest test = new KotlinTest("");
+        test.getSName();
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
 
+            }
+        };
     }
-    private void switchFragment(){
 
+    private void switchFragment() {
     }
 
     @Override

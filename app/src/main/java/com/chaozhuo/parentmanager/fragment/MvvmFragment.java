@@ -3,6 +3,7 @@ package com.chaozhuo.parentmanager.fragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.view.View;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.bean.OnLineConfigBean;
 import com.chaozhuo.parentmanager.mvvm.ConfigViewModel;
-import com.chaozhuo.parentmanager.mvvm.MyObserver;
+import com.chaozhuo.parentmanager.mvvm.HandlerObserver;
 import com.orhanobut.logger.Logger;
 
 public class MvvmFragment extends android.support.v4.app.Fragment {
@@ -18,6 +19,8 @@ public class MvvmFragment extends android.support.v4.app.Fragment {
     public MvvmFragment() {
         // Required empty public constructor
     }
+
+    private Handler mHandler;
 
     // TODO: Rename and change types and number of parameters
     public static Fragment newInstance() {
@@ -35,8 +38,8 @@ public class MvvmFragment extends android.support.v4.app.Fragment {
                 Logger.e("viewC Click");
             }
         });
-
-        getLifecycle().addObserver(new MyObserver());
+        mHandler = new Handler();
+        getLifecycle().addObserver(new HandlerObserver(mHandler));
         ConfigViewModel viewModel = ViewModelProviders.of(getActivity()).get(ConfigViewModel.class);
         viewModel.getConfig().observe(this, new Observer<OnLineConfigBean>() {
             @Override

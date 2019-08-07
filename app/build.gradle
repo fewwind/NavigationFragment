@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
+
 android {
     compileSdkVersion rootProject.sdkVersion
     defaultConfig {
@@ -39,6 +42,11 @@ android {
         }
     }
 }
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -53,6 +61,9 @@ dependencies {
     implementation project(':route_annotation')
     annotationProcessor project(':RouteProcess')
     implementation 'org.aspectj:aspectjrt:1.8.9'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.20'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.20'
 }
 
 final def log = project.logger
@@ -95,4 +106,7 @@ variants.all { variant ->
             }
         }
     }
+}
+repositories {
+    mavenCentral()
 }

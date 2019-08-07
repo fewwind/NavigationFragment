@@ -11,7 +11,7 @@ public class AppInfoBean {
     public String title;
     public String pkgName;
     public String activityName;
-    public int order;
+    private int order;
 
 
     public String getActivityName() {

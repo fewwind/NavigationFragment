@@ -18,6 +18,8 @@ import java.lang.reflect.Method;
 
 /**
  * Created by fewwind on 19-6-24.
+ * 用例：
+ * 1，运行时权限，在需要权限的方法上加注解，
  */
 
 @Aspect

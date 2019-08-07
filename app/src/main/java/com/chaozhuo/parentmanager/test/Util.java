@@ -34,6 +34,7 @@ public class Util {
         for (int i = 0; i < 10; i++) {
             feibonaqi(1,2);
         }
+        EnumClass a = EnumClass.One;
     }
 
     private List<Integer> feibonaqi(int x, int y, List<Integer> list) {

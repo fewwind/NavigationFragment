@@ -19,14 +19,18 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|keyboard|smallestScreenSize|layoutDirection|screenLayout|navigation"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.Sub0Activity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.Sub0Activity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".test.kotlin.KotlinmActivity"
+            android:label="@string/title_activity_kotlinm"></activity>
     </application>
 
 </manifest>
