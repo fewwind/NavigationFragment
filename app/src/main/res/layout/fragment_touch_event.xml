@@ -1,22 +1,29 @@
-<com.chaozhuo.parentmanager.weight.touch.FrameLayoutA xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.chaozhuo.parentmanager.fragment.StatisticsFragment">
+    android:layout_height="match_parent">
 
-    <com.chaozhuo.parentmanager.weight.touch.FrameLayoutB
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@color/design_default_color_primary">
+    <com.chaozhuo.parentmanager.weight.touch.FrameLayoutA
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/bottom_normal"
+        android:orientation="vertical"
+        tools:context="com.chaozhuo.parentmanager.fragment.StatisticsFragment">
 
-        <com.chaozhuo.parentmanager.weight.touch.ViewC
-            android:id="@+id/view_c"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:background="@color/colorPrimary" />
-    </com.chaozhuo.parentmanager.weight.touch.FrameLayoutB>
+        <com.chaozhuo.parentmanager.weight.touch.FrameLayoutB
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@color/design_default_color_primary">
 
-</com.chaozhuo.parentmanager.weight.touch.FrameLayoutA>
+            <com.chaozhuo.parentmanager.weight.touch.ViewC
+                android:id="@+id/view_c"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary" />
+        </com.chaozhuo.parentmanager.weight.touch.FrameLayoutB>
+
+    </com.chaozhuo.parentmanager.weight.touch.FrameLayoutA>
+</FrameLayout>
+

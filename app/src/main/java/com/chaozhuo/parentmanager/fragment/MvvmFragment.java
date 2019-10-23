@@ -44,7 +44,13 @@ public class MvvmFragment extends android.support.v4.app.Fragment {
         viewModel.getConfig().observe(this, new Observer<OnLineConfigBean>() {
             @Override
             public void onChanged(@Nullable OnLineConfigBean onLineConfigBean) {
-
+                Logger.w("One - "+onLineConfigBean.name);
+            }
+        });
+        viewModel.getConfig().observe(this, new Observer<OnLineConfigBean>() {
+            @Override
+            public void onChanged(@Nullable OnLineConfigBean onLineConfigBean) {
+                Logger.w("two - "+onLineConfigBean.name);
             }
         });
     }

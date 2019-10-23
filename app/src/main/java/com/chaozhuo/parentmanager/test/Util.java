@@ -44,4 +44,7 @@ public class Util {
     private int feibonaqi(int x, int y) {
         return x+y;
     }
+  public void register(Object object){
+      Class<?> aClass = object.getClass();
+  }
 }

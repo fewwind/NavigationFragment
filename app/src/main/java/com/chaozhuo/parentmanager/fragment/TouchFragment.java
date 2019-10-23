@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
@@ -37,13 +38,27 @@ public class TouchFragment extends BaseFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
-        View cview = view.findViewById(R.id.view_c);
+        final View cview = view.findViewById(R.id.view_c);
 //        cview.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                Logger.e("viewC Click");
 //            }
 //        });
+        Logger.w("Size = "+cview.getMeasuredWidth());
+        cview.post(new Runnable() {
+            @Override
+            public void run() {
+                Logger.w("Handler = "+cview.getMeasuredWidth());
+            }
+        });
+        cview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Logger.w("ViewTree = "+cview.getMeasuredWidth());
+                cview.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
         cview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

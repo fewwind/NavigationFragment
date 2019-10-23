@@ -44,7 +44,7 @@ public class FrameLayoutB extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Logger.w(super.onTouchEvent(event)+getClass().getSimpleName() + " = onTouchEvent -- " + event.toString());
+        Logger.w(getClass().getSimpleName() + " = onTouchEvent -- " + event.toString());
         return super.onTouchEvent(event);
     }
 }

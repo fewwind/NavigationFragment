@@ -1,7 +1,11 @@
 package com.chaozhuo.parentmanager.activity;
 
 import android.app.Activity;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.LifecycleRegistry;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,7 +22,7 @@ import com.orhanobut.logger.Logger;
  * Created by fewwind on 19-1-7.
  */
 
-public class SplashActivity extends Activity implements LearnListFragment.IFragClick {
+public class SplashActivity extends Activity implements LearnListFragment.IFragClick, LifecycleOwner {
     LearnListFragment learnListFragment;
     Class mType;
 
@@ -26,6 +30,10 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        // 如果不是Fragment或者支持库需要自己实现
+        mRegistry = new LifecycleRegistry(this);
+        mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
+
         learnListFragment = new LearnListFragment();
         getFragmentManager().beginTransaction().add(R.id.container, learnListFragment).commitAllowingStateLoss();
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
@@ -36,6 +44,9 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
 //                MainActivity.start(SplashActivity.this);
             }
         });
+
+        String s = ""+(Integer.MAX_VALUE+1000);
+        Logger.e("S = "+Integer.valueOf(s));
     }
 
     @Override
@@ -53,16 +64,10 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
     @Override
     public void click(Class type) {
         mType = type;
-//        getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
-//        switchFragment();
+        getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
+        switchFragment();
         KotlinTest test = new KotlinTest("");
         test.getSName();
-        View.OnClickListener listener = new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-            }
-        };
     }
 
     private void switchFragment() {
@@ -77,5 +82,13 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
             getFragmentManager().beginTransaction().show(learnListFragment).commitAllowingStateLoss();
             mType = null;
         }
+    }
+
+    private LifecycleRegistry mRegistry;
+
+    @NonNull
+    @Override
+    public Lifecycle getLifecycle() {
+        return mRegistry;
     }
 }

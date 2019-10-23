@@ -4,7 +4,13 @@ package com.chaozhuo.parentmanager.util;
 
 import android.os.AsyncTask;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -20,16 +26,22 @@ public class ThreadPoolUtils {
         threadPool = AsyncTask.THREAD_POOL_EXECUTOR;
     }
 
-    /**
-     * 从线程池中抽取线程，执行指定的Runnable对象
-     *
-     * @param runnable
-     */
     public static void execute(Runnable runnable) {
         threadPool.execute(runnable);
     }
 
-    public static Executor getExecutor(){
+    public static void submit(Runnable runnable) {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 0, 1, TimeUnit.HOURS, new LinkedBlockingDeque<Runnable>());
+        FutureTask task = new FutureTask(new Callable() {
+            @Override
+            public Object call() throws Exception {
+                return null;
+            }
+        });
+        Future<?> submit = executor.submit(task);
+    }
+
+    public static Executor getExecutor() {
         return threadPool;
     }
 

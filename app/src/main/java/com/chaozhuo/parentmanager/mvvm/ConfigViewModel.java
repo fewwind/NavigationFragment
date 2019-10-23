@@ -2,6 +2,7 @@ package com.chaozhuo.parentmanager.mvvm;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.os.SystemClock;
 
 import com.chaozhuo.parentmanager.bean.OnLineConfigBean;
 
@@ -22,9 +23,16 @@ public class ConfigViewModel extends ViewModel {
     }
 
     private void loadData() {
-        OnLineConfigBean lineConfigBean = new OnLineConfigBean();
-        lineConfigBean.name = "liveData";
-        mData.setValue(lineConfigBean);
+        new Thread(){
+            @Override
+            public void run() {
+                SystemClock.sleep(2000);
+                OnLineConfigBean lineConfigBean = new OnLineConfigBean();
+                lineConfigBean.name = "liveData";
+                mData.setValue(lineConfigBean);
+                super.run();
+            }
+        }.start();
     }
 
 }
