@@ -1,12 +1,15 @@
 package com.chaozhuo.parentmanager.test.simpleplugin;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 
 import com.chaozhuo.parentmanager.App;
 import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * Created by fewwind on 19-1-7.
@@ -32,10 +35,13 @@ public class IActivityManagerProxy implements InvocationHandler {//动态代理
                     break;
                 }
             }
-            Intent newIntent = new Intent();//创建新的Intent
-            newIntent.setClassName(App.app, "com.chaozhuo.parentmanager.activity.Sub0Activity");//启动目标SubActivity
-            newIntent.putExtra(HookHelper.TRANSFER_INTENT, oldIntent);//保留原始intent
-            args[i] = newIntent;//把插件Intent替换为占坑Intent
+            List<ResolveInfo> infos = App.app.getPackageManager().queryIntentActivities(oldIntent, PackageManager.MATCH_ALL);
+            if (infos == null || infos.size() == 0) {
+                Intent newIntent = new Intent();//创建新的Intent
+                newIntent.setClassName(App.app, "com.chaozhuo.parentmanager.activity.Sub0Activity");//启动目标SubActivity
+                newIntent.putExtra(HookHelper.TRANSFER_INTENT, oldIntent);//保留原始intent
+                args[i] = newIntent;//把插件Intent替换为占坑Intent
+            }
         }
         return method.invoke(am, args);
     }

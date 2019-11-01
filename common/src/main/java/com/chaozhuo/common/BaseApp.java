@@ -11,10 +11,12 @@ import com.orhanobut.logger.Logger;
 
 public class BaseApp extends Application {
     public static BaseApp app;
+
     @Override
     public void onCreate() {
         super.onCreate();
         app = this;
         Logger.init("Keep").setLogLevel(BuildConfig.DEBUG ? LogLevel.FULL : LogLevel.NONE);
+        Logger.i("AppCreat -> " + getClass().getSimpleName());
     }
 }

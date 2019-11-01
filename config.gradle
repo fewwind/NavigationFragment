@@ -1,0 +1,8 @@
+def supportVersion = "26.1.0"
+// ext 是gradle的专用属性，只能有一个，类似map
+ext {
+    android = [
+            applicationId: "",
+            code         : 1
+    ]
+}
