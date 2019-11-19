@@ -60,21 +60,23 @@ public class SortFragment extends BaseFragment {
         new SuanFa().test();
     }
 
-    private int find(int[] array, int value) {
-        int min = 0;
-        int max = array.length;
-        int mid = 0;
-        while (min < max) {
-            mid = (min + max) / 2;
-            if (array[mid] > value) {
-                max = mid;
-            } else if (array[mid] < value) {
-                min = mid;
+    static int binarySearch(int[] array, int size, int value) {
+        int lo = 0;
+        int hi = size - 1;
+
+        while (lo <= hi) {
+            final int mid = (lo + hi) >>> 1;
+            final int midVal = array[mid];
+
+            if (midVal < value) {
+                lo = mid + 1;
+            } else if (midVal > value) {
+                hi = mid - 1;
             } else {
-                return mid;
+                return mid;  // value found
             }
         }
-        return ~mid;
+        return ~lo;  // value not present
     }
 
     void findd(int[] array, int val) {
@@ -93,21 +95,27 @@ public class SortFragment extends BaseFragment {
     }
 
 
-    private void select(int[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
-            int index = i;
-            for (int j = index + 1; j < array.length; j++) {
-                if (array[index] > array[j]) {
-                    index = j;
+    private void select(int[] arr) {
+        //排序
+        //大循环。循环n-1次
+        for (int i = 0; i < arr.length - 1; i++) {
+            //假设第i个元素最小
+            int minIndex = i;
+            //i+1开始，依次用最小的比较
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[minIndex] > arr[j]) {
+                    minIndex = j;
                 }
             }
-            if (index != i) {
-                int tem = array[i];
-                array[i] = array[index];
-                array[index] = tem;
+            //第一趟比较完，比较最小值索引是不是第i个
+            if (minIndex != i) {
+                int temp;
+                temp = arr[minIndex];
+                arr[minIndex] = arr[i];
+                arr[i] = temp;
             }
         }
-        Logger.w("select = " + Arrays.toString(array));
+        Logger.w("select = " + Arrays.toString(arr));
     }
 
     void select2(int[] arr) {
@@ -139,10 +147,15 @@ public class SortFragment extends BaseFragment {
         }
     }
 
-    void mp(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length - i - 1; j++) {
-
+    public void bubbleSort(int[] a) {
+        int len = a.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len - i - 1; j++) {//注意第二重循环的条件
+                if (a[j] > a[j + 1]) {
+                    int temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                }
             }
         }
     }
@@ -327,7 +340,7 @@ public class SortFragment extends BaseFragment {
             Character character = s.charAt(i);
             if (list.contains(character)) {
                 max = Math.max(list.size(), max);
-                list = list.subList(list.indexOf(character)+1,list.size());
+                list = list.subList(list.indexOf(character) + 1, list.size());
                 list.add(character);
             } else {
                 list.add(character);
@@ -335,7 +348,7 @@ public class SortFragment extends BaseFragment {
             }
 
         }
-        Logger.w(list+"最长字符串 - " + max);
+        Logger.w(list + "最长字符串 - " + max);
     }
 
 

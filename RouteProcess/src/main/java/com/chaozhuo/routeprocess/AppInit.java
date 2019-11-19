@@ -1,4 +1,5 @@
 package com.chaozhuo.routeprocess;
 
-public class myClass {
+ interface AppInit{
+    void init();
 }

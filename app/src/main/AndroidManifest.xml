@@ -12,12 +12,12 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        tools:replace="name"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="name">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|keyboard|smallestScreenSize|layoutDirection|screenLayout|navigation"
@@ -32,7 +32,7 @@
         </activity>
         <activity
             android:name=".test.kotlin.KotlinmActivity"
-            android:label="@string/title_activity_kotlinm"></activity>
+            android:label="@string/title_activity_kotlinm" />
     </application>
 
 </manifest>

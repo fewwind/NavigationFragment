@@ -202,4 +202,20 @@ public class SuanFa {
             }
         }
     }
+
+    public void String2Int() {
+        final String s = "192.168.1.1";
+        String ss = "";
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isDigit(s.charAt(i))) {
+                ss += s.charAt(i);
+            }
+        }
+        int resule = 0;
+        for (int i = 0; i < ss.length(); i++) {
+            double v1 = Integer.valueOf(ss.charAt(i) + "") * (Math.pow(10, ss.length() - i - 1));
+            Logger.i(Integer.valueOf(ss.charAt(i) + "") + "vi = " + v1 + "");
+            resule += v1;
+        }
+    }
 }
