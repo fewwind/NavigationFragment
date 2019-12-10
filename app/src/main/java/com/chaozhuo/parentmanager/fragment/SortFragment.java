@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
-import com.chaozhuo.parentmanager.test.SuanFa;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public class SortFragment extends BaseFragment {
 //        threadSortCycle();
 //        lengthOfLongest2("abcabcbb");
 //        lengthOfLongest2("arabcacfr");
-        new SuanFa().test();
+//        new SuanFa().test();
     }
 
     static int binarySearch(int[] array, int size, int value) {

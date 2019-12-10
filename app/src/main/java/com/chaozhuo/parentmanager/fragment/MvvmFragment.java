@@ -12,6 +12,11 @@ import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.bean.OnLineConfigBean;
 import com.chaozhuo.parentmanager.mvvm.ConfigViewModel;
 import com.chaozhuo.parentmanager.mvvm.HandlerObserver;
+import com.chaozhuo.parentmanager.util.Event.BaseEvent;
+import com.chaozhuo.parentmanager.util.Event.EventObserver;
+import com.chaozhuo.parentmanager.util.Event.IEventListener;
+import com.chaozhuo.parentmanager.util.Event.livedata.EventLiveData;
+import com.chaozhuo.parentmanager.util.Event.livedata.LiveObserver;
 import com.orhanobut.logger.Logger;
 
 public class MvvmFragment extends android.support.v4.app.Fragment {
@@ -44,15 +49,29 @@ public class MvvmFragment extends android.support.v4.app.Fragment {
         viewModel.getConfig().observe(this, new Observer<OnLineConfigBean>() {
             @Override
             public void onChanged(@Nullable OnLineConfigBean onLineConfigBean) {
-                Logger.w("One - "+onLineConfigBean.name);
+                Logger.w("One - " + onLineConfigBean.name);
             }
         });
         viewModel.getConfig().observe(this, new Observer<OnLineConfigBean>() {
             @Override
             public void onChanged(@Nullable OnLineConfigBean onLineConfigBean) {
-                Logger.w("two - "+onLineConfigBean.name);
+                Logger.w("two - " + onLineConfigBean.name);
             }
         });
+
+        EventLiveData.DATA.observe(this, new LiveObserver<String>("add") {
+            @Override
+            public void dataChange(String event) {
+                Logger.w("key= " + event);
+            }
+        });
+        EventLiveData.DATA.setValue(new BaseEvent("add", ""));
+        getLifecycle().addObserver(new EventObserver("add", new IEventListener() {
+            @Override
+            public void onEventListener(BaseEvent event) {
+
+            }
+        }));
     }
 
 

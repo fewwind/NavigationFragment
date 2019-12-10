@@ -4,10 +4,13 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.chaozhuo.parentmanager.BuildConfig;
+import com.chaozhuo.parentmanager.bean.OnLineConfigBean;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
@@ -64,6 +67,22 @@ public class HttpManager {
 
     public static <T> T creatApi(Class<T> clazz) {
         return get().mRetrofit.create(clazz);
+    }
+
+    public <T> T toBean(String json, Type t) {
+        if (t == null) return null;
+        try {
+            T obj = new Gson().fromJson(json, t);
+            return obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void toList() {
+        List<OnLineConfigBean> list = new Gson().fromJson("", new TypeToken<List<OnLineConfigBean>>() {
+        }.getType());
     }
 
     /**
