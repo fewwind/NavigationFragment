@@ -62,7 +62,7 @@ public class TouchFragment extends BaseFragment {
         cview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Logger.e("touListener = " + event.toString());
+//                Logger.e("touListener = " + event.toString());
                 return false;
             }
         });

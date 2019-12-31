@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SuanFa {
+    // 有序数组合并，链表合并
     AtomicInteger integer = new AtomicInteger(1);
     static int count = 10;
 

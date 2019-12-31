@@ -64,7 +64,7 @@ public class FTree {
         return depth;
     }
 
-    public void Mirror(TreeNode root) {
+    public void mirror(TreeNode root) {
         if (root == null) {
             return;
         }
@@ -74,8 +74,8 @@ public class FTree {
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
-        Mirror(root.left);
-        Mirror(root.right);
+        mirror(root.left);
+        mirror(root.right);
     }
 
     public int maxDepth(TreeNode root) {

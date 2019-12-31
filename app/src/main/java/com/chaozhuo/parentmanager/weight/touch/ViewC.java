@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.orhanobut.logger.Logger;
-
 /**
  * Created by fewwind on 19-1-25.
  */
@@ -24,14 +22,14 @@ public class ViewC extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Logger.d(getClass().getSimpleName() + " = dispatch -- " + ev.toString());
+        TouchUtil.dispatch(this, ev);
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Logger.w(getClass().getSimpleName() + " = onTouchEvent -- " + event.toString());
-//        return super.onTouchEvent(event);
-        return true;
+        TouchUtil.touch(this, event);
+        if (event.getAction() == MotionEvent.ACTION_DOWN)return true;
+        return false;
     }
 }

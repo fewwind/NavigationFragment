@@ -47,8 +47,7 @@ public class CustomSeekBarV extends FrameLayout {
     private int mMeasureHeight, mMeasureWidth;
 
     public CustomSeekBarV(@NonNull Context context) {
-        super(context);
-        initView(context);
+        this(context,null);
     }
 
     public CustomSeekBarV(@NonNull Context context, @Nullable AttributeSet attrs) {

@@ -78,22 +78,6 @@ public class SortFragment extends BaseFragment {
         return ~lo;  // value not present
     }
 
-    void findd(int[] array, int val) {
-        int min = 0;
-        int max = array.length;
-        while (min < max) {
-            int mid = (min + max) / 2;
-            if (val < mid) {
-                max = mid;
-            } else if (val > mid) {
-                min = mid;
-            } else {
-
-            }
-        }
-    }
-
-
     private void select(int[] arr) {
         //排序
         //大循环。循环n-1次
@@ -134,7 +118,7 @@ public class SortFragment extends BaseFragment {
         Logger.w("select2 = " + Arrays.toString(arr));
     }
 
-    private void mapPao(int[] arr) {
+    private void bubble(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j + 1]) {
@@ -188,7 +172,7 @@ public class SortFragment extends BaseFragment {
     }
 
     // 单链表反转
-    private void revaseLink(Node head) {
+    private void reverseLink(Node head) {
         Node next = null;
         Node pre = null;
         // 每次循环head都在改变，一次是链表的node，第一次node1，第二次node2 ...

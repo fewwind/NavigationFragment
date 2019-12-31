@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
-import com.orhanobut.logger.Logger;
-
 /**
  * Created by fewwind on 19-1-25.
  */
@@ -28,23 +26,23 @@ public class FrameLayoutB extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Logger.v(getClass().getSimpleName() + " = dispatch -- " + ev.toString());
+        TouchUtil.dispatch(this, ev);
 //        return false;
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Logger.v(getClass().getSimpleName() + " = onIntercept -- " + ev.toString());
+        TouchUtil.intercepert(this, ev);
         if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-            return true;
+//            return true;
         }
         return super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Logger.w(getClass().getSimpleName() + " = onTouchEvent -- " + event.toString());
+        TouchUtil.touch(this, event);
         return super.onTouchEvent(event);
     }
 }

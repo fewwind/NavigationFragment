@@ -2,7 +2,6 @@ package com.chaozhuo.parentmanager.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 
 import com.chaozhuo.parentmanager.R;
@@ -14,16 +13,10 @@ import com.chaozhuo.parentmanager.test.okhttp.NetIntercept;
 import com.chaozhuo.parentmanager.test.okhttp.RealChain;
 import com.orhanobut.logger.Logger;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 
 public class NetFragment extends BaseFragment {
 
@@ -60,26 +53,8 @@ public class NetFragment extends BaseFragment {
         list.add(new NetIntercept());
         Request request = new Request.Builder().url("http://www.qq.com").method("start", null).build();
         RealChain realChain = new RealChain(list, 0, request);
-        realChain.process(request);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                return null;
-            }
-        }).build();
-        Message.obtain();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
+//        realChain.process(request);
 
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-            }
-        });
     }
 
 

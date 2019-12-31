@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,8 +17,8 @@ import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
 import com.chaozhuo.parentmanager.mvvm.CheckLogin;
 import com.chaozhuo.parentmanager.test.KotlinTest;
+import com.chaozhuo.parentmanager.weight.touch.TouchUtil;
 import com.chaozhuo.route_api.RouteDemo;
-import com.orhanobut.logger.Logger;
 
 /**
  * Created by fewwind on 19-1-7.
@@ -45,8 +47,13 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
             }
         });
 
-        String s = ""+(Integer.MAX_VALUE+1000);
-        Logger.e("S = "+Integer.valueOf(s));
+        KotlinTest test = new KotlinTest("");
+        test.getSName();
+        Intent intent = new Intent();
+        ComponentName neam = new ComponentName("com.chaozhuo.grow", "com.chaozhuo.grow.MainActivity");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        intent.setComponent(neam);
+        startActivity(intent);
     }
 
     @Override
@@ -56,7 +63,7 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Logger.e("Activity Touch = " + event);
+        TouchUtil.touch(this, event);
         return super.onTouchEvent(event);
     }
 
@@ -66,8 +73,6 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         mType = type;
         getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
         switchFragment();
-        KotlinTest test = new KotlinTest("");
-        test.getSName();
     }
 
     private void switchFragment() {

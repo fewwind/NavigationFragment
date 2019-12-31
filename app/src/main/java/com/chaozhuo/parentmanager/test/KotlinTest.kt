@@ -1,19 +1,23 @@
 package com.chaozhuo.parentmanager.test
 
+import android.util.Log
 import com.chaozhuo.parentmanager.bean.AppInfoBean
 import com.chaozhuo.parentmanager.test.kotlin.SubClass
 import com.orhanobut.logger.Logger
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
-import kotlinx.coroutines.experimental.withTimeoutOrNull
+import kotlinx.coroutines.*
 
 class KotlinTest constructor(value: String) {
     //主构造用constructor修饰，如果没有构造器注解可以省略关键字constructor
     // fun methodName (args : String) :String {} 函数体
     // fun methodName (args : String)  = {} 表达式
     // { args : String -> 函数体，最后一行为返回值} lambda
+    init {
+        print("init")
+    }
+
     val nameFinal = "fa"
+    val array1 = arrayOf(1, 2, 3)
+    val array2 = Array(3, { i -> 2 * i })
     var name = ""
         get() = field
         set(value) {
@@ -77,12 +81,13 @@ class KotlinTest constructor(value: String) {
         }
 //        Logger.w(info::class.toString())
 //        Logger.w(info::class.java.toString())
-        val plus = plus(arg2 = 4, arg1 = 2)
+        var plus = plus(arg2 = 4, arg1 = 2)
+        plus = plus(arg2 = 4)
         Logger.e("$plus -> ${sum(1, 1)} Reullt = $result")
 
     }
 
-    suspend fun plus(arg1: Int, arg2: Int): Int {
+    suspend fun plus(arg1: Int = 1, arg2: Int): Int {
         var list = mutableListOf<Int>()
         repeat(1000000, action = { list.add(arg1) })
         repeat(10) {
@@ -97,25 +102,72 @@ class KotlinTest constructor(value: String) {
     }
 
     fun getSName(): String {
-        launch {
-            plus(1, 1)
-            Logger.e("getName")
-        }
+        /*  this.run {
+              bidashi("")
+              666
+          }
+          val apply = this.apply {
+              bidashi("")
+          }*/
+        load()
+        Logger.e("main-> end")
         return "dong"
+    }
+
+    public fun load() {
+        GlobalScope.launch(Dispatchers.Default) {
+            Logger.d("launch start")
+            GlobalScope.launch(Dispatchers.IO) { load1("") }
+            setUI()
+        }
     }
 
     val sum = fun(a: Int, b: Int) = { a + b }
     val sum2 = fun(a: Int, b: Int): Int {
         return a + b
     }
+    val sum3 = { a: Int, b: Int -> a + b }
     var tmepBean = object {
         var x: Int = 0
         var y: Int = 1
     }
 
-    fun bidashi(name: String) = {
+    suspend fun load1(name: String) {
+        Logger.w("load1")
+        delay(1000)
         print(name)
     }
+
+    fun setUI() {
+        Logger.i("setUI")
+    }
+
+    fun test2() {
+        GlobalScope.launch(Dispatchers.Main) {
+            Log.d("AA", "协程测试 开始执行，线程：${Thread.currentThread().name}")
+
+            var token = GlobalScope.async(Dispatchers.Unconfined) {
+                return@async getToken()
+            }.await()
+
+            var response = GlobalScope.async(Dispatchers.Unconfined) {
+                return@async getResponse(token)
+            }.await()
+
+            setText(response)
+        }
+
+    }
+
+    private fun getToken(): String {
+        return "666"
+    }
+
+    private fun getResponse(token: String): String {
+        return ""
+    }
+
+    private fun setText(response: String) {}
 
     companion object {
         fun getName(): String {
@@ -123,6 +175,12 @@ class KotlinTest constructor(value: String) {
         }
     }
 
+    class Boy {
+        infix fun love(girl: Girl) {
 
+        }
+    }
+
+    class Girl {}
 }
 

@@ -3,7 +3,6 @@ package com.chaozhuo.parentmanager;
 import android.content.Context;
 
 import com.chaozhuo.common.BaseApp;
-import com.chaozhuo.login.LoginApp;
 import com.chaozhuo.route_api.RouteDemo;
 
 /**
@@ -27,7 +26,7 @@ public class App extends BaseApp {
     @Override
     public void onCreate() {
         super.onCreate();
-        BaseApp login = new LoginApp();
-        login.onCreate();
+//        BaseApp login = new LoginApp();
+//        login.onCreate();
     }
 }
