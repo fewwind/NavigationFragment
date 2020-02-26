@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidStudioProject-NavigationFragment.iml" filepath="$PROJECT_DIR$/AndroidStudioProject-NavigationFragment.iml" />
       <module fileurl="file://$PROJECT_DIR$/NavigationFragment.iml" filepath="$PROJECT_DIR$/NavigationFragment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RouteProcess/NavigationFragment-RouteProcess.iml" filepath="$PROJECT_DIR$/RouteProcess/NavigationFragment-RouteProcess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/NavigationFragment-app.iml" filepath="$PROJECT_DIR$/app/NavigationFragment-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/NavigationFragment-common.iml" filepath="$PROJECT_DIR$/common/NavigationFragment-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/login/NavigationFragment-login.iml" filepath="$PROJECT_DIR$/login/NavigationFragment-login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/route_annotation/NavigationFragment-route_annotation.iml" filepath="$PROJECT_DIR$/route_annotation/NavigationFragment-route_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/route_api/NavigationFragment-route_api.iml" filepath="$PROJECT_DIR$/route_api/NavigationFragment-route_api.iml" />
       <module fileurl="file://$PROJECT_DIR$/RouteProcess/RouteProcess.iml" filepath="$PROJECT_DIR$/RouteProcess/RouteProcess.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />

@@ -5,6 +5,11 @@
 - 模仿知识星球实现了滑动效果
 - 自定义下拉刷新
 - 自定义圆角图片截取图片中心
+- 学习kotlin
+- 插件化
 
 ![主页](https://raw.githubusercontent.com/fewwind/img_folder/master/home_frag.png)
+![view](https://raw.githubusercontent.com/fewwind/img_folder/master/view.jpg)
+![step](https://raw.githubusercontent.com/fewwind/img_folder/master/step.jpg)
+![step](https://raw.githubusercontent.com/fewwind/img_folder/master/show.gif)
 

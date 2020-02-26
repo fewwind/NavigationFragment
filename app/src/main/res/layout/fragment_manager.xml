@@ -18,6 +18,7 @@
             android:id="@+id/circle_round"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="24dp"
             android:src="@drawable/mali"
             android:text="manger"
             app:type="round" />
@@ -25,6 +26,7 @@
         <com.chaozhuo.parentmanager.weight.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="24dp"
             android:layout_toRightOf="@+id/circle_round"
             android:src="@drawable/mali"
             android:text="manger" />
@@ -40,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/circle_round"
+            android:layout_marginTop="56dp"
             android:layout_marginRight="56dp" />
 
         <FrameLayout
