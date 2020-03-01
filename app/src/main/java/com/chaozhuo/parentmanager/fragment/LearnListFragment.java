@@ -3,7 +3,7 @@ package com.chaozhuo.parentmanager.fragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -49,7 +49,7 @@ public class LearnListFragment extends BaseFragment {
     @Override
     protected void initViewsAndEvents(View view) {
         mRv = view.findViewById(R.id.recycler_view);
-        mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRv.setLayoutManager(new GridLayoutManager(getActivity(),2));
         CommonAdapterRV adapterRV = new CommonAdapterRV<FragmentBean>(getActivity(), mDatas, R.layout.item_apply_history) {
             @Override
             public void convert(ViewHolderRV holder, final FragmentBean bean) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFD323 </color>
-    <color name="colorPrimaryDark">#FFD323 </color>
-    <color name="colorAccent">#FFD323 </color>
+    <color name="colorPrimary">#A44CFF </color>
+    <color name="colorPrimaryDark">#A44CFF </color>
+    <color name="colorAccent">#A44CFF </color>
     <color name="tvWhite">#FFFFFF</color>
 
     <color name="bottom_select">#333333</color>

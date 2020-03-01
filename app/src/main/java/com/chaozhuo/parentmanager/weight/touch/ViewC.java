@@ -29,7 +29,21 @@ public class ViewC extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         TouchUtil.touch(this, event);
-        if (event.getAction() == MotionEvent.ACTION_DOWN)return true;
+        if (event.getAction() == MotionEvent.ACTION_DOWN) return true;
         return false;
+//        return super.onTouchEvent(event);
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        TouchUtil.log(this, "onMeasure");
+    }
+
+    @Override
+    public void layout(int l, int t, int r, int b) {
+        super.layout(l, t, r, b);
+        TouchUtil.log(this,"onLayout");
+    }
+
 }

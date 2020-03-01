@@ -45,4 +45,10 @@ public class FrameLayoutB extends FrameLayout {
         TouchUtil.touch(this, event);
         return super.onTouchEvent(event);
     }
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        TouchUtil.log(this,"onMeasure");
+    }
+
 }

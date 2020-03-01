@@ -45,17 +45,17 @@ public class TouchFragment extends BaseFragment {
 //                Logger.e("viewC Click");
 //            }
 //        });
-        Logger.w("Size = "+cview.getMeasuredWidth());
+        Logger.w("Size = " + cview.getMeasuredWidth());
         cview.post(new Runnable() {
             @Override
             public void run() {
-                Logger.w("Handler = "+cview.getMeasuredWidth());
+                Logger.w("Handler = " + cview.getMeasuredWidth());
             }
         });
         cview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                Logger.w("ViewTree = "+cview.getMeasuredWidth());
+                Logger.w("ViewTree = " + cview.getMeasuredWidth());
                 cview.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
@@ -65,6 +65,9 @@ public class TouchFragment extends BaseFragment {
 //                Logger.e("touListener = " + event.toString());
                 return false;
             }
+        });
+        cview.setOnClickListener(v -> {
+            cview.requestLayout();
         });
         //if(down或者mFirstTouchTarget不为null)，才会调用onIntercept
         // - 不拦截的话if（Down）中遍历子View寻找可以处理事件的child，倒叙遍历，如果不在触摸范围或者不在动画直接contniue，调用dispatchTransformedTouchEvent
