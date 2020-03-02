@@ -1,4 +1,4 @@
-package com.chaozhuo.parentmanager.test.suanfa;
+package com.chaozhuo.parentmanager.test.algorithm;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,8 +95,11 @@ public class FTree {
     //是否正确？
     int depth(TreeNode root) {
         if (root == null) return 0;
+        //此时输出前序遍历
         int left = depth(root.left) + 1;
+        //中序
         int right = depth(root.right) + 1;
+        //后序
         return Math.max(left, right);
     }
 

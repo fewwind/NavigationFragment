@@ -1,4 +1,4 @@
-package com.chaozhuo.parentmanager.test.proxy;
+package com.chaozhuo.parentmanager.design.proxy;
 
 import android.app.Activity;
 import android.view.View;

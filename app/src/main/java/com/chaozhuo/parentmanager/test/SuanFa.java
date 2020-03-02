@@ -175,10 +175,58 @@ public class SuanFa {
         }
         int resule = 0;
         for (int i = 0; i < ss.length(); i++) {
+            // 关键点 不允许使用value方法，int和char互转，char c9 = '9',int int_c9 = c9-'0' ,就是char-‘0’
             double v1 = Integer.valueOf(ss.charAt(i) + "") * (Math.pow(10, ss.length() - i - 1));
             Logger.i(Integer.valueOf(ss.charAt(i) + "") + "vi = " + v1 + "");
             resule += v1;
         }
+    }
+
+    public int StrToInt(String str) {
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
+        int num = 0, index = 0;
+        boolean minus = false;
+        if (str.charAt(0) == '+') {
+            index++;
+        } else if (str.charAt(0) == '-') {
+            minus = true;
+            index++;
+        }
+        while (index < str.length()) {
+            char digit = str.charAt(index++);
+            if (digit >= '0' && digit <= '9') {
+                num = num * 10 + digit - '0';
+            } else {
+                return 0;
+            }
+        }
+        Logger.w("v = " + num);
+        return minus ? -num : num;
+    }
+
+    public int StrToInt2(String str) {
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
+        int num = 0;
+        boolean minus = false;
+        if (str.charAt(0) == '+') {
+            str = str.substring(1);
+        } else if (str.charAt(0) == '-') {
+            minus = true;
+            str = str.substring(1);
+        }
+        for (int i = 0; i < str.toCharArray().length; i++) {
+            char c = str.toCharArray()[i];
+            if (c >= '0' && c <= '9') {
+                int pow = (int) Math.pow(10, str.toCharArray().length - 1 - i);
+                int v = c - '0';
+                num += v * pow;
+            }
+        }
+        return minus ? -num : num;
     }
 
     void fuShuLeft() {

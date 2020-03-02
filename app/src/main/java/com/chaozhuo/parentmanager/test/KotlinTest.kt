@@ -173,11 +173,17 @@ class KotlinTest constructor(value: String) {
         fun getName(): String {
             return "静态方法"
         }
+        val boy = Boy(3,"parent")
     }
+    open class Person(var name :String){//构造方法不加var，类不允许访问name，相当于局部变量
 
-    class Boy {
+    }
+    class Boy(age :Int,name:String) : Person(name){
+
+        init {
+            //主函数的逻辑体
+        }
         infix fun love(girl: Girl) {
-
         }
     }
 

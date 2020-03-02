@@ -334,6 +334,34 @@ public class SortFragment extends BaseFragment {
         Logger.w(list + "最长字符串 - " + max);
     }
 
+    void su(int x) {
+        int l = (int) Math.sqrt(x);
+        for (int i = 0; i <= l; i++) {
+            if (x % i == 0) ;
+        }
+    }
+
+    private int findK(int[] arr, int k, int low, int high) {
+        int l = low;
+        int h = high;
+        int tmp = arr[low];
+        while (l < h) {
+            // tmp大于高位值再减减，就是保留小值，把大的移到前排，逆序
+            while (l < h && tmp >= arr[h]) h--;
+            arr[l] = arr[h];
+            while (l < h && tmp <= arr[l]) l++;
+            arr[h] = arr[l];
+        }
+        arr[h] = tmp;
+        if (h == k - 1) {
+            return h;
+        } else if (h > k - 1) {
+            return findK(arr, k, low, h - 1);
+        } else {
+            return findK(arr, k, h + 1, high);
+        }
+    }
+
 
     public static void quickSort(int[] arr, int low, int high) {
         int i, j, temp, t;

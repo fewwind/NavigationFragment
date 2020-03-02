@@ -1,4 +1,4 @@
-package com.chaozhuo.parentmanager.test.work;
+package com.chaozhuo.parentmanager.design.work;
 
 public interface Node {
     void onComplete();

@@ -1,4 +1,4 @@
-package com.chaozhuo.parentmanager.test.proxy;
+package com.chaozhuo.parentmanager.design.proxy;
 
 import com.chaozhuo.parentmanager.test.simpleplugin.ILoadBean;
 import com.orhanobut.logger.Logger;

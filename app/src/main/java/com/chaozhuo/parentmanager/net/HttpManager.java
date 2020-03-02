@@ -60,7 +60,6 @@ public class HttpManager {
     public static HttpManager get() {
         return SingleInstance.instance;
     }
-
     public HttpService getService() {
         return mHttpService;
     }
@@ -80,6 +79,7 @@ public class HttpManager {
         return null;
     }
 
+    // typeToken是万能的List<OnLineConfigBean>可以换成任意
     public void toList() {
         List<OnLineConfigBean> list = new Gson().fromJson("", new TypeToken<List<OnLineConfigBean>>() {
         }.getType());
