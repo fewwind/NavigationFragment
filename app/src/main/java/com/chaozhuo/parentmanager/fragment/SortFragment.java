@@ -11,7 +11,6 @@ import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -56,7 +55,7 @@ public class SortFragment extends BaseFragment {
 //        threadSortCycle();
 //        lengthOfLongest2("abcabcbb");
 //        lengthOfLongest2("arabcacfr");
-//        new SuanFa().test();
+//        new FThread().test();
     }
 
     static int binarySearch(int[] array, int size, int value) {
@@ -86,7 +85,7 @@ public class SortFragment extends BaseFragment {
             int minIndex = i;
             //i+1开始，依次用最小的比较
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[minIndex] > arr[j]) {
+                if (arr[j] < arr[minIndex]) {
                     minIndex = j;
                 }
             }
@@ -119,7 +118,7 @@ public class SortFragment extends BaseFragment {
     }
 
     private void bubble(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
@@ -132,7 +131,7 @@ public class SortFragment extends BaseFragment {
 
     public void bubbleSort(int[] a) {
         int len = a.length;
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len - 1; i++) {
             for (int j = 0; j < len - i - 1; j++) {//注意第二重循环的条件
                 if (a[j] > a[j + 1]) {
                     int temp = a[j];
@@ -141,85 +140,6 @@ public class SortFragment extends BaseFragment {
                 }
             }
         }
-    }
-
-    private int removeDuplicates(int[] arr) {//有序数组去重
-        int[] array = {0, 1, 2, 2, 5, 6, 6, 8};
-        int i = 0;
-        int j;
-        for (j = 1; j < arr.length; j++) {
-            if (arr[j] != arr[i]) {
-                arr[++i] = arr[j];
-            }
-        }
-        //j=1 -A1=1 i=1
-        //j=2 -A2=2 i=2
-        //j=3
-        //j=4 -A3=5 i=3
-        //j=5 -A4=6 i=4
-        //j=6
-        //j=7 -A5=8 i=5
-        return i + 1;
-    }
-
-    class Node {
-        int val;
-        Node next;
-
-        public Node(int val) {
-            this.val = val;
-        }
-    }
-
-    // 单链表反转
-    private void reverseLink(Node head) {
-        Node next = null;
-        Node pre = null;
-        // 每次循环head都在改变，一次是链表的node，第一次node1，第二次node2 ...
-        while (head != null) {
-            next = head.next;
-            head.next = pre;
-            pre = head;
-            head = next;
-        }
-    }
-
-    void rev(Node head) {
-        Node next = null;
-        Node pre = null;
-        while (head != null) {
-            next = head.next;
-            head.next = pre;
-            pre = head;
-            head = next;
-        }
-    }
-
-    //判断链表是否有环
-    private boolean isNodeCycle(Node node) {
-        Set<Node> set = new HashSet<>();
-        while (node != null) {
-            if (set.contains(node)) {
-                return true;
-            } else {
-                set.add(node);
-                node = node.next;
-            }
-        }
-        return false;
-    }
-
-    //判断链表是否有环
-    private boolean isNodeCycle2(Node node) {
-        Node quick = node;
-        Node slow = node;
-        // 为什么是quick的循环，因为只要有环必定永不为空，while会一直循环，必能能找到快慢相等的点
-        while (quick != null && quick.next != null) {
-            quick = quick.next.next;
-            slow = slow.next;
-            if (quick == slow) return true;
-        }
-        return false;
     }
 
     private int get(int n) {
@@ -259,43 +179,6 @@ public class SortFragment extends BaseFragment {
     }
 
     String s = "ABCDEFGHIJKLMNOPQRESUVWXYZ";
-    volatile LinkedList<Character> list = new LinkedList<>();
-
-    private void threadSortCycle() {
-        for (int i = 0; i < s.length(); i++) {
-            list.add(s.charAt(i));
-        }
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                while (!list.isEmpty()) print(1);
-            }
-        }.start();
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                while (!list.isEmpty()) print(2);
-            }
-        }.start();
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                while (!list.isEmpty()) print(3);
-            }
-        }.start();
-    }
-
-    private synchronized void print(int id) {
-        if (list.isEmpty()) return;
-        Character character = list.get(0);
-        int i = s.indexOf(String.valueOf(character)) % 3 + 1;
-        if (i == id) {
-            Logger.e(id + "==" + list.removeFirst());
-        }
-    }
 
     private void lengthOfLongest(String s) {
         Set<Character> set = new HashSet<>();

@@ -1,4 +1,4 @@
-package com.chaozhuo.parentmanager.design.work;runnable
+package com.chaozhuo.parentmanager.design.work;
 
 public class WorkNode implements Node {
 

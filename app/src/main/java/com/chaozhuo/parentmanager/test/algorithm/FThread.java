@@ -1,4 +1,4 @@
-package com.chaozhuo.parentmanager.test;
+package com.chaozhuo.parentmanager.test.algorithm;
 
 import android.os.SystemClock;
 
@@ -7,7 +7,7 @@ import com.orhanobut.logger.Logger;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SuanFa {
+public class FThread {
     // 有序数组合并，链表合并
     AtomicInteger integer = new AtomicInteger(1);
     static int count = 10;
@@ -44,7 +44,7 @@ public class SuanFa {
             public void run() {
                 while (true) {
                     synchronized (integer) {
-                        if (count == 0) {
+                        while (count == 0) {
                             try {
                                 integer.wait();
                             } catch (InterruptedException e) {
@@ -161,84 +161,6 @@ public class SuanFa {
                     Logger.i("Make = " + i);
                     food.notifyAll();
                 }
-            }
-        }
-    }
-
-    public void String2Int() {
-        final String s = "192.168.1.1";
-        String ss = "";
-        for (int i = 0; i < s.length(); i++) {
-            if (Character.isDigit(s.charAt(i))) {
-                ss += s.charAt(i);
-            }
-        }
-        int resule = 0;
-        for (int i = 0; i < ss.length(); i++) {
-            // 关键点 不允许使用value方法，int和char互转，char c9 = '9',int int_c9 = c9-'0' ,就是char-‘0’
-            double v1 = Integer.valueOf(ss.charAt(i) + "") * (Math.pow(10, ss.length() - i - 1));
-            Logger.i(Integer.valueOf(ss.charAt(i) + "") + "vi = " + v1 + "");
-            resule += v1;
-        }
-    }
-
-    public int StrToInt(String str) {
-        if (str == null || str.length() == 0) {
-            return 0;
-        }
-        int num = 0, index = 0;
-        boolean minus = false;
-        if (str.charAt(0) == '+') {
-            index++;
-        } else if (str.charAt(0) == '-') {
-            minus = true;
-            index++;
-        }
-        while (index < str.length()) {
-            char digit = str.charAt(index++);
-            if (digit >= '0' && digit <= '9') {
-                num = num * 10 + digit - '0';
-            } else {
-                return 0;
-            }
-        }
-        Logger.w("v = " + num);
-        return minus ? -num : num;
-    }
-
-    public int StrToInt2(String str) {
-        if (str == null || str.length() == 0) {
-            return 0;
-        }
-        int num = 0;
-        boolean minus = false;
-        if (str.charAt(0) == '+') {
-            str = str.substring(1);
-        } else if (str.charAt(0) == '-') {
-            minus = true;
-            str = str.substring(1);
-        }
-        for (int i = 0; i < str.toCharArray().length; i++) {
-            char c = str.toCharArray()[i];
-            if (c >= '0' && c <= '9') {
-                int pow = (int) Math.pow(10, str.toCharArray().length - 1 - i);
-                int v = c - '0';
-                num += v * pow;
-            }
-        }
-        return minus ? -num : num;
-    }
-
-    void fuShuLeft() {
-        int[] arr = {2, -1, 3, -2, 4, -3};
-        int tmp = 0;
-        int head = -1;
-        for (int i = 0; i < arr.length; i++) {
-            int x = arr[i];
-            if (x < 0) {
-                tmp = arr[head + 1];
-                arr[++head] = x;
-                arr[i] = tmp;
             }
         }
     }

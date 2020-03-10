@@ -3,6 +3,8 @@ package com.chaozhuo.parentmanager.test.algorithm;
 import com.chaozhuo.parentmanager.bean.LinkNode;
 import com.orhanobut.logger.Logger;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 public class Flink {
@@ -17,6 +19,47 @@ public class Flink {
         addLink(node1, new LinkNode(5));
         addLink(node2, new LinkNode(4));
         addLink(node2, new LinkNode(6));
+    }
+
+    // 单链表反转
+    private void reverseLink(Node head) {
+        Node next = null;
+        Node pre = null;
+        // 每次循环head都在改变，一次是链表的node，第一次node1，第二次node2 ...
+        while (head != null) {
+            next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+    }
+
+
+    //判断链表是否有环
+    private boolean isNodeCycle(Node node) {
+        Set<Node> set = new HashSet<>();
+        while (node != null) {
+            if (set.contains(node)) {
+                return true;
+            } else {
+                set.add(node);
+                node = node.next;
+            }
+        }
+        return false;
+    }
+
+    //判断链表是否有环
+    private boolean isNodeCycle2(Node node) {
+        Node quick = node;
+        Node slow = node;
+        // 为什么是quick的循环，因为只要有环必定永不为空，while会一直循环，必能能找到快慢相等的点
+        while (quick != null && quick.next != null) {
+            quick = quick.next.next;
+            slow = slow.next;
+            if (quick == slow) return true;
+        }
+        return false;
     }
 
     public LinkNode merge(LinkNode node1, LinkNode node2) {
@@ -35,6 +78,7 @@ public class Flink {
         logLink(head);
         return head;
     }
+
     public LinkNode mergeTwoLists(LinkNode l1, LinkNode l2) {
         // 在返回节点之前维护对节点的不变引用。（？？？）
         LinkNode prehead = new LinkNode(-1);
@@ -77,11 +121,22 @@ public class Flink {
     }
 
     static void addLink(LinkNode head, LinkNode node) {
-        while (head.next != null) {
-            head = head.next;
+        LinkNode p = head;
+        while ((p.next) != null) {
+            p = p.next;
         }
-        head.next = node;
+        p.next = node;
     }
+
+    class Node {
+        int val;
+        Node next;
+
+        public Node(int val) {
+            this.val = val;
+        }
+    }
+
     class Queue {
         private Stack stack1;
         private Stack stack2;
@@ -91,7 +146,7 @@ public class Flink {
         }
 
         public Object pop() {
-            if (stack2.isEmpty()) return stack2.pop();
+            if (!stack2.isEmpty()) return stack2.pop();
             while (!stack1.isEmpty()) {
                 stack2.push(stack1.pop());
             }
