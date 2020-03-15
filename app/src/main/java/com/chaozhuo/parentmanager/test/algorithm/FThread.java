@@ -165,4 +165,55 @@ public class FThread {
         }
     }
 
+    AtomicInteger index = new AtomicInteger(0);
+
+    class Task extends Thread {
+        int id = 0;
+
+        public Task(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            while (index.get() < 100) {
+                while (id == index.get() % 3) {
+                    Logger.v("id = " + id);
+                    index.incrementAndGet();
+                }
+            }
+
+        }
+    }
+
+    class Task2 extends Thread {
+        int id = 0;
+
+        public Task2(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            synchronized (index) {
+                while (index.get() < 100) {
+                    if (id == index.get() % 3) {
+                        Logger.v("id = " + id);
+                        index.incrementAndGet();
+                        index.notifyAll();
+                    } else {
+                        try {
+                            index.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
 }

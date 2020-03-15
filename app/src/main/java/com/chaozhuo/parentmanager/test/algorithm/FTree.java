@@ -3,6 +3,7 @@ package com.chaozhuo.parentmanager.test.algorithm;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
 import java.util.Stack;
 
 public class FTree {
@@ -137,6 +138,19 @@ public class FTree {
         }
     }
 
+    private void findPath(TreeNode node, List<String> list, String s) {
+        if (node == null) return;
+        if (node.left == null && node.right == null) {
+            list.add(s + node.val);
+            return;
+        }
+        if (node.left != null) {
+            findPath(node.left, list, s + node.val + "-");
+        }
+        if (node.right != null) {
+            findPath(node.right, list, s + node.val + "-");
+        }
+    }
 //    fun recursionPrint(root:View) {
 //        printView(root)
 //        if (root is ViewGroup) {
