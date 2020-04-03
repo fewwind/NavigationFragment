@@ -12,6 +12,8 @@ import com.chaozhuo.parentmanager.base.BaseFragment;
 import com.chaozhuo.parentmanager.base.CommonAdapterRV;
 import com.chaozhuo.parentmanager.base.ViewHolderRV;
 import com.chaozhuo.parentmanager.bean.FragmentBean;
+import com.chaozhuo.parentmanager.test.kotlin.KotlinTest;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class LearnListFragment extends BaseFragment {
 
     private RecyclerView mRv;
     private List<FragmentBean> mDatas = new ArrayList<>();
-
+    KotlinTest kotlinTest;
     public LearnListFragment() {
         // Required empty public constructor
     }
@@ -43,6 +45,7 @@ public class LearnListFragment extends BaseFragment {
 
     @Override
     protected int getContentViewLayoutID() {
+        kotlinTest = new KotlinTest("");
         return R.layout.fragment_list;
     }
 
@@ -58,6 +61,9 @@ public class LearnListFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
                         if (mListener != null) mListener.click(bean.fragment);
+                        Logger.v("lambda0");
+                        kotlinTest.lambda();
+                        Logger.e("lambda");
                     }
                 });
             }

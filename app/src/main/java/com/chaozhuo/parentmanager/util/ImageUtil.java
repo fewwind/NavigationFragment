@@ -20,7 +20,10 @@ import java.io.ByteArrayOutputStream;
  */
 
 public class ImageUtil {
-
+    /**
+     * * @param scale         The scale(0...1).
+     * * @param radius        The radius(0...25).
+     */
     public static Bitmap rsBlur(Context context, Bitmap source, int radius, float scale) {
         Logger.i("origin size:" + source.getWidth() + "*" + source.getHeight());
         int width = Math.round(source.getWidth() * scale);

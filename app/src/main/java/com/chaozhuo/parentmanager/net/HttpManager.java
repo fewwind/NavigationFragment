@@ -96,6 +96,9 @@ public class HttpManager {
         new Gson().fromJson("", getTypeT(callBack));//用法
         return ((ParameterizedType) callBack.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
+    private <T> Class<T> getClass(CZCallBack<T> callBack) {
+        return (Class<T>) ((ParameterizedType) callBack.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    }
 
     public abstract static class CZCallBack<T> {
         public abstract void onSuccess(T t);

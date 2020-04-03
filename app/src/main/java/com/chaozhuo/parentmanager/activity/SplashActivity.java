@@ -14,7 +14,6 @@ import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
 import com.chaozhuo.parentmanager.mvvm.CheckLogin;
-import com.chaozhuo.parentmanager.test.KotlinTest;
 import com.chaozhuo.parentmanager.weight.touch.TouchUtil;
 import com.chaozhuo.route_api.RouteDemo;
 
@@ -28,7 +27,6 @@ import org.greenrobot.eventbus.Subscribe;
 public class SplashActivity extends Activity implements LearnListFragment.IFragClick, LifecycleOwner {
     LearnListFragment learnListFragment;
     Class mType;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +45,6 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
             }
         });
 
-        KotlinTest test = new KotlinTest("");
-        test.getSName();
 //        Intent intent = new Intent();
 //        ComponentName neam = new ComponentName("com.chaozhuo.grow", "com.chaozhuo.grow.MainActivity");
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
@@ -74,6 +70,7 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         mType = type;
         getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
     }
+
     @Subscribe()
     public void switchFragment(Object o) {
     }

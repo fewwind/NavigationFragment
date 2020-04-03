@@ -1,8 +1,13 @@
 package com.chaozhuo.parentmanager.test.algorithm;
 
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.chaozhuo.parentmanager.bean.LinkNode;
 import com.orhanobut.logger.Logger;
 
 public class FSimple {
+    //合并数组
     public void String2Int() {
         final String s = "192.168.1.1";
         String ss = "";
@@ -92,6 +97,28 @@ public class FSimple {
         return minus ? -num : num;
     }
 
+    void mergeArray(int[] arr1, int[] arr2) {
+        int m = arr1.length;
+        int n = arr2.length;
+        int[] result = new int[m + n];
+        int c = 0;
+        int a = 0;
+        int b = 0;
+        while (a < m && b < n) {
+            if (arr1[a] < arr2[b]) {
+                result[c++] = arr1[a++];
+            } else {
+                result[c++] = arr1[b++];
+            }
+        }
+        while (a < m) {
+            result[c++] = arr2[a++];
+        }
+        while (b < n) {
+            result[c++] = arr2[b++];
+        }
+    }
+
     void minusLeft() {
         int[] arr = {2, -1, 3, -2, 4, -3};
         int tmp = 0;
@@ -138,4 +165,51 @@ public class FSimple {
         //j=7 -A5=8 i=5
         return i + 1;
     }
+    void test(int[] arr,int low,int high){
+        for (int i = 0; i < arr.length - 1; i++) {
+            int index = i;
+            for (int j = i+1; j < arr.length; j++) {
+                if (arr[j]>arr[index] ) index = j;
+            }
+        }
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length-i-1; j++) {
+            }
+        }
+        if (low>high) return;
+        int i = low;
+        int j = high;
+        int base = arr[low];
+        while (i<j){
+            while (i<j&&base>=arr[j]){
+                j--;
+            }
+            while (i<j&&base>=arr[i]){
+                i--;
+            }
+
+        }
+        arr[low] = arr[i];
+        arr[i] = base;
+        int l = 0;
+        int h = arr.length-1;
+        int m = l+h/2;
+        int val = 8;
+        while (l<=h){
+            if (arr[m] <val){
+                l = m+1;
+            } else {
+
+            }
+        }
+        LinkNode node1,node2;
+        LinkNode head;
+        ViewGroup vg = null;
+        for (int k = 0; k < vg.getChildCount(); k++) {
+            View v = vg.getChildAt(i);
+
+        }
+    }
+
 }

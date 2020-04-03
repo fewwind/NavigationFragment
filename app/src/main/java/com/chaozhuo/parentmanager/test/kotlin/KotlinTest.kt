@@ -1,8 +1,9 @@
-package com.chaozhuo.parentmanager.test
+package com.chaozhuo.parentmanager.test.kotlin
 
 import android.util.Log
+import android.view.View
 import com.chaozhuo.parentmanager.bean.AppInfoBean
-import com.chaozhuo.parentmanager.test.kotlin.SubClass
+import com.chaozhuo.parentmanager.fragment.LearnListFragment
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.*
 
@@ -139,6 +140,7 @@ class KotlinTest constructor(value: String) {
     }
 
     fun setUI() {
+        Thread.sleep(2000)
         Logger.i("setUI")
     }
 
@@ -173,20 +175,39 @@ class KotlinTest constructor(value: String) {
         fun getName(): String {
             return "静态方法"
         }
-        val boy = Boy(3,"parent")
+
+        val boy = Boy(3, "parent")
     }
-    open class Person(var name :String){//构造方法不加var，类不允许访问name，相当于局部变量
+
+    open class Person(var name: String) {//构造方法不加var，类不允许访问name，相当于局部变量
 
     }
-    class Boy(age :Int,name:String) : Person(name){
+
+    class Boy(age: Int, name: String) : Person(name) {
 
         init {
             //主函数的逻辑体
         }
+
         infix fun love(girl: Girl) {
         }
     }
 
     class Girl {}
+
+    private fun getNiming() = object {//加private是匿名对象，并且可以引用x，public返回值是any类型，不能引用值
+        val x: String = "1"
+    }
+    fun lambda(){
+        Runnable {  }
+        val iFragClick = LearnListFragment.IFragClick {}
+        View.OnClickListener{ }
+        iFragClick.click(null)
+        LambdaTest().test2(2,{setUI()})
+    }
+
 }
 
+interface IClick{
+    fun get():Int
+}
