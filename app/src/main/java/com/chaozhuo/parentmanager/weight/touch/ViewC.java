@@ -29,9 +29,9 @@ public class ViewC extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         TouchUtil.touch(this, event);
-        if (event.getAction() == MotionEvent.ACTION_DOWN) return true;
-        return false;
-//        return super.onTouchEvent(event);
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) return true;
+//        return false;
+        return super.onTouchEvent(event);
     }
 
     @Override

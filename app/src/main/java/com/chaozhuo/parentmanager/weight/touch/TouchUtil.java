@@ -7,7 +7,7 @@ import com.chaozhuo.parentmanager.App;
 import com.orhanobut.logger.Logger;
 
 public class TouchUtil {
-    static boolean eventLog = false;
+    static boolean eventLog = true;
 
     public static void dispatch(Object view, MotionEvent event) {
         if (eventLog) Logger.d(getName(event) + "-->dispatch-->" + view.getClass().getSimpleName());

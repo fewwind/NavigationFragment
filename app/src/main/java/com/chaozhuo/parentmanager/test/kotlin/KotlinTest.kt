@@ -203,7 +203,6 @@ class KotlinTest constructor(value: String) {
         val iFragClick = LearnListFragment.IFragClick {}
         View.OnClickListener{ }
         iFragClick.click(null)
-        LambdaTest().test2(2,{setUI()})
     }
 
 }
