@@ -90,8 +90,19 @@ class LambdaTest {
     fun bindViewHolder(holder: ViewHolder, pos: Int, item: String) {
         tv.setOnClickListener { listener?.invoke(pos, item) }
     }
+
     //每个lambda都会被编译成对象，内联函数不会（直接调用函数体），可以优化代码
     inline fun <T, R> T.myLet(block: (T) -> R): R {
         return block(this)
+    }
+
+    fun testSam() {
+//        SamTest().setSamType { type -> } 编译器不知道改调用哪个了
+        SamTest().setSamType(SamTest.ISAM1 { type -> })
+        SamTest().setSamType({ } as SamTest.ISAM2)
+        SamTest().setSamType(object : SamTest.ISAM1 {
+            override fun getType(type: Int) {
+            }
+        })
     }
 }

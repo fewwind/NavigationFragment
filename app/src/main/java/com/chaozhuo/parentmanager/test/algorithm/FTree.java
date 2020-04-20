@@ -128,9 +128,9 @@ public class FTree {
         return result;
     }
 
-    static class TreeNode {
-        TreeNode left;
-        TreeNode right;
+    public static class TreeNode {
+        public TreeNode left;
+        public TreeNode right;
         public int val;
 
         public TreeNode(int val) {
@@ -149,6 +149,21 @@ public class FTree {
         }
         if (node.right != null) {
             findPath(node.right, list, s + node.val + "-");
+        }
+    }
+
+    public static void findPath2(TreeNode root, List<String> list, String cur) {
+        if (root == null) return;
+        cur += root.val;
+        if (root.left == null && root.right == null) {
+            list.add(cur);
+            return;
+        }
+        if (root.left != null) {
+            findPath2(root.left, list, cur + ">");
+        }
+        if (root.right != null) {
+            findPath2(root.right, list, cur + ">");
         }
     }
 //    fun recursionPrint(root:View) {
