@@ -1,13 +1,16 @@
 package com.chaozhuo.parentmanager.test.kotlin
 
+import android.animation.AnimatorSet
 import com.chaozhuo.parentmanager.bean.AppInfoBean
+import com.chaozhuo.parentmanager.bean.AppUsageBean
 import java.net.ConnectException
 import java.net.SocketException
 
-class Collection {
+class MyCollection {
+    var list = mutableListOf(AppInfoBean(), AppInfoBean())
     fun main() {
-        var list = mutableListOf(AppInfoBean(), AppInfoBean())
-        var map = mutableMapOf(1 to "1", 2 to "2")//中缀调用
+
+        var map = mutableMapOf(1 to "1", 2 to "2")//中缀调用,需要关键字infox
         var map2 = mutableMapOf(1.to("1"), 2 to "2")
         for (i in 1..9) {
         }
@@ -32,6 +35,8 @@ class Collection {
         for ((key, value) in map) {
         }
         map.mapValues { (key, value) -> }
+        list.map { AppUsageBean() }
+        list.filter { it.order > 0 }
     }
 
     fun whenTest() {
@@ -46,12 +51,16 @@ class Collection {
             is ConnectException -> {
             }
         }
+        LambdaTest().also { tt -> tt.setOnclick() }
     }
 
     fun varargFun(numA: Int, vararg str: String) {
         // 遍历
         for (s in str) {
-
+            setMap2 { info -> info.activityName }
+            setMap2 { it.activityName }
+            var res = AppInfoBean().activityName
+            list.print { "${it.activityName}" }
         }
 
 // 获取元素
@@ -64,4 +73,23 @@ class Collection {
 //    str.sortBy {  }
 
     }
+
+    fun setMap2(mapp: (info: AppInfoBean) -> String) {
+    }
+
+    var map: ((AppInfoBean) -> String)? = null
+
+    fun <T> Collection<T>.print(map: (T) -> String) = StringBuilder("\n[ ").also { sb ->
+        this.forEach { e ->
+            sb.append("${map(e)}")
+            sb.append(" ]")
+            AnimatorSet().addListener { activityName }
+        }
+    }.toString()
+
+    var action: (AppInfoBean.() -> Unit)? = null
+    fun AnimatorSet.addListener(action: AppInfoBean.() -> Unit) {
+    }
+
+    var ll = fun(x: Int, y: Int): Int = x + y
 }

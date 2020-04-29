@@ -56,6 +56,11 @@ class ResourceID : View.OnClickListener {
 
 }
 
+val pigs = listOf(猪("9527", 50),
+        猪("007", 48),
+        猪("009", 55))
+
+
 fun repeat2(data: Int, action: (Int) -> Unit) {
     for (i in 0..data) {
         action(i)
@@ -80,22 +85,23 @@ class Derived(base: Base) : Base by base // Dervied 的所有实现委托给base
 
 data class 猪(val 编号: String, val weight: Int)
 
-val pigs = listOf(猪("9527", 50),
-        猪("007", 48),
-        猪("009", 45))
+fun isTest(t: Any) {
+    when (t) {
+        is View -> "View"
+        6 -> "is 6"
+        in 2..5 -> "between 2-5"
+    }
+}
 
 fun main(args: Array<String>) {
 
     var pig: 猪? = null
-    var maxWeight = 0;
     pigs.forEach {
-        if (it.weight > maxWeight) {
-            pig = it;
-            maxWeight = it.weight
-        }
     }
+    var s = "abc"
+    val sumBy = s.sumBy { c -> c.toInt() }
 
-    println(pig)
-    pigs.maxBy { p: 猪 -> p.weight }
-    pigs.maxBy { p -> p.weight }//自动推导
+    val maxBy = pigs.maxBy { p: 猪 -> p.weight }
+    println("$sumBy+$maxBy")
+    maxBy//自动推导
 }
