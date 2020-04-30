@@ -2,6 +2,7 @@ package com.chaozhuo.parentmanager;
 
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chaozhuo.common.BaseApp;
 import com.chaozhuo.route_api.RouteDemo;
 
@@ -28,5 +29,8 @@ public class App extends BaseApp {
         super.onCreate();
 //        BaseApp login = new LoginApp();
 //        login.onCreate();
+        ARouter.openLog();
+        ARouter.openDebug();
+        ARouter.init(this);
     }
 }

@@ -10,12 +10,15 @@ import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.NavigationCallback;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
 import com.chaozhuo.parentmanager.mvvm.CheckLogin;
 import com.chaozhuo.parentmanager.weight.touch.TouchUtil;
-import com.chaozhuo.route_api.RouteDemo;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,6 +30,7 @@ import org.greenrobot.eventbus.Subscribe;
 public class SplashActivity extends Activity implements LearnListFragment.IFragClick, LifecycleOwner {
     LearnListFragment learnListFragment;
     Class mType;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,29 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouteDemo.getInstance().build("main").start();
+//                RouteDemo.getInstance().build("main").start();
+                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this, new NavigationCallback() {
+                    @Override
+                    public void onFound(Postcard postcard) {
+                        Logger.v(postcard.toString());
+                    }
+
+                    @Override
+                    public void onLost(Postcard postcard) {
+                        Logger.d(postcard.toString());
+                    }
+
+                    @Override
+                    public void onArrival(Postcard postcard) {
+                        Logger.i(postcard.toString());
+                    }
+
+                    @Override
+                    public void onInterrupt(Postcard postcard) {
+                        Logger.w(postcard.toString());
+                    }
+                });
+//                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 //                MainActivity.start(SplashActivity.this);
             }
         });
