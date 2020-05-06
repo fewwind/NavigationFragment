@@ -1,16 +1,16 @@
 package com.chaozhuo.parentmanager.fragment;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
-import com.chaozhuo.parentmanager.base.FragmentPagerAdapter;
 
 public class StatisticsFragment extends BaseFragment {
 

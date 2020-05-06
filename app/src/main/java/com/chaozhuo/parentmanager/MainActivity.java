@@ -1,8 +1,5 @@
 package com.chaozhuo.parentmanager;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -26,7 +26,7 @@ import com.chaozhuo.rounte_annotation.Route;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-@Route({"main","2"})
+@Route({"main", "2"})
 public class MainActivity extends AppCompatActivity {
 
     public static final String STATISTICS_FRAGMENT = "statistics_fragment";
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     private void switchFragmentByTag(String tag) {
         if (tag.equals(mCurTag)) return;
         initToolBar(tag);
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         Fragment fragmentByTag = fm.findFragmentByTag(tag);
         Fragment fragmentCur = fm.findFragmentByTag(mCurTag);

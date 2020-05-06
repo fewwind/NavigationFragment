@@ -1,17 +1,16 @@
 package com.chaozhuo.parentmanager.activity;
 
-import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.alibaba.android.arouter.facade.Postcard;
-import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
@@ -27,7 +26,7 @@ import org.greenrobot.eventbus.Subscribe;
  * Created by fewwind on 19-1-7.
  */
 
-public class SplashActivity extends Activity implements LearnListFragment.IFragClick, LifecycleOwner {
+public class SplashActivity extends AppCompatActivity implements LearnListFragment.IFragClick, LifecycleOwner {
     LearnListFragment learnListFragment;
     Class mType;
 
@@ -40,32 +39,14 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
 
         learnListFragment = new LearnListFragment();
-        getFragmentManager().beginTransaction().add(R.id.container, learnListFragment).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, learnListFragment).commitAllowingStateLoss();
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                RouteDemo.getInstance().build("main").start();
-                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this, new NavigationCallback() {
-                    @Override
-                    public void onFound(Postcard postcard) {
-                        Logger.v(postcard.toString());
-                    }
-
-                    @Override
-                    public void onLost(Postcard postcard) {
-                        Logger.d(postcard.toString());
-                    }
-
-                    @Override
-                    public void onArrival(Postcard postcard) {
-                        Logger.i(postcard.toString());
-                    }
-
-                    @Override
-                    public void onInterrupt(Postcard postcard) {
-                        Logger.w(postcard.toString());
-                    }
-                });
+                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
+                Fragment fragment = (Fragment) ARouter.getInstance().build("/main/view").navigation();
+                Logger.v("frag" + fragment);
 //                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 //                MainActivity.start(SplashActivity.this);
             }
@@ -94,7 +75,7 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
     @Override
     public void click(Class type) {
         mType = type;
-        getFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().hide(learnListFragment).add(R.id.container, FragmentFactory.creat(mType)).commitAllowingStateLoss();
     }
 
     @Subscribe()
@@ -106,8 +87,8 @@ public class SplashActivity extends Activity implements LearnListFragment.IFragC
         if (mType == null) {
             super.onBackPressed();
         } else {
-            getFragmentManager().beginTransaction().remove(FragmentFactory.creat(mType)).commitAllowingStateLoss();
-            getFragmentManager().beginTransaction().show(learnListFragment).commitAllowingStateLoss();
+            getSupportFragmentManager().beginTransaction().remove(FragmentFactory.creat(mType)).commitAllowingStateLoss();
+            getSupportFragmentManager().beginTransaction().show(learnListFragment).commitAllowingStateLoss();
             mType = null;
         }
     }
