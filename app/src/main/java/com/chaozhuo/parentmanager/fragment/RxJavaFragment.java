@@ -77,6 +77,7 @@ public class RxJavaFragment extends BaseFragment {
         });
     }
     private void testCustomRx(){
+        //整体上看是双向回调，observable接受一个接口最为成员，发生订阅的时候此接口作为桥梁，调用接口方法observer作为参数传递，然后observer在执行自己的方法，这是第二层回调
         //每个操作符都创建Observable，同时Observable 的subscribe方法接收observer对象，接收下游的observer对象后创建新的Observer，并把下游传过来的obs作为成员变量
         FObservable.creat(new FObservableOnSubscribe<String>() {
             @Override

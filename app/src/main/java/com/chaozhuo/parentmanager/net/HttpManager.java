@@ -2,19 +2,30 @@ package com.chaozhuo.parentmanager.net;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 
 import com.chaozhuo.parentmanager.BuildConfig;
 import com.chaozhuo.parentmanager.bean.OnLineConfigBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
+import okhttp3.CacheControl;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -60,6 +71,7 @@ public class HttpManager {
     public static HttpManager get() {
         return SingleInstance.instance;
     }
+
     public HttpService getService() {
         return mHttpService;
     }
@@ -96,6 +108,7 @@ public class HttpManager {
         new Gson().fromJson("", getTypeT(callBack));//用法
         return ((ParameterizedType) callBack.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
+
     private <T> Class<T> getClass(CZCallBack<T> callBack) {
         return (Class<T>) ((ParameterizedType) callBack.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
@@ -104,5 +117,43 @@ public class HttpManager {
         public abstract void onSuccess(T t);
 
         public abstract void onFail(String msg);
+    }
+
+    String douban = "https://api.douban.com/v2/movie/imdb/tt0111161?apikey=0df993c66c0c636e29ecbb5344252a4a";
+
+    public void cacheMethod() {
+        CacheControl control = new CacheControl.Builder().maxAge(20, TimeUnit.SECONDS).build();
+        Cache cache = new Cache(new File(""), 1024 * 1024 * 6);
+        OkHttpClient client = new OkHttpClient.Builder().cache(cache).addNetworkInterceptor(new NetCacheInterceptor()).build();
+        //.cacheControl等价于设置header，二者选其一
+        client.newCall(new Request.Builder().url(douban).cacheControl(control).header("Cache-Control", "max-age=60").build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Logger.w("--" + response.body().string());
+            }
+        });
+    }
+
+    public class NetCacheInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Response originResponse = chain.proceed(request);
+
+            if (!TextUtils.isEmpty(request.header("Cache-Control"))) {
+                originResponse = originResponse.newBuilder()
+                        .removeHeader("pragma")
+//                        .header("Cache-Control", "max-age=60")
+                        //让每个header决定缓存时间
+                        .header("Cache-Control", request.header("Cache-Control"))
+                        .build();
+            }
+
+            return originResponse;
+        }
     }
 }
