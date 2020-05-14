@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.chaozhuo.parentmanager.R;
+import com.chaozhuo.parentmanager.base.BaseFragment;
 import com.chaozhuo.parentmanager.bean.OnLineConfigBean;
 import com.chaozhuo.parentmanager.mvvm.ConfigViewModel;
 import com.chaozhuo.parentmanager.mvvm.HandlerObserver;
@@ -19,7 +20,7 @@ import com.chaozhuo.parentmanager.util.Event.livedata.EventLiveData;
 import com.chaozhuo.parentmanager.util.Event.livedata.LiveObserver;
 import com.orhanobut.logger.Logger;
 
-public class MvvmFragment extends android.support.v4.app.Fragment {
+public class MvvmFragment extends BaseFragment {
 
     public MvvmFragment() {
         // Required empty public constructor
@@ -33,6 +34,11 @@ public class MvvmFragment extends android.support.v4.app.Fragment {
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return 0;
     }
 
     protected void initViewsAndEvents(View view) {

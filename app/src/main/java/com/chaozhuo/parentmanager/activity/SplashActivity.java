@@ -3,11 +3,15 @@ package com.chaozhuo.parentmanager.activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -16,6 +20,7 @@ import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
 import com.chaozhuo.parentmanager.mvvm.CheckLogin;
+import com.chaozhuo.parentmanager.test.kotlin.KotlinmActivity;
 import com.chaozhuo.parentmanager.weight.touch.TouchUtil;
 import com.orhanobut.logger.Logger;
 
@@ -44,11 +49,11 @@ public class SplashActivity extends AppCompatActivity implements LearnListFragme
             @Override
             public void onClick(View v) {
 //                RouteDemo.getInstance().build("main").start();
-                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
+//                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
                 Fragment fragment = (Fragment) ARouter.getInstance().build("/main/view").navigation();
                 Logger.v("frag" + fragment);
-//                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 //                MainActivity.start(SplashActivity.this);
+                AlertDialog dialog = new AlertDialog.Builder(SplashActivity.this).show();
             }
         });
 
@@ -58,6 +63,7 @@ public class SplashActivity extends AppCompatActivity implements LearnListFragme
 //        intent.setComponent(neam);
 //        startActivity(intent);
         EventBus.getDefault().register(this);
+        startActivity(new Intent(this, KotlinmActivity.class));
     }
 
     @Override
@@ -99,5 +105,24 @@ public class SplashActivity extends AppCompatActivity implements LearnListFragme
     @Override
     public Lifecycle getLifecycle() {
         return mRegistry;
+    }
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        if ("FrameLayout".equals(name)) {
+            int count = attrs.getAttributeCount();
+            for (int i = 0; i < count; i++) {
+                String attributeName = attrs.getAttributeName(i);
+                String value = attrs.getAttributeValue(i);
+                if (attributeName.equals("id")) {
+                    int id = Integer.parseInt(value.substring(1));
+                    Logger.v(attributeName + "<>" + getResources().getResourceName(id));
+                    if ("android:id/content".equals(getResources().getResourceName(id))) {
+
+                    }
+                }
+            }
+        }
+        return super.onCreateView(name, context, attrs);
     }
 }
