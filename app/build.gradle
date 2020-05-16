@@ -16,9 +16,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
+
         javaCompileOptions {
             annotationProcessorOptions {
+                includeCompileClasspath = true
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
+//                arguments = [eventBusIndex: 'com.chaozhuo.parentmanager.MyEventBusIndex']
             }
         }
     }
@@ -76,7 +79,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
     implementation 'org.greenrobot:eventbus:3.0.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    annotationProcessor  'org.greenrobot:eventbus-annotation-processor:3.0.1'
 }
+
 
 final def log = project.logger
 final def variants = project.android.applicationVariants

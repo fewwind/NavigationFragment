@@ -11,10 +11,14 @@ import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -25,8 +29,10 @@ import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -50,8 +56,18 @@ public class HttpManager {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             //builder.addInterceptor(loggingInterceptor);
         }
-        Handler handler = new Handler();
-        Looper.prepare();
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Interceptor.Chain chain) throws IOException {
+                Request.Builder build = chain.request()
+                        .newBuilder()
+                        .addHeader("Cookie", "")
+                        //这个代表接受json参数
+                        .addHeader("Accept", "application/json");
+                Request request = build.build();
+                return chain.proceed(request);
+            }
+        });
         OkHttpClient client = builder.build();
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("base")
@@ -60,6 +76,35 @@ public class HttpManager {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         mHttpService = mRetrofit.create(HttpService.class);
+    }
+
+    private Interceptor getAddPIntercepter() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                RequestBody body = request.body();// 得到请求体
+                Buffer buffer = new Buffer();// 创建缓存
+                body.writeTo(buffer);//将请求体内容,写入缓存
+                String parameterStr = buffer.readUtf8();// 读取参数字符串
+                //如果是json串就解析 从新加餐 如果是字符串就进行修改 具体业务逻辑自己加
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(parameterStr);
+                    jsonObject.put("from", "mpc_car_and");
+                    jsonObject.put("taskId", UUID.randomUUID().toString());
+//                    jsonObject.put("clientVersion", "1.32");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //对应请求头大伙按照自己的传输方式 定义
+                RequestBody requestBody = RequestBody.create(MEDIA_TYPE, jsonObject == null ? parameterStr : jsonObject.toString());
+                request = request.newBuilder().patch(requestBody).build();
+
+                Response response = chain.proceed(request);
+                return response;
+            }
+        };
     }
 
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");

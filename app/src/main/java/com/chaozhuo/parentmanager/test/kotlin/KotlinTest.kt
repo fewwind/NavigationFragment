@@ -205,6 +205,16 @@ class KotlinTest constructor(value: String) {
         iFragClick.click(null)
     }
 
+    fun main2(args: Array<String>) {
+        //注意小括号，而不是lambda的大括号
+        args.forEach(::println)// 顶级函数，并且参数为any可以引用
+        args.filter(String::isNotEmpty)//非顶级，方法本身没有参数，前边的String对象就是方法参数
+//        args.forEach(Pdf::printPdf) // 为什么不行？因为引用pdf的方法相当于第一个参数是pdf，第二个才是any
+        args.forEach(Pdf()::printPdf)
+    }
+    class Pdf {
+        fun printPdf(any: Any) {}
+    }
 }
 
 interface IClick{
