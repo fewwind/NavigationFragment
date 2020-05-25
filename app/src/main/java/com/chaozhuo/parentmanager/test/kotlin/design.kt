@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy
 
 class design {
     var outField = ""
+
     class HouseOwer() : IBuyHouse {
         override fun askPrice() {
         }
@@ -55,7 +56,8 @@ class design {
             Bean("").name = ""
         }
     }
-    data class Bean(var name:String)
+
+    data class Bean(var name: String)
 }
 
 fun main(args: Array<String>) {
@@ -63,4 +65,10 @@ fun main(args: Array<String>) {
     design.Builder("").test()
     //内部类需要外部实例，可以访问外部类属性
     design().Holder().getView()
+    val s = "1234"
+    var num = 0
+    s.toCharArray().forEach {
+        num = num * 10 + (it - '0')
+    }
+    println("res = "+num)
 }

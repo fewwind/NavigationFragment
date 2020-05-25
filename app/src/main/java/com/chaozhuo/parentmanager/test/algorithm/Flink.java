@@ -49,6 +49,16 @@ public class Flink {
         return false;
     }
 
+    private Node findMid(Node node) {
+        Node quick = node;
+        Node slow = node;
+        while (quick != null && quick.next != null) {
+            quick = quick.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
     //判断链表是否有环
     private boolean isNodeCycle2(Node node) {
         Node quick = node;

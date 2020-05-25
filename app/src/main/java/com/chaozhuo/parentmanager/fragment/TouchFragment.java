@@ -2,12 +2,17 @@ package com.chaozhuo.parentmanager.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
+import com.chaozhuo.parentmanager.base.CommonAdapterRV;
+import com.chaozhuo.parentmanager.base.ViewHolderRV;
+import com.chaozhuo.parentmanager.util.DataUtil;
 import com.orhanobut.logger.Logger;
 
 public class TouchFragment extends BaseFragment {
@@ -74,6 +79,7 @@ public class TouchFragment extends BaseFragment {
         // 如果返回值为true，则addTouchTarget给mFirstTouchTarget赋值。
         // dispatchTouchevent不论是VP或者View，如果返回false，则回调父View的onTouchevent方法
         // 如果down的父view没有拦截，分发给子View处理，则mTirstTouchTarget不为null，move的时候拦截了，则会发送cancle事件给子view，并把touchTarget置为null。
+        setAdapter(view);
     }
 
 /*    private boolean dispatchTouchEvent() {
@@ -86,4 +92,14 @@ public class TouchFragment extends BaseFragment {
         return isHand;
     }*/
 
+private void setAdapter(View v){
+    RecyclerView rv = v.findViewById(R.id.rv);
+    rv.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+    rv.setAdapter(new CommonAdapterRV<String>(getActivity(), DataUtil.creatSimlpe(20),R.layout.item_viewpager) {
+        @Override
+        public void convert(ViewHolderRV holder, String s) {
+
+        }
+    });
+}
 }

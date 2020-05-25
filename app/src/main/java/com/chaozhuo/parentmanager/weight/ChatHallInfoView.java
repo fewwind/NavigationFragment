@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.weight.adapter.BaseHallAdapter;
 import com.chaozhuo.parentmanager.weight.adapter.HallDataObserver;
@@ -92,7 +91,7 @@ public class ChatHallInfoView extends ViewGroup implements HallDataObserver {
             }
         }
         for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder holder = adapter.creatViewHolder(this);
+            RecyclerView.ViewHolder holder = adapter.creatViewHolder(this,i);
             adapter.bindViewholder(holder, i);
             mHolders.put(i, holder);
             addView(holder.itemView, paramItem);
