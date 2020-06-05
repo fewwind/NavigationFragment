@@ -3,19 +3,16 @@ package com.chaozhuo.parentmanager.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
-
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
-import com.chaozhuo.parentmanager.test.okhttp.CacheIntercept;
-import com.chaozhuo.parentmanager.test.okhttp.Intercept;
-import com.chaozhuo.parentmanager.test.okhttp.LogIntercept;
-import com.chaozhuo.parentmanager.test.okhttp.NetIntercept;
-import com.chaozhuo.parentmanager.test.okhttp.RealChain;
+import com.chaozhuo.parentmanager.copy2creat.okhttp.CacheIntercept;
+import com.chaozhuo.parentmanager.copy2creat.okhttp.Intercept;
+import com.chaozhuo.parentmanager.copy2creat.okhttp.LogIntercept;
+import com.chaozhuo.parentmanager.copy2creat.okhttp.NetIntercept;
+import com.chaozhuo.parentmanager.copy2creat.okhttp.RealChain;
 import com.orhanobut.logger.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.Request;
 
 public class NetFragment extends BaseFragment {

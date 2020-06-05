@@ -18,6 +18,24 @@ public abstract class FObservable<T> implements FObservableSource<T>{
     public void subscribe(FObserver<T> observer) {
         subscribeActual(observer);
     }
+    public void subscribe(FConsumer<T> observer) {
+        FObserver<T> temp = new FObserver<T>() {
+            @Override public void onNext(T t) {
+                observer.onNext(t);
+            }
+
+
+            @Override public void onError() {
+
+            }
+
+
+            @Override public void onComplete() {
+
+            }
+        };
+        subscribeActual(temp);
+    }
 
 //    public final void subscribe(FObserver<T> observer) {
 //        subscribeActual(observer);

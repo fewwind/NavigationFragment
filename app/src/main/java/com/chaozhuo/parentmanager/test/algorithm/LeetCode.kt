@@ -39,4 +39,5 @@ fun main(args: Array<String>) {
     var res = simple.isOrderArray(intArrayOf(1,1,2,0))
     println(res)
     simple.s2Int("123")
+
 }

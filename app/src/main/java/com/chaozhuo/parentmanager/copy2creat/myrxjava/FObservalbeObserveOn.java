@@ -24,10 +24,10 @@ public class FObservalbeObserveOn<T> extends FObservable<T> {
         source.subscribe(new ObserveOnObserver<T>(observer, mScheduler.createWorker()));
     }
 
-    class ObserveOnObserver<T> implements FObserver<T> {
+    class ObserveOnObserver<T> implements FObserver<T> ,Runnable{
         FObserver<T> actual;
         Scheduler.Worker worker;
-
+        T next;
         public ObserveOnObserver(FObserver<T> actual, Scheduler.Worker worker) {
             this.actual = actual;
             this.worker = worker;
@@ -35,8 +35,8 @@ public class FObservalbeObserveOn<T> extends FObservable<T> {
 
         @Override
         public void onNext(T t) {
-            Logger.v("ObserveOnObserver Worker Thread == > "+actual);
-            actual.onNext(t);
+            next = t;
+            worker.schedule(this);
         }
 
         @Override
@@ -47,6 +47,12 @@ public class FObservalbeObserveOn<T> extends FObservable<T> {
         @Override
         public void onComplete() {
 
+        }
+
+
+        @Override public void run() {
+            Logger.v("ObserveOnObserver Worker Thread == > "+actual);
+            actual.onNext(next);
         }
     }
 }

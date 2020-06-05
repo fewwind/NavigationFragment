@@ -19,6 +19,7 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chaozhuo.parentmanager.MainActivity;
 import com.chaozhuo.parentmanager.R;
+import com.chaozhuo.parentmanager.copy2creat.TopUtil;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
 import com.chaozhuo.parentmanager.mvvm.CheckLogin;
@@ -84,7 +85,7 @@ public class SplashActivity extends AppCompatActivity
 
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.single_select,menu);
+        getMenuInflater().inflate(R.menu.single_select, menu);
         return true;
     }
 
@@ -116,6 +117,7 @@ public class SplashActivity extends AppCompatActivity
                 .hide(learnListFragment)
                 .add(R.id.container, FragmentFactory.creat(mType))
                 .commitAllowingStateLoss();
+        TopUtil.rxJava();
     }
 
 
