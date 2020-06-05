@@ -2,9 +2,10 @@ package com.chaozhuo.parentmanager.test.algorithm;
 
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.chaozhuo.parentmanager.bean.LinkNode;
 import com.orhanobut.logger.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FSimple {
     //合并数组
@@ -24,6 +25,7 @@ public class FSimple {
             resule += v1;
         }
     }
+
 
     public int StrToInt(String str) {
         if (str == null || str.length() == 0) {
@@ -49,6 +51,7 @@ public class FSimple {
         return minus ? -num : num;
     }
 
+
     public int StrToInt2(String str) {
         if (str == null || str.length() == 0) {
             return 0;
@@ -71,6 +74,7 @@ public class FSimple {
         }
         return minus ? -num : num;
     }
+
 
     int StrToInt3() {
         String s = "+1921-6+8";
@@ -97,6 +101,7 @@ public class FSimple {
         return minus ? -num : num;
     }
 
+
     void mergeArray(int[] arr1, int[] arr2) {
         int m = arr1.length;
         int n = arr2.length;
@@ -119,8 +124,9 @@ public class FSimple {
         }
     }
 
+
     void minusLeft() {
-        int[] arr = {2, -1, 3, -2, 4, -3};
+        int[] arr = { 2, -1, 3, -2, 4, -3 };
         int tmp = 0;
         int head = -1;
         for (int i = 0; i < arr.length; i++) {
@@ -133,8 +139,9 @@ public class FSimple {
         }
     }
 
+
     void minusLeft2() {
-        int[] arr = {2, -1, 3, -2, 4, -3};
+        int[] arr = { 2, -1, 3, -2, 4, -3 };
         int head = 0;
         for (int i = 0; i < arr.length; i++) {
             int val = arr[i];
@@ -147,8 +154,90 @@ public class FSimple {
         }
     }
 
+
+    public int reverseNum(int num) {
+        int i = 0;
+        int res = 0;
+        while (num != 0) {
+            i = num % 10;
+            num /= 10;
+            res = res * 10 + i;
+        }
+        System.out.println("reverseNum = " + res);
+        return res;
+    }
+
+
+    public boolean isSquare(int num) {
+        return (num & (num - 1)) == 0;
+    }
+
+
+    public boolean isOrderArray(int[] num) {
+        //boolean flag = false;此方法无法判断 221这种情况
+        //for (int i = 0; i < num.length - 1; i++) {
+        //    boolean next = (num[i + 1] - num[i]) >= 0;
+        //    if (i > 0) {
+        //        if (next != flag) return false;
+        //    }
+        //    flag = next;
+        //}
+        boolean isDes = true;
+        boolean isIns = true;
+        for (int i = 0; i < num.length-1; i++) {
+            if (num[i] - num[i+1] >0) isIns = false;
+            if (num[i+1] - num[i] >0) isDes = false;
+        }
+        return isIns || isDes;
+    }
+
+
+    public int s2Int(String num) {
+        int res = 0;
+        for (int i = 0; i < num.length(); i++) {
+            res = res * 10 + (num.charAt(i) - '0');
+        }
+        System.out.println("s2Int = " + res);
+        return res;
+    }
+
+
+    public int[] indexAdd(int total, int[] num) {
+        int[] res = new int[2];
+        Map<Integer, Integer> map = new HashMap();
+        for (int i = 0; i < num.length; i++) {
+            map.put(num[i], i);
+        }
+        for (int i = 0; i < num.length; i++) {
+            if (map.get(total - num[i]) != null) {
+                res[0] = i;
+                res[1] = map.get(total - num[i]);
+            }
+        }
+        System.out.println("res[] = " + res[0] + "-" + res[1]);
+        return res;
+    }
+
+    public int oneBite(int num){
+        int res = 0;
+        while (num !=0){
+            num = num&(num-1);
+            res++;
+        }
+        return res;
+    }
+    public int onlyOne(int[] num){// 数组中只出现一次
+        //0 ^ v =v v^v=0 ,结论是相同的数^后为0，只剩下0和单数，结果就是单数
+        int res = 0;
+        for (int i = 0; i < num.length; i++) {
+            res = res^num[i];
+        }
+        return res;
+    }
+
+
     private int removeDuplicates(int[] arr) {//有序数组去重
-        int[] array = {0, 1, 2, 2, 5, 6, 6, 8};
+        int[] array = { 0, 1, 2, 2, 5, 6, 6, 8 };
         int i = 0;
         int j;
         for (j = 1; j < arr.length; j++) {
@@ -165,27 +254,29 @@ public class FSimple {
         //j=7 -A5=8 i=5
         return i + 1;
     }
-    void test(int[] arr,int low,int high){
+
+
+    void test(int[] arr, int low, int high) {
         for (int i = 0; i < arr.length - 1; i++) {
             int index = i;
-            for (int j = i+1; j < arr.length; j++) {
-                if (arr[j]>arr[index] ) index = j;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] > arr[index]) index = j;
             }
         }
 
         for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length-i-1; j++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
             }
         }
-        if (low>high) return;
+        if (low > high) return;
         int i = low;
         int j = high;
         int base = arr[low];
-        while (i<j){
-            while (i<j&&base>=arr[j]){
+        while (i < j) {
+            while (i < j && base >= arr[j]) {
                 j--;
             }
-            while (i<j&&base>=arr[i]){
+            while (i < j && base >= arr[i]) {
                 i--;
             }
 
@@ -193,17 +284,17 @@ public class FSimple {
         arr[low] = arr[i];
         arr[i] = base;
         int l = 0;
-        int h = arr.length-1;
-        int m = l+h/2;
+        int h = arr.length - 1;
+        int m = l + h / 2;
         int val = 8;
-        while (l<=h){
-            if (arr[m] <val){
-                l = m+1;
+        while (l <= h) {
+            if (arr[m] < val) {
+                l = m + 1;
             } else {
 
             }
         }
-        LinkNode node1,node2;
+        LinkNode node1, node2;
         LinkNode head;
         ViewGroup vg = null;
         for (int k = 0; k < vg.getChildCount(); k++) {

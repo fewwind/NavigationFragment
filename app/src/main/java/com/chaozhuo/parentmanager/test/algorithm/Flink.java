@@ -9,10 +9,20 @@ import java.util.Stack;
 
 public class Flink {
 
+
     static LinkNode node1;
     static LinkNode node2;
 
+
     static {
+//        003-从尾到头打印链表
+//        014-链表中倒数第k个结点
+//        015-反转链表
+//        016-合并两个或k个有序链表
+//        025-复杂链表的复制
+//        036-两个链表的第一个公共结点
+//        055-链表中环的入口结点
+//        056-删除链表中重复的结点
         node1 = new LinkNode(1);
         node2 = new LinkNode(2);
         addLink(node1, new LinkNode(3));
@@ -20,6 +30,7 @@ public class Flink {
         addLink(node2, new LinkNode(4));
         addLink(node2, new LinkNode(6));
     }
+
 
     // 单链表反转
     private void reverseLink(Node head) {
@@ -34,6 +45,20 @@ public class Flink {
         }
     }
 
+    public void printLink(Node node){
+        Stack<Node> stack = new Stack<>();
+        while (node != null){
+            stack.push(node);
+            node = node.next;
+        }
+        while (!stack.isEmpty()) stack.pop();
+    }
+    public void printLinkCycle(Node node){
+        if (node != null){
+            printLinkCycle(node.next);
+            System.out.println(node.val);
+        } else return;
+    }
 
     //判断链表是否有环
     private boolean isNodeCycle(Node node) {
@@ -49,6 +74,7 @@ public class Flink {
         return false;
     }
 
+
     private Node findMid(Node node) {
         Node quick = node;
         Node slow = node;
@@ -58,6 +84,21 @@ public class Flink {
         }
         return slow;
     }
+
+
+    private void findPublic(Node node1, Node node2) {
+        while (node1 != null && node2 != null) {
+            if (node1.val < node2.val) {
+                node1 = node1.next;
+            } else if (node1.val < node2.val) {
+                node2 = node2.next;
+            } else {
+                node1 = node1.next;
+                node2 = node2.next;
+            }
+        }
+    }
+
 
     //判断链表是否有环
     private boolean isNodeCycle2(Node node) {
@@ -71,6 +112,7 @@ public class Flink {
         }
         return false;
     }
+
 
     public LinkNode merge(LinkNode node1, LinkNode node2) {
         if (node1 == null) return node2;
@@ -88,6 +130,7 @@ public class Flink {
         logLink(head);
         return head;
     }
+
 
     public LinkNode mergeTwoLists(LinkNode l1, LinkNode l2) {
         // 在返回节点之前维护对节点的不变引用。（？？？）
@@ -112,6 +155,17 @@ public class Flink {
         return prehead.next;
     }
 
+    public void reverseK(int k,LinkNode node){
+        LinkNode quick = node;
+        LinkNode slow = node;
+        while (k -->0){
+            quick = quick.next;
+        }
+        while (quick != null){
+            quick = quick.next;
+            slow = slow.next;
+        }
+    }
     void logLink(LinkNode node) {
         String s = "";
         while (node != null) {
@@ -120,6 +174,7 @@ public class Flink {
         }
         Logger.e("Node = " + s);
     }
+
 
     void logLinkV(LinkNode node) {
         String s = "";
@@ -130,6 +185,7 @@ public class Flink {
         Logger.v("Node = " + s);
     }
 
+
     static void addLink(LinkNode head, LinkNode node) {
         LinkNode p = head;
         while ((p.next) != null) {
@@ -138,22 +194,27 @@ public class Flink {
         p.next = node;
     }
 
+
     class Node {
         int val;
         Node next;
+
 
         public Node(int val) {
             this.val = val;
         }
     }
 
+
     class Queue {
         private Stack stack1;
         private Stack stack2;
 
+
         public void push(Object obj) {
             stack1.push(obj);
         }
+
 
         public Object pop() {
             if (!stack2.isEmpty()) return stack2.pop();
@@ -162,6 +223,7 @@ public class Flink {
             }
             return stack2.pop();
         }
+
 
         public Queue() {
             stack1 = new Stack();

@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
 
-
 import com.chaozhuo.parentmanager.App;
 
 import org.json.JSONArray;

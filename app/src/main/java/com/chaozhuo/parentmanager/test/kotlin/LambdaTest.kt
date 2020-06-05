@@ -31,6 +31,9 @@ class LambdaTest {
     }
     var noArg = { }//无参
     var onClick = { v: View -> Boolean }
+    // ------
+    var sum1 = {x: Int,y: Int -> x+y}
+    val sum2 : ((x: Int,y: Int) ->Int) = {x,y -> x+y}
     /**
      * 总结lambda的几种写法
      * 1，var name = {i:Int -> i-1}
