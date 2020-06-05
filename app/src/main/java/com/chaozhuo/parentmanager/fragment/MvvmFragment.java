@@ -13,11 +13,11 @@ import com.chaozhuo.parentmanager.base.BaseFragment;
 import com.chaozhuo.parentmanager.bean.OnLineConfigBean;
 import com.chaozhuo.parentmanager.mvvm.ConfigViewModel;
 import com.chaozhuo.parentmanager.mvvm.HandlerObserver;
-import com.chaozhuo.parentmanager.util.Event.BaseEvent;
-import com.chaozhuo.parentmanager.util.Event.EventObserver;
-import com.chaozhuo.parentmanager.util.Event.IEventListener;
-import com.chaozhuo.parentmanager.util.Event.livedata.EventLiveData;
-import com.chaozhuo.parentmanager.util.Event.livedata.LiveObserver;
+import com.chaozhuo.parentmanager.copy2creat.Event.BaseEvent;
+import com.chaozhuo.parentmanager.copy2creat.Event.EventObserver;
+import com.chaozhuo.parentmanager.copy2creat.Event.IEventListener;
+import com.chaozhuo.parentmanager.copy2creat.Event.livedata.EventLiveData;
+import com.chaozhuo.parentmanager.copy2creat.Event.livedata.LiveObserver;
 import com.orhanobut.logger.Logger;
 
 public class MvvmFragment extends BaseFragment {
