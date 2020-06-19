@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class FSimple {
     //合并数组
+    //单调数列
     public void String2Int() {
         final String s = "192.168.1.1";
         String ss = "";
@@ -125,6 +126,24 @@ public class FSimple {
     }
 
 
+    //有序数组两个数之和为某个值
+    public static void better(int[] a, int m) {
+        int start = 0;
+        int end = a.length - 1;
+        while (start < end) {
+            if (a[start] + a[end] == m) {
+                System.out.println(a[start] + "," + a[end]);
+                start++;
+                end--;
+            } else if (a[start] + a[end] > m) {
+                end--;
+            } else if (a[start] + a[end] < m) {
+                start++;
+            }
+        }
+    }
+
+
     void minusLeft() {
         int[] arr = { 2, -1, 3, -2, 4, -3 };
         int tmp = 0;
@@ -184,9 +203,9 @@ public class FSimple {
         //}
         boolean isDes = true;
         boolean isIns = true;
-        for (int i = 0; i < num.length-1; i++) {
-            if (num[i] - num[i+1] >0) isIns = false;
-            if (num[i+1] - num[i] >0) isDes = false;
+        for (int i = 0; i < num.length - 1; i++) {
+            if (num[i] - num[i + 1] > 0) isIns = false;
+            if (num[i + 1] - num[i] > 0) isDes = false;
         }
         return isIns || isDes;
     }
@@ -218,19 +237,22 @@ public class FSimple {
         return res;
     }
 
-    public int oneBite(int num){
+
+    public int oneBite(int num) {
         int res = 0;
-        while (num !=0){
-            num = num&(num-1);
+        while (num != 0) {
+            num = num & (num - 1);
             res++;
         }
         return res;
     }
-    public int onlyOne(int[] num){// 数组中只出现一次
+
+
+    public int onlyOne(int[] num) {// 数组中只出现一次
         //0 ^ v =v v^v=0 ,结论是相同的数^后为0，只剩下0和单数，结果就是单数
         int res = 0;
         for (int i = 0; i < num.length; i++) {
-            res = res^num[i];
+            res = res ^ num[i];
         }
         return res;
     }
@@ -255,6 +277,67 @@ public class FSimple {
         return i + 1;
     }
 
+
+    //奇数排到偶数前
+    public static void order() {
+        int[] arr = { 2, 4, 6, 5, 3, 7, };
+        int a = 0;
+        int end = arr[arr.length - 1];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 != 0) {
+                int t = arr[a];
+                arr[a] = arr[i];
+                arr[i] = t;
+                a++;
+                if (arr[i] == end) break;
+            }
+        }
+    }
+
+
+    // 先找最左边的index，如果data[mid] == k,我们也将right = mid - 1,
+    // 因为我们只要最左边的index，下面找最右边的index也是同理。
+    // 也可以二分法呢找到值，然后遍历它前边和后边
+    private int valTimes(int[] arr, int k) {
+        int left = 0, right = arr.length - 1;
+        int mid = 0;
+        while (left <= right) {
+            mid = (right - left) / 2 + left;
+            if (arr[mid] >= k) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        int l = left;
+        right = arr.length - 1;
+        while (left <= right) {
+            mid = (right - left) / 2 + left;
+            if (arr[mid] <= k) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        int r = right;
+        return r - l + 1;
+    }
+
+    public int GetNumberOfK(int [] array , int k) {
+        return biSearch(array, k+0.5) - biSearch(array, k-0.5);
+    }
+    public int biSearch(int [] array, double k){
+        int start  = 0, end = array.length - 1;
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            if(array[mid] > k){
+                end = mid - 1;
+            }else{
+                start = mid + 1;
+            }
+        }
+        return start;
+    }
 
     void test(int[] arr, int low, int high) {
         for (int i = 0; i < arr.length - 1; i++) {

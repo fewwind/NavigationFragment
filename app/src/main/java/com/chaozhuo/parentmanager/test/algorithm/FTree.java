@@ -2,7 +2,6 @@ package com.chaozhuo.parentmanager.test.algorithm;
 
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.List;
 import java.util.Stack;
 
@@ -166,6 +165,15 @@ public class FTree {
 
         public TreeNode(int val) {
             this.val = val;
+        }
+        public void print(){
+            System.out.print("-"+val);
+            if (left != null){
+                left.print();
+            }
+            if (right != null){
+                right.print();
+            }
         }
     }
 

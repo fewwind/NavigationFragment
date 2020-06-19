@@ -27,7 +27,7 @@ public class CheckLoginAspectJ {
 
     @Pointcut("execution(@com.chaozhuo.parentmanager.mvvm.CheckLogin * *(..))")
     public void pointCut() {
-        // 这种拦截被注解的方法
+        // 方法名自己随意定义，当前pointcut注解的正则表示 拦截被注解修饰的方法
     }
 //    @Pointcut("call(* com.chaozhuo.parentmanager.activity.SplashActivity.*(..))")
 //    public void pointCut() {
@@ -40,7 +40,7 @@ public class CheckLoginAspectJ {
         Logger.i("CheckLoginAspectJ.before");
     }
 
-    @Around("pointCut()")
+    @Around("pointCut()")//包围的意思，包围切点的方法
     public Object checkLogin(ProceedingJoinPoint joinPoint) throws Throwable {
         Logger.i("checkLogin");
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

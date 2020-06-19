@@ -1,5 +1,7 @@
 package com.chaozhuo.parentmanager.test.algorithm
 
+import com.chaozhuo.parentmanager.bean.LinkNode
+import com.chaozhuo.parentmanager.design.FServiceLoader
 import java.util.*
 
 class LeetCode {
@@ -30,14 +32,18 @@ class LeetCode {
 fun main(args: Array<String>) {
     var leetCode = LeetCode()
     var simple = FSimple()
+    var tree = FTree()
+    var head = LinkNode(1, LinkNode(1, LinkNode(2, LinkNode(2, LinkNode(3, null)))))
 //    1
 //  21    22
 // 31 32 33 34
 //    leetCode.treeMaxPath(FTree.root)
-    simple.indexAdd(3, intArrayOf(0,2,1,5))
-    simple.reverseNum(123)
-    var res = simple.isOrderArray(intArrayOf(1,1,2,0))
-    println(res)
-    simple.s2Int("123")
-
+//    simple.indexAdd(3, intArrayOf(0,2,1,5))
+//    simple.reverseNum(123)
+//    var res = simple.isOrderArray(intArrayOf(1,1,2,0))
+//    println(res)
+//    simple.s2Int("123")
+//    FSimple.better(intArrayOf(1,2,3,5),5)
+    FServiceLoader.load()
+    Flink.deleteRepeat(head)
 }

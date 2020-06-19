@@ -9,6 +9,13 @@ public class LinkNode {
         this.val = val;
     }
 
+
+    public LinkNode(int val, LinkNode next) {
+        this.val = val;
+        this.next = next;
+    }
+
+
     public void add(LinkNode LinkNode) {
         LinkNode curr = this;
         while (curr.next != null) {

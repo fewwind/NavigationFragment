@@ -2,7 +2,6 @@ package com.chaozhuo.parentmanager.test.algorithm;
 
 import com.chaozhuo.parentmanager.bean.LinkNode;
 import com.orhanobut.logger.Logger;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -120,14 +119,14 @@ public class Flink {
         LinkNode head = null;
         if (node1.val <= node2.val) {
             head = node1;
-            logLinkV(head);
+            printLink(head);
             head.next = merge(node1.next, node2);
         } else {
             head = node2;
-            logLinkV(head);
+            printLink(head);
             head.next = merge(node1, node2.next);
         }
-        logLink(head);
+        printLink(head);
         return head;
     }
 
@@ -155,7 +154,7 @@ public class Flink {
         return prehead.next;
     }
 
-    public void reverseK(int k,LinkNode node){
+    public void backwardsK(int k,LinkNode node){
         LinkNode quick = node;
         LinkNode slow = node;
         while (k -->0){
@@ -166,7 +165,22 @@ public class Flink {
             slow = slow.next;
         }
     }
-    void logLink(LinkNode node) {
+    public void delBackwardsK(int k,LinkNode node){
+        LinkNode quick = node;
+        LinkNode slow = node;
+        LinkNode pre = node;
+        while (k -->0){
+            quick = quick.next;
+        }
+        while (quick != null){
+            quick = quick.next;
+            pre = slow;
+            slow = slow.next;
+        }
+        pre.next = slow.next;
+        printLink(node);
+    }
+    public static void printLink(LinkNode node) {
         String s = "";
         while (node != null) {
             s = s + node.val + "-";
@@ -174,17 +188,39 @@ public class Flink {
         }
         Logger.e("Node = " + s);
     }
-
-
-    void logLinkV(LinkNode node) {
+    public static void printLn(LinkNode node) {
         String s = "";
         while (node != null) {
             s = s + node.val + "-";
             node = node.next;
         }
-        Logger.v("Node = " + s);
+        System.out.print("Node = " + s);
     }
 
+    public static void deleteRepeat(LinkNode node){
+        LinkNode head = node;
+        while ( head != null && head.next != null){
+            if (head.val == head.next.val){
+                head.next = head.next.next;
+                //head  = head.next;
+            }else {
+                head  = head.next;
+            }
+        }
+        printLn(node);
+    }
+    public static void deleteVal(LinkNode node,int val){
+        LinkNode head = new LinkNode(-1);
+        LinkNode pre = head;
+        while ( pre.next != null){
+            if (pre.next.val ==val){
+                pre = pre.next.next;
+            } else {
+                pre = pre.next;
+            }
+        }
+        printLn(node);
+    }
 
     static void addLink(LinkNode head, LinkNode node) {
         LinkNode p = head;

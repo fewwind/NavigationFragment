@@ -20,4 +20,8 @@ object TopUtil {
             }
         })
     }
+    @JvmStatic
+    fun print(any:Any?){
+        println(any?.toString())
+    }
 }
