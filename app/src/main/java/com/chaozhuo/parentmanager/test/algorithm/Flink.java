@@ -32,9 +32,9 @@ public class Flink {
 
 
     // 单链表反转
-    private void reverseLink(Node head) {
-        Node next = null;
-        Node pre = null;
+    private void reverseLink(LinkNode head) {
+        LinkNode next = null;
+        LinkNode pre = null;
         // 每次循环head都在改变，一次是链表的node，第一次node1，第二次node2 ...
         while (head != null) {
             next = head.next;
@@ -44,15 +44,15 @@ public class Flink {
         }
     }
 
-    public void printLink(Node node){
-        Stack<Node> stack = new Stack<>();
+    public void printLinkRevarse(LinkNode node){
+        Stack<LinkNode> stack = new Stack<>();
         while (node != null){
             stack.push(node);
             node = node.next;
         }
         while (!stack.isEmpty()) stack.pop();
     }
-    public void printLinkCycle(Node node){
+    public void printLinkCycle(LinkNode node){
         if (node != null){
             printLinkCycle(node.next);
             System.out.println(node.val);
@@ -60,8 +60,8 @@ public class Flink {
     }
 
     //判断链表是否有环
-    private boolean isNodeCycle(Node node) {
-        Set<Node> set = new HashSet<>();
+    private boolean isNodeCycle(LinkNode node) {
+        Set<LinkNode> set = new HashSet<>();
         while (node != null) {
             if (set.contains(node)) {
                 return true;
@@ -74,9 +74,9 @@ public class Flink {
     }
 
 
-    private Node findMid(Node node) {
-        Node quick = node;
-        Node slow = node;
+    private LinkNode findMid(LinkNode node) {
+        LinkNode quick = node;
+        LinkNode slow = node;
         while (quick != null && quick.next != null) {
             quick = quick.next.next;
             slow = slow.next;
@@ -85,7 +85,7 @@ public class Flink {
     }
 
 
-    private void findPublic(Node node1, Node node2) {
+    private void findPublic(LinkNode node1, LinkNode node2) {
         while (node1 != null && node2 != null) {
             if (node1.val < node2.val) {
                 node1 = node1.next;
@@ -100,14 +100,17 @@ public class Flink {
 
 
     //判断链表是否有环
-    private boolean isNodeCycle2(Node node) {
-        Node quick = node;
-        Node slow = node;
+    public static boolean isNodeCycle2(LinkNode node) {
+        LinkNode quick = node;
+        LinkNode slow = node;
         // 为什么是quick的循环，因为只要有环必定永不为空，while会一直循环，必能能找到快慢相等的点
         while (quick != null && quick.next != null) {
             quick = quick.next.next;
             slow = slow.next;
-            if (quick == slow) return true;
+            if (quick.val == slow.val) {
+                printLn(slow);
+                return true;
+            }
         }
         return false;
     }
@@ -197,6 +200,7 @@ public class Flink {
         System.out.print("Node = " + s);
     }
 
+
     public static void deleteRepeat(LinkNode node){
         LinkNode head = node;
         while ( head != null && head.next != null){
@@ -229,18 +233,6 @@ public class Flink {
         }
         p.next = node;
     }
-
-
-    class Node {
-        int val;
-        Node next;
-
-
-        public Node(int val) {
-            this.val = val;
-        }
-    }
-
 
     class Queue {
         private Stack stack1;
