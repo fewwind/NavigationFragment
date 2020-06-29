@@ -107,6 +107,14 @@ class GameHallBg(ctx: Context, att: AttributeSet? = null) : View(ctx, att) {
             paintRound.xfermode = null
             canvas.restoreToCount(layerId)
 
+/*            matrixRotate.reset() 矩阵实现，注意先后顺序和旋转位移的中心点
+//            matrixRotate.postRotate(30f + 60 * i, icon.width / 2f, icon.width / 2f)
+//            matrixRotate.postTranslate(w / 2 - icon.width / 2, h / 2 - icon.height / 2)
+            matrixRotate.postTranslate(w / 2 - icon.width / 2, h / 2 - icon.height / 2)
+            matrixRotate.postRotate(30f + 60 * i, w / 2, h / 2f)
+            canvas.drawBitmap(icon, matrixRotate, paintRound)
+            i++*/
+
             val rotateId = canvas.save()
             canvas.rotate(degrees[i], w / 2, h / 2)
 //            canvas.rotate(30f + 60 * i, w / 2, h / 2)
