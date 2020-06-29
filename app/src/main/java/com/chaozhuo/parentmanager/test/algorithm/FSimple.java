@@ -293,7 +293,23 @@ public class FSimple {
             }
         }
     }
-
+    // aaxbb 只出现一次的字母
+    public static char getOnlyOnce(String s){
+        int l = 0;
+        char[] chars = s.toCharArray();
+        int h = s.length()-1;
+        while (l<=h){
+            int mid = (l+h)/2;
+            if (mid ==0 || mid == s.length()-1 || (chars[mid] != chars[mid-1] && chars[mid] !=chars[mid+1])){
+                return chars[mid];
+            } else if (chars[mid] != chars[mid-1]){
+                h = mid-1;
+            } else {
+                l = mid+1;
+            }
+        }
+        return '0';
+    }
 
     // 先找最左边的index，如果data[mid] == k,我们也将right = mid - 1,
     // 因为我们只要最左边的index，下面找最右边的index也是同理。
@@ -322,7 +338,7 @@ public class FSimple {
         int r = right;
         return r - l + 1;
     }
-
+    //获取排序数组中出现次数
     public int GetNumberOfK(int [] array , int k) {
         return biSearch(array, k+0.5) - biSearch(array, k-0.5);
     }

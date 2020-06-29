@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.chaozhuo.parentmanager.R;
-import com.chaozhuo.parentmanager.weight.adapter.BaseHallAdapter;
 import com.chaozhuo.parentmanager.weight.adapter.HallDataObserver;
 import com.chaozhuo.parentmanager.weight.adapter.HallSize;
+import com.shuo.ruzuo.chat.adapter.BaseHallAdapter;
 
 public class ChatHallInfoView extends ViewGroup implements HallDataObserver {
     int radius;

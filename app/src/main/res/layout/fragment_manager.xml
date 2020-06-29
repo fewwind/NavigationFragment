@@ -12,7 +12,6 @@
         android:orientation="vertical"
         tools:context="com.chaozhuo.parentmanager.fragment.StatisticsFragment">
 
-
         <!-- TODO: Update blank fragment layout -->
         <com.chaozhuo.parentmanager.weight.CircleImageView
             android:id="@+id/circle_round"
@@ -48,8 +47,14 @@
         <FrameLayout
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:layout_below="@+id/time_line">
+            android:layout_below="@+id/time_line"></FrameLayout>
 
-        </FrameLayout>
+        <com.chaozhuo.parentmanager.weight.table.ChatHallInfoView2
+            android:id="@+id/hall_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/time_line"
+            android:clipChildren="false" />
+
     </RelativeLayout>
 </ScrollView>
