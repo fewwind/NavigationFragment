@@ -1,7 +1,6 @@
 package com.chaozhuo.parentmanager;
 
 import android.content.Context;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chaozhuo.common.BaseApp;
 import com.chaozhuo.route_api.RouteDemo;
@@ -22,6 +21,9 @@ public class App extends BaseApp {
             e.printStackTrace();
         }
         RouteDemo.getInstance().init(this);
+        if (BuildConfig.DEBUG){
+            //LeakCanary.install(this);
+        }
     }
 
     @Override

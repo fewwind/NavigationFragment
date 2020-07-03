@@ -10,23 +10,6 @@ import java.util.Map;
 public class FSimple {
     //合并数组
     //单调数列
-    public void String2Int() {
-        final String s = "192.168.1.1";
-        String ss = "";
-        for (int i = 0; i < s.length(); i++) {
-            if (Character.isDigit(s.charAt(i))) {
-                ss += s.charAt(i);
-            }
-        }
-        int resule = 0;
-        for (int i = 0; i < ss.length(); i++) {
-            // 关键点 不允许使用value方法，int和char互转，char c9 = '9',int int_c9 = c9-'0' ,就是char-‘0’
-            double v1 = Integer.valueOf(ss.charAt(i) + "") * (Math.pow(10, ss.length() - i - 1));
-            Logger.i(Integer.valueOf(ss.charAt(i) + "") + "vi = " + v1 + "");
-            resule += v1;
-        }
-    }
-
 
     public int StrToInt(String str) {
         if (str == null || str.length() == 0) {
@@ -52,29 +35,6 @@ public class FSimple {
         return minus ? -num : num;
     }
 
-
-    public int StrToInt2(String str) {
-        if (str == null || str.length() == 0) {
-            return 0;
-        }
-        int num = 0;
-        boolean minus = false;
-        if (str.charAt(0) == '+') {
-            str = str.substring(1);
-        } else if (str.charAt(0) == '-') {
-            minus = true;
-            str = str.substring(1);
-        }
-        for (int i = 0; i < str.toCharArray().length; i++) {
-            char c = str.toCharArray()[i];
-            if (c >= '0' && c <= '9') {
-                int pow = (int) Math.pow(10, str.toCharArray().length - 1 - i);
-                int v = c - '0';
-                num += v * pow;
-            }
-        }
-        return minus ? -num : num;
-    }
 
 
     int StrToInt3() {
@@ -173,6 +133,15 @@ public class FSimple {
         }
     }
 
+    //int[] = 456 123，旋转数组找到旋转起点
+    public static int findTransition(int[] arr){
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i+1]<arr[i]){
+                return arr[i+1];
+            }
+        }
+        return arr[0];
+    }
 
     public int reverseNum(int num) {
         int i = 0;
