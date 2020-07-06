@@ -53,4 +53,8 @@ dependencies {
     api 'com.alibaba:arouter-api:1.5.0'
     api 'pub.devrel:easypermissions:2.0.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    api project(':route_api')
+    api project(':route_annotation')
+    annotationProcessor project(':RouteProcess')
 }

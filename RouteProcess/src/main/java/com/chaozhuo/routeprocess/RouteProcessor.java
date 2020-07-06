@@ -8,11 +8,10 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
-
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
@@ -34,11 +33,18 @@ public class RouteProcessor extends AbstractProcessor{
 
     Messager mMessager;
     Filer mFiler;
+    String modeName = "";
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
         mMessager = processingEnvironment.getMessager();
         mFiler = processingEnvironment.getFiler();
+        Map<String, String> options = processingEnvironment.getOptions();
+        for (String key:options.keySet()){
+            modeName = options.get("fewwind");
+            System.out.println(key+"--> 注解可选参数，arouter根据此参数获取模块名称  "+options.get(key));
+        }
+        System.out.println("--> 注解可选参数模块名称  "+modeName);
     }
 
     @Override
@@ -46,6 +52,7 @@ public class RouteProcessor extends AbstractProcessor{
         Set<? extends Element> routeElements = roundEnvironment.getElementsAnnotatedWith(Route.class);
         try {
             TypeSpec typeSpec = processRouterTable(routeElements);
+            System.out.println(mFiler+"--> process  "+typeSpec);
             if (typeSpec != null) {
                 JavaFile.builder("com.fewwind.learn", typeSpec).build().writeTo(mFiler);
             }
@@ -80,7 +87,7 @@ public class RouteProcessor extends AbstractProcessor{
             }
         }
 
-        return TypeSpec.classBuilder("AutoCreateModuleActivityMap_app")
+        return TypeSpec.classBuilder(modeName+"AutoCreateModuleActivityMap_app")
                 .addModifiers(Modifier.PUBLIC)
                 .addMethod(routerInitBuilder.build())
                 .build();

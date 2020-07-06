@@ -15,16 +15,14 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.MenuItem;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.chaozhuo.parentmanager.activity.Sub0Activity;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
 import com.chaozhuo.parentmanager.fragment.ViewFragment;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
 import com.chaozhuo.rounte_annotation.Route;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 @Route({"main", "2"})
 public class MainActivity extends AppCompatActivity {

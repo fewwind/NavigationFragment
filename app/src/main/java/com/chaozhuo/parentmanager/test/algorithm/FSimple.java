@@ -102,7 +102,19 @@ public class FSimple {
             }
         }
     }
-
+    // 数组中找出重复数字
+    void findRepeatNum(int[] arr){// 2 9 3 6 2 3
+        int temp = 0;
+        int[] arrs = {2,3,1,0,2,5,3};
+        for (int i = 0; i < arr.length; i++) {
+            while (i !=arr[i]){
+                if (arr[i] == arr[arr[i]]) return;
+                temp = arr[i];
+                arr[i] = arr[temp];
+                arr[temp] = temp;
+            }
+        }
+    }
 
     void minusLeft() {
         int[] arr = { 2, -1, 3, -2, 4, -3 };
