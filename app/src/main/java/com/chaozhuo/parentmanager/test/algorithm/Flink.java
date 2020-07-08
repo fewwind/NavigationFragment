@@ -133,6 +133,17 @@ public class Flink {
         return head;
     }
 
+    public LinkNode merge2(LinkNode node1, LinkNode node2) {
+        if (node1 == null) return node2;
+        if (node2 == null) return node1;
+        if (node1.val <= node2.val) {
+            node1.next = merge(node1.next, node2);
+            return node1;
+        } else {
+            node2.next = merge(node1, node2.next);
+            return node2;
+        }
+    }
 
     public LinkNode mergeTwoLists(LinkNode l1, LinkNode l2) {
         // 在返回节点之前维护对节点的不变引用。（？？？）

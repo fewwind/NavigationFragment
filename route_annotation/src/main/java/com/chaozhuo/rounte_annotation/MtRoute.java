@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
-public @interface Route {
+public @interface MtRoute {
     String [] value();
 }

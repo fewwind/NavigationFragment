@@ -25,7 +25,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
-                arguments = [fewwind: project.getName()]
+//                arguments = [fewwind: project.getName()]
             }
         }
     }
@@ -55,5 +55,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':common')
     annotationProcessor project(':RouteProcess')
-//    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }

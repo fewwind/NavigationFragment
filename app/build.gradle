@@ -20,9 +20,9 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath = true
-//                arguments = [AROUTER_MODULE_NAME: project.getName()]
-                arguments = [fewwind: "Word"]
-                arguments = [eventBusIndex: 'com.chaozhuo.parentmanager.MyEventBusIndex']
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//                arguments = [fewwind: "Word"]
+//                arguments = [eventBusIndex: 'com.chaozhuo.parentmanager.MyEventBusIndex']
             }
         }
     }
@@ -76,8 +76,8 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
     implementation 'org.greenrobot:eventbus:3.0.0'
-//    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-    annotationProcessor  'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+//    annotationProcessor  'org.greenrobot:eventbus-annotation-processor:3.0.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.6.1'
     annotationProcessor project(':RouteProcess')
 }

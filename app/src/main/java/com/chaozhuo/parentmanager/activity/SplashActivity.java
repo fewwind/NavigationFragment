@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -56,10 +55,10 @@ public class SplashActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 //                RouteDemo.getInstance().build("main").start();
-//                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
-                Fragment fragment =
-                        (Fragment) ARouter.getInstance().build("/main/view").navigation();
-                Logger.v("frag" + fragment);
+                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
+                //Fragment fragment =
+                //        (Fragment) ARouter.getInstance().build("/main/view").navigation();
+                //Logger.v("frag" + fragment);
                 MainActivity.start(SplashActivity.this);
                 AlertDialog dialog = new AlertDialog.Builder(SplashActivity.this).show();
             }

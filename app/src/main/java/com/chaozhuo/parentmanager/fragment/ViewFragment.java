@@ -14,7 +14,7 @@ import com.chaozhuo.parentmanager.weight.table.GameHallBg;
 import com.shuo.ruzuo.chat.adapter.HallLayoutAdapter;
 import org.jetbrains.annotations.NotNull;
 
-@Route(path = "/main/view")
+@Route(path = "/home/view")
 public class ViewFragment extends BaseFragment {
 
     public ViewFragment() {

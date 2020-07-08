@@ -1,6 +1,6 @@
 package com.chaozhuo.routeprocess;
 
-import com.chaozhuo.rounte_annotation.Route;
+import com.chaozhuo.rounte_annotation.MtRoute;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -49,7 +49,7 @@ public class RouteProcessor extends AbstractProcessor{
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-        Set<? extends Element> routeElements = roundEnvironment.getElementsAnnotatedWith(Route.class);
+        Set<? extends Element> routeElements = roundEnvironment.getElementsAnnotatedWith(MtRoute.class);
         try {
             TypeSpec typeSpec = processRouterTable(routeElements);
             System.out.println(mFiler+"--> process  "+typeSpec);
@@ -79,7 +79,7 @@ public class RouteProcessor extends AbstractProcessor{
                 .addParameter(mapParameterSpec);
 
         for (Element element : elements) {
-            Route route = element.getAnnotation(Route.class);
+            MtRoute route = element.getAnnotation(MtRoute.class);
             String[] routerUrls = route.value();
             for (String url : routerUrls) {
                 //核心逻辑  将字符与类做映射关联
@@ -97,7 +97,7 @@ public class RouteProcessor extends AbstractProcessor{
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> ret = new HashSet<>();
-        ret.add(Route.class.getCanonicalName());
+        ret.add(MtRoute.class.getCanonicalName());
         return ret;
     }
 

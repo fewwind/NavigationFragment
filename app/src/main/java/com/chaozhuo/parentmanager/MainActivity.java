@@ -17,14 +17,16 @@ import android.util.ArrayMap;
 import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chaozhuo.parentmanager.activity.Sub0Activity;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
 import com.chaozhuo.parentmanager.fragment.ViewFragment;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
-import com.chaozhuo.rounte_annotation.Route;
+import com.chaozhuo.rounte_annotation.MtRoute;
 
-@Route({"main", "2"})
+@MtRoute({"main", "2"})
+@Route(path = "/home/main")
 public class MainActivity extends AppCompatActivity {
 
     public static final String STATISTICS_FRAGMENT = "statistics_fragment";
