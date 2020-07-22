@@ -3,11 +3,9 @@ package com.chaozhuo.parentmanager.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
-
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
 import com.orhanobut.logger.Logger;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,7 +18,9 @@ public class SortFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-    int[] array = {2, 9, 4, 6, 0, 8, 14, 7};
+
+    int[] array = { 2, 9, 4, 6, 0, 8, 14, 7 };
+
 
     // TODO: Rename and change types and number of parameters
     public static Fragment newInstance() {
@@ -30,6 +30,7 @@ public class SortFragment extends BaseFragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +38,12 @@ public class SortFragment extends BaseFragment {
         }
     }
 
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_touch_event;
     }
+
 
     @Override
     protected void initViewsAndEvents(View view) {
@@ -57,6 +60,7 @@ public class SortFragment extends BaseFragment {
 //        lengthOfLongest2("arabcacfr");
 //        new FThread().test();
     }
+
 
     static int binarySearch(int[] array, int size, int value) {
         int lo = 0;
@@ -76,6 +80,7 @@ public class SortFragment extends BaseFragment {
         }
         return ~lo;  // value not present
     }
+
 
     private void select(int[] arr) {
         //排序
@@ -100,6 +105,7 @@ public class SortFragment extends BaseFragment {
         Logger.w("select = " + Arrays.toString(arr));
     }
 
+
     void select2(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             int min = i;
@@ -117,6 +123,7 @@ public class SortFragment extends BaseFragment {
         Logger.w("select2 = " + Arrays.toString(arr));
     }
 
+
     private void bubble(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
@@ -128,6 +135,7 @@ public class SortFragment extends BaseFragment {
             }
         }
     }
+
 
     public void bubbleSort(int[] a) {
         int len = a.length;
@@ -142,43 +150,33 @@ public class SortFragment extends BaseFragment {
         }
     }
 
+
     private int get(int n) {
         if (n <= 2) return 1;
         return get(n - 1) + get(n - 2);
     }
 
 
-    public long fibonacci(int n) {
+    public static long fibonacci(int n) {
         // 当输入非正整数的时候返回0
         if (n <= 0) {
             return 0;
         }
-        // 输入1或者2的时候返回1
-        if (n == 1 || n == 2) {
-            return 1;
+        long current = 0;
+        long next = 1;
+        long sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum = current + next;
+            System.out.println("curr " + current + " -next " + next);
+            current = next;
+            next = sum;
         }
-        // 第n-2个的Fibonacci数的值
-        long prePre = 1;
-        // 第n-1个的Fibonacci数的值
-        long pre = 1;
-        // 第n个的Fibonacci数的值
-        long current = 2;
-        // 求解第n个的Fibonacci数的值
-        for (int i = 3; i <= n; i++) {
-            // 求第i个的Fibonacci数的值
-            current = prePre + pre;
-            // 更新记录的结果，prePre原先记录第i-2个Fibonacci数的值
-            // 现在记录第i-1个Fibonacci数的值
-            prePre = pre;
-            // 更新记录的结果，pre原先记录第i-1个Fibonacci数的值
-            // 现在记录第i个Fibonacci数的值
-            pre = current;
-        }
-        // 返回所求的结果
         return current;
     }
 
+
     String s = "ABCDEFGHIJKLMNOPQRESUVWXYZ";
+
 
     private void lengthOfLongest(String s) {
         Set<Character> set = new HashSet<>();
@@ -197,6 +195,7 @@ public class SortFragment extends BaseFragment {
         }
         Logger.w("最长字符串 - " + max);
     }
+
 
     private void lengthOfLongest2(String s) {
         //arabcacfr
@@ -217,6 +216,23 @@ public class SortFragment extends BaseFragment {
         Logger.w(list + "最长字符串 - " + max);
     }
 
+
+    public static void longestSub(String s) {
+        int left = 0;
+        int right = 0;
+        int max = 0;
+        Set<Character> set = new HashSet<>();
+        while (right < s.length()) {
+            if (set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left++));
+            } else {
+                set.add(s.charAt(right++));
+            }
+            max = Math.max(max, set.size());
+        }
+    }
+
+
     void su(int x) {
         int l = (int) Math.sqrt(x);
         for (int i = 0; i <= l; i++) {
@@ -224,15 +240,20 @@ public class SortFragment extends BaseFragment {
         }
     }
 
+
     private int findK(int[] arr, int k, int low, int high) {
         int l = low;
         int h = high;
         int tmp = arr[low];
         while (l < h) {
             // tmp大于高位值再减减，就是保留小值，把大的移到前排，逆序
-            while (l < h && tmp >= arr[h]) h--;
+            while (l < h && tmp >= arr[h]) {
+                h--;
+            }
             arr[l] = arr[h];
-            while (l < h && tmp <= arr[l]) l++;
+            while (l < h && tmp <= arr[l]) {
+                l++;
+            }
             arr[h] = arr[l];
         }
         arr[h] = tmp;

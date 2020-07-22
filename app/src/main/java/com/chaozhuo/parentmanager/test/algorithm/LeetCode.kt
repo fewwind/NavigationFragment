@@ -1,6 +1,10 @@
 package com.chaozhuo.parentmanager.test.algorithm
 
+import android.view.View
+import android.view.ViewGroup
 import com.chaozhuo.parentmanager.bean.LinkNode
+import com.chaozhuo.parentmanager.fragment.SortFragment
+import com.orhanobut.logger.Logger
 import java.util.*
 
 class LeetCode {
@@ -26,6 +30,18 @@ class LeetCode {
         return max
     }
 
+    fun getCount(view: View): Int {
+        if (view == null) return 0
+        Logger.v("v = $view")
+        var r = 0
+        if (view is ViewGroup) {
+            for (v in 0 until view.childCount) {
+                r = r + getCount(view.getChildAt(v))
+            }
+            return r + 1
+        } else return 1
+    }
+
 }
 
 fun main(args: Array<String>) {
@@ -45,5 +61,6 @@ fun main(args: Array<String>) {
 //    simple.s2Int("123")
 //    FSimple.better(intArrayOf(1,2,3,5),5)
 //    Flink.deleteRepeat(head)
-    Flink.isNodeCycle2(cycle)
+//    Flink.isNodeCycle2(cycle)
+    SortFragment.fibonacci(8)
 }
