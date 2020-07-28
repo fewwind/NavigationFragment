@@ -30,6 +30,7 @@ class GameHallBg(ctx: Context, att: AttributeSet? = null) : View(ctx, att) {
         setBackgroundResource(R.drawable.hall_green_bg)
         icon = BitmapFactory.decodeResource(resources, R.drawable.ic_turn_table)
         setOnClickListener { start() }
+        start()
         roundColor = Color.parseColor("#15915B")
         indicatorColor= Color.parseColor("#34bd81")
     }
@@ -122,7 +123,7 @@ class GameHallBg(ctx: Context, att: AttributeSet? = null) : View(ctx, att) {
             canvas.restoreToCount(rotateId)
             i++
         }
-        postInvalidateDelayed(666)
+//        postInvalidateDelayed(666)
     }
 
     fun start() {

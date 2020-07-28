@@ -19,6 +19,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chaozhuo.parentmanager.MainActivity;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.copy2creat.TopUtil;
+import com.chaozhuo.parentmanager.design.GenericCenter;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
 import com.chaozhuo.parentmanager.mvvm.CheckLogin;
@@ -72,6 +73,7 @@ public class SplashActivity extends AppCompatActivity
         EventBus.getDefault().register(this);
         startActivity(new Intent(this, KotlinmActivity.class));
         setToolbar();
+        GenericCenter.show();
     }
 
 
