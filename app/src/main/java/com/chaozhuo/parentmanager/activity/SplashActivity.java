@@ -1,5 +1,6 @@
 package com.chaozhuo.parentmanager.activity;
 
+import android.Manifest;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
@@ -20,9 +21,9 @@ import com.chaozhuo.parentmanager.MainActivity;
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.copy2creat.TopUtil;
 import com.chaozhuo.parentmanager.design.GenericCenter;
+import com.chaozhuo.parentmanager.design.compentent.PermissionAOP;
 import com.chaozhuo.parentmanager.fragment.FragmentFactory;
 import com.chaozhuo.parentmanager.fragment.LearnListFragment;
-import com.chaozhuo.parentmanager.mvvm.CheckLogin;
 import com.chaozhuo.parentmanager.test.kotlin.KotlinmActivity;
 import com.chaozhuo.parentmanager.weight.touch.TouchUtil;
 import com.orhanobut.logger.Logger;
@@ -110,7 +111,7 @@ public class SplashActivity extends AppCompatActivity
     }
 
 
-    @CheckLogin(param = "login")
+    @PermissionAOP(permissions = { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode = 10)
     @Override
     public void click(Class type) {
         mType = type;

@@ -6,15 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.chaozhuo.parentmanager.R;
 import com.chaozhuo.parentmanager.base.BaseFragment;
 import com.chaozhuo.parentmanager.base.CommonAdapterRV;
 import com.chaozhuo.parentmanager.base.ViewHolderRV;
 import com.chaozhuo.parentmanager.bean.FragmentBean;
 import com.chaozhuo.parentmanager.test.kotlin.KotlinTest;
-import com.orhanobut.logger.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,9 +58,7 @@ public class LearnListFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
                         if (mListener != null) mListener.click(bean.fragment);
-                        Logger.v("lambda0");
                         kotlinTest.lambda();
-                        Logger.e("lambda");
                     }
                 });
             }

@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class GenericCenter {
+    //https://www.cnblogs.com/doucheyard/p/6855823.html
     public static void show() {
         Field field = Sellers.class.getFields()[0];
         //java.util.List<com.chaozhuo.parentmanager.design.Apple>

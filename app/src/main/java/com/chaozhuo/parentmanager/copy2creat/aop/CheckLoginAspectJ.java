@@ -1,4 +1,5 @@
-package com.chaozhuo.parentmanager.test;
+/*
+package com.chaozhuo.parentmanager.copy2creat.aop;
 
 import android.content.Context;
 
@@ -16,11 +17,13 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
 
+*/
 /**
  * Created by fewwind on 19-6-24.
  * 用例：
  * 1，运行时权限，在需要权限的方法上加注解，
- */
+ *//*
+
 
 @Aspect
 public class CheckLoginAspectJ {
@@ -70,3 +73,4 @@ public class CheckLoginAspectJ {
     }
 
 }
+*/
