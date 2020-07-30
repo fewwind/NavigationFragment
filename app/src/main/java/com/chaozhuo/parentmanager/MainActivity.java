@@ -17,7 +17,6 @@ import android.util.ArrayMap;
 import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chaozhuo.parentmanager.activity.Sub0Activity;
 import com.chaozhuo.parentmanager.fragment.MyFragment;
 import com.chaozhuo.parentmanager.fragment.StatisticsFragment;
@@ -25,8 +24,8 @@ import com.chaozhuo.parentmanager.fragment.ViewFragment;
 import com.chaozhuo.parentmanager.weight.AlignTextView;
 import com.chaozhuo.rounte_annotation.MtRoute;
 
-@MtRoute({"main", "2"})
-@Route(path = "/home/main")
+@MtRoute({ "main", "2" })
+//@Route(path = "/home/main")
 public class MainActivity extends AppCompatActivity {
 
     public static final String STATISTICS_FRAGMENT = "statistics_fragment";
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private AlignTextView mHeader;
     private BottomNavigationView navigation;
     private String mCurTag;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 //        LoadPlugin.load();
     }
 
+
     private void initView() {
         if (mFactory == null) mFactory = new ContentFragmentFactory();
         mToolBar = findViewById(R.id.tool_bar);
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+
     private void initToolBar(String mCurTag) {
 //        mToolBar.setVisibility(mCurTag.equals(STATISTICS_FRAGMENT) ? View.GONE : View.VISIBLE);
         mToolBar.setTitle("Learn");
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void showFragByIntent(Intent intent) {
         String stringExtra = intent.getStringExtra(EXTRA_FRAGMENT);
         if (TextUtils.isEmpty(stringExtra)) {
@@ -96,9 +99,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             switchFragmentByTag(stringExtra);
         }
-        if (mCurTag.equals(MANAGER_FRAGMENT))
+        if (mCurTag.equals(MANAGER_FRAGMENT)) {
             navigation.setSelectedItemId(R.id.navigation_dashboard);
+        }
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -107,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onSaveInstanceState(outState);
     }
+
 
     private void switchFragmentByTag(String tag) {
         if (tag.equals(mCurTag)) return;
@@ -129,8 +135,10 @@ public class MainActivity extends AppCompatActivity {
         mCurTag = tag;
     }
 
+
     private static class ContentFragmentFactory {
         ArrayMap<String, Fragment> mFragmentPool = new ArrayMap<>();
+
 
         Fragment getFragment(String tag) {
             if (mFragmentPool.get(tag) != null) {
@@ -140,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
             mFragmentPool.put(tag, f);
             return f;
         }
+
 
         public Fragment createFragment(String tag) {
             if (tag.equals(STATISTICS_FRAGMENT)) {
@@ -152,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
             throw new IllegalArgumentException(String.format("Invalid id %s", tag));
         }
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -174,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     public static void openApp(Context ctx, String pkg) {
         try {
             Intent launch = ctx.getPackageManager().getLaunchIntentForPackage(pkg);
@@ -183,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
     public static void start(Context ctx) {
         ctx.startActivity(new Intent(ctx, MainActivity.class));

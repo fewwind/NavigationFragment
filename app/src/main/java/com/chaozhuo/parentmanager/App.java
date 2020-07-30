@@ -3,6 +3,7 @@ package com.chaozhuo.parentmanager;
 import android.content.Context;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chaozhuo.common.BaseApp;
+import com.chaozhuo.parentmanager.copy2creat.processor.AppStartDemo;
 import com.chaozhuo.route_api.RouteDemo;
 
 /**
@@ -34,5 +35,6 @@ public class App extends BaseApp {
         ARouter.openLog();
         ARouter.openDebug();
         ARouter.init(this);
+        AppStartDemo.initAppStart();
     }
 }
