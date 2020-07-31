@@ -54,7 +54,10 @@ public class RouteProcessor extends AbstractProcessor {
         System.out.println("--> 注解可选参数模块名称  " + modeName);
     }
 
-
+    // 不同module生成的代码互相隔离，运行时需要收集所有module中生成的代码，
+    // 手动维护，或者在定义注解
+    // arouter中运行时遍历class
+    // 修改字节码，transforme
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         Set<? extends Element> routeElements =
@@ -104,9 +107,9 @@ public class RouteProcessor extends AbstractProcessor {
             int sort = route.sort();
             //核心逻辑  将字符与类做映射关联
             routerInitBuilder.addStatement(
-                    "appStartList.add(new com.chaozhuo.rounte_annotation.AppInitSort($L, $T.class))",
+                    "appStartList.add(new com.chaozhuo.rounte_annotation.AppInitSort($L, $S))",
                     sort,
-                    ClassName.get((TypeElement) element));
+                    ClassName.get((TypeElement) element).topLevelClassName());
         }
 
         return TypeSpec.classBuilder(modeName + "_AppStart")
