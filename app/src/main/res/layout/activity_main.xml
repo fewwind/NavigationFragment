@@ -15,7 +15,7 @@
         android:fitsSystemWindows="true"
         android:layout_weight="1"
         android:orientation="vertical"
-        tools:context="com.chaozhuo.parentmanager.MainActivity">
+        tools:context="com.feng.advance.MainActivity">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -34,7 +34,7 @@
                 app:toolbarId="@+id/tool_bar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <com.chaozhuo.parentmanager.weight.AlignTextView
+                <com.feng.advance.weight.AlignTextView
                     android:id="@+id/header_bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

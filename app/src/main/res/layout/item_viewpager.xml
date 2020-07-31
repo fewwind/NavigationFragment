@@ -8,7 +8,7 @@
     android:layout_margin="8dp"
     android:padding="8dp">
 
-    <com.chaozhuo.parentmanager.weight.MyViewPager
+    <com.feng.advance.weight.MyViewPager
         android:id="@+id/manager_history_icon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

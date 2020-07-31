@@ -24,10 +24,6 @@ allprojects {
         google()
         maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter(){ url "http://jcenter.bintray.com/"}
-        maven {
-            url "${artifactory_contextUrl}/libs-release"
-            name "artifactory"
-        }
     }
 }
 

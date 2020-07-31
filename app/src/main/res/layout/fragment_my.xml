@@ -3,19 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.chaozhuo.parentmanager.weight.RefreshLayout
+    <com.feng.advance.weight.RefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#eeeeee"
         android:orientation="vertical"
-        tools:context="com.chaozhuo.parentmanager.fragment.StatisticsFragment">
+        tools:context="com.feng.advance.fragment.StatisticsFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </com.chaozhuo.parentmanager.weight.RefreshLayout>
+    </com.feng.advance.weight.RefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/notify"

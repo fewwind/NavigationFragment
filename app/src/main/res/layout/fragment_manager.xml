@@ -10,10 +10,10 @@
         android:layout_height="match_parent"
 
         android:orientation="vertical"
-        tools:context="com.chaozhuo.parentmanager.fragment.StatisticsFragment">
+        tools:context="com.feng.advance.fragment.StatisticsFragment">
 
         <!-- TODO: Update blank fragment layout -->
-        <com.chaozhuo.parentmanager.weight.CircleImageView
+        <com.feng.advance.weight.CircleImageView
             android:id="@+id/circle_round"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:text="manger"
             app:type="round" />
 
-        <com.chaozhuo.parentmanager.weight.CircleImageView
+        <com.feng.advance.weight.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
@@ -30,13 +30,13 @@
             android:src="@drawable/mali"
             android:text="manger" />
 
-        <com.chaozhuo.parentmanager.weight.CustomSeekBarV
+        <com.feng.advance.weight.CustomSeekBarV
             android:layout_width="wrap_content"
             android:layout_height="144dp"
             android:layout_alignParentRight="true"
             android:layout_margin="8dp" />
 
-        <com.chaozhuo.parentmanager.weight.TimeLineView
+        <com.feng.advance.weight.TimeLineView
             android:id="@+id/time_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:layout_height="100dp"
             android:layout_below="@+id/time_line"></FrameLayout>
 
-        <com.chaozhuo.parentmanager.weight.table.ChatHallInfoView2
+        <com.feng.advance.weight.table.ChatHallInfoView2
             android:id="@+id/hall_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

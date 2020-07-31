@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ce686666"
-    tools:context="com.chaozhuo.parentmanager.activity.Sub0Activity">
+    tools:context="com.feng.advance.activity.Sub0Activity">
 
-    <com.chaozhuo.parentmanager.weight.CustomSeekBarV
+    <com.feng.advance.weight.CustomSeekBarV
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"></com.chaozhuo.parentmanager.weight.CustomSeekBarV>
+        app:layout_constraintRight_toRightOf="parent"></com.feng.advance.weight.CustomSeekBarV>
 </android.support.constraint.ConstraintLayout>

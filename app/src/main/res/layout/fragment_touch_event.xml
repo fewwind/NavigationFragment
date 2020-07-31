@@ -5,30 +5,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.chaozhuo.parentmanager.weight.touch.FrameLayoutA
+    <com.feng.advance.weight.touch.FrameLayoutA
         android:id="@+id/frame_a_1"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/bottom_normal"
         android:orientation="vertical"
-        tools:context="com.chaozhuo.parentmanager.fragment.StatisticsFragment">
+        tools:context="com.feng.advance.fragment.StatisticsFragment">
 
-        <com.chaozhuo.parentmanager.weight.touch.FrameLayoutB
+        <com.feng.advance.weight.touch.FrameLayoutB
             android:id="@+id/frame_b_2"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:background="@color/design_default_color_primary">
 
 
-            <com.chaozhuo.parentmanager.weight.touch.ViewC
+            <com.feng.advance.weight.touch.ViewC
                 android:id="@+id/view_c"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:background="@color/colorPrimary" />
-        </com.chaozhuo.parentmanager.weight.touch.FrameLayoutB>
+        </com.feng.advance.weight.touch.FrameLayoutB>
 
-    </com.chaozhuo.parentmanager.weight.touch.FrameLayoutA>
+    </com.feng.advance.weight.touch.FrameLayoutA>
 
    <ScrollView
        android:layout_width="match_parent"

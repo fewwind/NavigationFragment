@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.chaozhuo.login">
+    package="com.feng.login">
 
-    <application android:name=".LoginApp">
-        <activity android:name=".LoginActivity"></activity>
+    <application android:name="com.feng.login.LoginApp">
+        <activity android:name="com.feng.login.LoginActivity"></activity>
     </application>
 
 </manifest>
