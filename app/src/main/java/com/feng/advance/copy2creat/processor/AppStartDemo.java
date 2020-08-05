@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class AppStartDemo {
-
+    // 主module因为使用room引用了kapt注解处理器，导致自定义失效，login中是正常的
     public static ArrayList<AppInitSort> mAppSort = new ArrayList<>();
 
 
