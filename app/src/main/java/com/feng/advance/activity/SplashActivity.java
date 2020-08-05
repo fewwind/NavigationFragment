@@ -20,13 +20,13 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.feng.advance.MainActivity;
 import com.feng.advance.R;
 import com.feng.advance.copy2creat.TopUtil;
+import com.feng.advance.copy2creat.download.DownLoadCenter;
 import com.feng.advance.design.GenericCenter;
 import com.feng.advance.design.compentent.PermissionAOP;
 import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
 import com.feng.advance.test.kotlin.KotlinmActivity;
 import com.feng.advance.weight.touch.TouchUtil;
-import com.orhanobut.logger.Logger;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -40,7 +40,7 @@ public class SplashActivity extends AppCompatActivity
     Class mType;
     protected Toolbar toolbar;
 
-
+    boolean state = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,12 @@ public class SplashActivity extends AppCompatActivity
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (state){
+                    DownLoadCenter.INSTANCE.startLoad(DownLoadCenter.address);
+                } else {
+                    DownLoadCenter.INSTANCE.stop(DownLoadCenter.address);
+                }
+                state = !state;
 //                RouteDemo.getInstance().build("main").start();
                 ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
                 //Fragment fragment =
@@ -163,7 +169,7 @@ public class SplashActivity extends AppCompatActivity
                 String value = attrs.getAttributeValue(i);
                 if (attributeName.equals("id")) {
                     int id = Integer.parseInt(value.substring(1));
-                    Logger.v(attributeName + "<>" + getResources().getResourceName(id));
+                    //Logger.v(attributeName + "<>" + getResources().getResourceName(id));
                     if ("android:id/content".equals(getResources().getResourceName(id))) {
 
                     }
