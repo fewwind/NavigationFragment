@@ -2,18 +2,18 @@ package com.feng.advance.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.feng.advance.R;
 import com.feng.advance.base.BaseFragment;
 import com.feng.advance.base.CommonAdapterRV;
 import com.feng.advance.base.ViewHolderRV;
 import com.feng.advance.bean.TestBean;
+import com.feng.advance.test.simpleplugin.FieldUtil;
 import com.orhanobut.logger.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +59,11 @@ public class RecyclerFragment extends BaseFragment {
                 holder.setText(R.id.manager_history_agree, bean.value + "");
                 addIndex(bindSet, holder);
                 Logger.e(getIndex(bindSet, holder) + "->bind= " + holder);
+                holder.itemView.setOnClickListener(new View.OnClickListener(){
+                    @Override public void onClick(View v) {
+                        get();
+                    }
+                });
             }
 
             @Override
@@ -68,18 +73,52 @@ public class RecyclerFragment extends BaseFragment {
                 Logger.v(creatSet.size() + "->creat= " + holder);
             }
 
+
+            @Override
+            public void onBindViewHolder(
+                    @NonNull ViewHolderRV holder, int position, @NonNull List<Object> payloads) {
+                super.onBindViewHolder(holder, position, payloads);
+                if (payloads.isEmpty()){
+                    //onBindViewHolder(holder,position);
+                } else {
+                    holder.setText(R.id.manager_history_agree, payloads.get(0) + "");
+                }
+            }
+
+
             @Override
             public long getItemId(int position) {
                 return position;
             }
         };
-        adapterRV.setHasStableIds(true);
+        adapterRV.setHasStableIds(false);
         mRv.setAdapter(adapterRV);
         View fab = view.findViewById(R.id.notify);
         fab.setVisibility(View.VISIBLE);
         fab.setOnClickListener(v -> {
-            adapterRV.notifyDataSetChanged();
+            //adapterRV.notifyDataSetChanged();
+            adapterRV.notifyItemChanged(2);
+            //adapterRV.notifyItemChanged(2,1);
         });
+
+    }
+    void get(){
+        try {
+            Class<?> forName = Class.forName(
+                    "android.support.v7.widget.RecyclerView$Recycler");
+            Object recycler =
+                    FieldUtil.getField(RecyclerView.class, mRv, "mRecycler");
+            ArrayList<RecyclerView.ViewHolder> scrap =
+                    (ArrayList<RecyclerView.ViewHolder>) FieldUtil.getField(forName, recycler, "mAttachedScrap");
+            ArrayList<RecyclerView.ViewHolder> cachedViews =
+                    (ArrayList<RecyclerView.ViewHolder>) FieldUtil.getField(forName, recycler, "mCachedViews");
+            ArrayList<RecyclerView.ViewHolder> mChangeScrap =
+                    (ArrayList<RecyclerView.ViewHolder>)  FieldUtil.getField(forName, recycler, "mChangedScrap");
+            Logger.v("scrap = "+scrap.size()+"<>change= "+(mChangeScrap==null?"0":mChangeScrap.size())+">cachedViews "+cachedViews.size());
+        } catch (Exception e) {
+            Logger.e("ex = "+e);
+            e.printStackTrace();
+        }
     }
 
     private int getIndex(ArrayList list, Object o) {
