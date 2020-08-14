@@ -156,22 +156,17 @@ public class SortFragment extends BaseFragment {
         return get(n - 1) + get(n - 2);
     }
 
-
     public static long fibonacci(int n) {
-        // 当输入非正整数的时候返回0
-        if (n <= 0) {
-            return 0;
+        if (n == 0 || n == 1) {
+            return 1;
         }
-        long current = 0;
-        long next = 1;
-        long sum = 0;
-        for (int i = 0; i < n; i++) {
-            sum = current + next;
-            System.out.println("curr " + current + " -next " + next);
-            current = next;
-            next = sum;
+        long[] result = new long[n+1];
+        result[0] = 0;
+        result[1] = 1;
+        for (int i = 2; i < n; i++) {
+            result[i] = result[i - 1] + result[i - 2];
         }
-        return current;
+        return result[n];
     }
 
 
