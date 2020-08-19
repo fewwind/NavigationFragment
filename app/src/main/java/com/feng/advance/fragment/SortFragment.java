@@ -157,16 +157,14 @@ public class SortFragment extends BaseFragment {
     }
 
     public static long fibonacci(int n) {
-        if (n == 0 || n == 1) {
-            return 1;
+        int[] res = new int[n + 1];
+        res[0] = 0;// 对应[0,1,1,2,3,5]
+        res[0] = 1;// 对应[1,1,2,3,5,8]
+        res[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            res[i] = res[i - 1] + res[i - 2];
         }
-        long[] result = new long[n+1];
-        result[0] = 0;
-        result[1] = 1;
-        for (int i = 2; i < n; i++) {
-            result[i] = result[i - 1] + result[i - 2];
-        }
-        return result[n];
+        return res[n];
     }
 
 

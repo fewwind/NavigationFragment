@@ -8,7 +8,6 @@ import java.util.Stack;
 
 public class Flink {
 
-
     static LinkNode node1;
     static LinkNode node2;
 
@@ -32,7 +31,7 @@ public class Flink {
 
 
     // 单链表反转
-    private void reverseLink(LinkNode head) {
+    private LinkNode reverseLink(LinkNode head) {
         LinkNode next = null;
         LinkNode pre = null;
         // 每次循环head都在改变，一次是链表的node，第一次node1，第二次node2 ...
@@ -42,22 +41,49 @@ public class Flink {
             pre = head;
             head = next;
         }
+        return pre;
     }
 
-    public void printLinkRevarse(LinkNode node){
+
+    //递归写法
+    class Solution {
+        public LinkNode reverseList(LinkNode head) {
+            return reverseListHelper(head, null);
+        }
+
+
+        private LinkNode reverseListHelper(LinkNode head, LinkNode newHead) {
+            if (head == null) {
+                return newHead;
+            }
+            LinkNode next = head.next;
+            head.next = newHead;
+            return reverseListHelper(next, head);
+        }
+    }
+
+
+    public void printLinkRevarse(LinkNode node) {
         Stack<LinkNode> stack = new Stack<>();
-        while (node != null){
+        while (node != null) {
             stack.push(node);
             node = node.next;
         }
-        while (!stack.isEmpty()) stack.pop();
+        while (!stack.isEmpty()) {
+            stack.pop();
+        }
     }
-    public void printLinkCycle(LinkNode node){
-        if (node != null){
+
+
+    public void printLinkCycle(LinkNode node) {
+        if (node != null) {
             printLinkCycle(node.next);
             System.out.println(node.val);
-        } else return;
+        } else {
+            return;
+        }
     }
+
 
     //判断链表是否有环
     private boolean isNodeCycle(LinkNode node) {
@@ -133,6 +159,7 @@ public class Flink {
         return head;
     }
 
+
     public LinkNode merge2(LinkNode node1, LinkNode node2) {
         if (node1 == null) return node2;
         if (node2 == null) return node1;
@@ -144,6 +171,7 @@ public class Flink {
             return node2;
         }
     }
+
 
     public LinkNode mergeTwoLists(LinkNode l1, LinkNode l2) {
         // 在返回节点之前维护对节点的不变引用。（？？？）
@@ -168,32 +196,40 @@ public class Flink {
         return prehead.next;
     }
 
-    public void backwardsK(int k,LinkNode node){
+
+    public void backwardsK(int k, LinkNode node) {
         LinkNode quick = node;
         LinkNode slow = node;
-        while (k -->0){
+        while (k-- > 0) {
             quick = quick.next;
         }
-        while (quick != null){
+        while (quick != null) {
             quick = quick.next;
             slow = slow.next;
         }
     }
-    public void delBackwardsK(int k,LinkNode node){
-        LinkNode quick = node;
-        LinkNode slow = node;
-        LinkNode pre = node;
-        while (k -->0){
+
+
+    public void delBackwardsK(int k, LinkNode node) {
+        //链表的节点随着随着节点移动，12345--345
+        //增加哨兵节点后，获取到倒数k节点的前一个节点
+        //注意k的取值，数组长度（k+1）正好是数组[k]最后一位
+        LinkNode result = new LinkNode(0);
+        result.next = node;
+        LinkNode quick = result;
+        LinkNode slow = result;
+        while (k-- > 0) {
             quick = quick.next;
         }
-        while (quick != null){
+        while (quick != null) {
             quick = quick.next;
-            pre = slow;
             slow = slow.next;
         }
-        pre.next = slow.next;
-        printLink(node);
+        if (slow.next != null) slow.next = slow.next.next;
+        printLink(result.next);
     }
+
+
     public static void printLink(LinkNode node) {
         String s = "";
         while (node != null) {
@@ -202,6 +238,8 @@ public class Flink {
         }
         Logger.e("Node = " + s);
     }
+
+
     public static void printLn(LinkNode node) {
         String s = "";
         while (node != null) {
@@ -212,23 +250,25 @@ public class Flink {
     }
 
 
-    public static void deleteRepeat(LinkNode node){
+    public static void deleteRepeat(LinkNode node) {
         LinkNode head = node;
-        while ( head != null && head.next != null){
-            if (head.val == head.next.val){
+        while (head != null && head.next != null) {
+            if (head.val == head.next.val) {
                 head.next = head.next.next;
                 //head  = head.next;
-            }else {
-                head  = head.next;
+            } else {
+                head = head.next;
             }
         }
         printLn(node);
     }
-    public static void deleteVal(LinkNode node,int val){
+
+
+    public static void deleteVal(LinkNode node, int val) {
         LinkNode head = new LinkNode(-1);
         LinkNode pre = head;
-        while ( pre.next != null){
-            if (pre.next.val ==val){
+        while (pre.next != null) {
+            if (pre.next.val == val) {
                 pre = pre.next.next;
             } else {
                 pre = pre.next;
@@ -237,6 +277,7 @@ public class Flink {
         printLn(node);
     }
 
+
     static void addLink(LinkNode head, LinkNode node) {
         LinkNode p = head;
         while ((p.next) != null) {
@@ -244,6 +285,7 @@ public class Flink {
         }
         p.next = node;
     }
+
 
     class Queue {
         private Stack stack1;
