@@ -3,9 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/NavigationFragment.iml" filepath="$PROJECT_DIR$/.idea/NavigationFragment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RouteProcess/NavigationFragment-RouteProcess.iml" filepath="$PROJECT_DIR$/.idea/modules/RouteProcess/NavigationFragment-RouteProcess.iml" group="NavigationFragment/RouteProcess" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/NavigationFragment-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/NavigationFragment-app.iml" group="NavigationFragment/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/NavigationFragment-common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/NavigationFragment-common.iml" group="NavigationFragment/common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/login/NavigationFragment-login.iml" filepath="$PROJECT_DIR$/.idea/modules/login/NavigationFragment-login.iml" group="NavigationFragment/login" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/route_annotation/NavigationFragment-route_annotation.iml" filepath="$PROJECT_DIR$/.idea/modules/route_annotation/NavigationFragment-route_annotation.iml" group="NavigationFragment/route_annotation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/route_api/NavigationFragment-route_api.iml" filepath="$PROJECT_DIR$/.idea/modules/route_api/NavigationFragment-route_api.iml" group="NavigationFragment/route_api" />
       <module fileurl="file://$PROJECT_DIR$/RouteProcess/RouteProcess.iml" filepath="$PROJECT_DIR$/RouteProcess/RouteProcess.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fewwind-project-NavigationFragment.iml" filepath="$PROJECT_DIR$/.idea/modules/fewwind-project-NavigationFragment.iml" group="NavigationFragment" />
       <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-NavigationFragment.iml" filepath="$PROJECT_DIR$/project-NavigationFragment.iml" />
       <module fileurl="file://$PROJECT_DIR$/route_annotation/route_annotation.iml" filepath="$PROJECT_DIR$/route_annotation/route_annotation.iml" />

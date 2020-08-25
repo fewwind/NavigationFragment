@@ -88,6 +88,7 @@ public class LearnListFragment extends BaseFragment {
         mDatas.add(new FragmentBean(SortFragment.class));
         mDatas.add(new FragmentBean(RecyclerFragment.class));
         mDatas.add(new FragmentBean(ScrollFragment.class));
+        mDatas.add(new FragmentBean(RxJavaFragment.class));
     }
 
 //    public static final String VP_FRAG = "ViewPager_Fragment";

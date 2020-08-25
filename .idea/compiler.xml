@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="NavigationFragment-RouteProcess" target="1.7" />
       <module name="RouteProcess" target="1.7" />
     </bytecodeTargetLevel>
   </component>
