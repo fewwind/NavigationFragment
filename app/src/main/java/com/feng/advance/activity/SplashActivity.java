@@ -15,6 +15,8 @@ import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.feng.advance.MainActivity;
 import com.feng.advance.R;
@@ -26,18 +28,22 @@ import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
 import com.feng.advance.test.kotlin.KotlinmActivity;
 import com.feng.advance.weight.touch.TouchUtil;
+import com.feng.common.ICheckLogin;
+import com.orhanobut.logger.Logger;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 /**
  * Created by fewwind on 19-1-7.
  */
-
+@Route(path = "/home/splash")
 public class SplashActivity extends AppCompatActivity
         implements LearnListFragment.IFragClick, LifecycleOwner {
     LearnListFragment learnListFragment;
     Class mType;
     protected Toolbar toolbar;
+    @Autowired
+    ICheckLogin mCheckLogin;
 
     boolean state = true;
     @Override
@@ -47,7 +53,7 @@ public class SplashActivity extends AppCompatActivity
         // 如果不是Fragment或者支持库需要自己实现
         mRegistry = new LifecycleRegistry(this);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
-
+        ARouter.getInstance().inject(this);
         learnListFragment = new LearnListFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, learnListFragment)
@@ -67,6 +73,7 @@ public class SplashActivity extends AppCompatActivity
                 //        (Fragment) ARouter.getInstance().build("/main/view").navigation();
                 //Logger.v("frag" + fragment);
                 MainActivity.start(SplashActivity.this);
+                Logger.e("aaa = "+mCheckLogin);
             }
         });
 

@@ -1,4 +1,4 @@
-package com.feng.advance.base.itemfactory;
+package com.feng.advance.design.itemfactory;
 
 public class Item1 implements ItemInterface {
     @Override
