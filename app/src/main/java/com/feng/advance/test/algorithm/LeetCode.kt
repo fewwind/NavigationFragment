@@ -49,7 +49,8 @@ fun main(args: Array<String>) {
     var simple = FSimple()
     var tree = FTree()
     var head = LinkNode(1, LinkNode(1, LinkNode(2, LinkNode(2, LinkNode(3, null)))))
-    var cycle = LinkNode(1, LinkNode(2, LinkNode(3, LinkNode(4, LinkNode(2, null)))))
+    var cycle = LinkNode(1, LinkNode(2, LinkNode(3, LinkNode(4, LinkNode(5, null)))))
+    Flink.reverseListHelper(cycle,null)
 //    1
 //  21    22
 // 31 32 33 34

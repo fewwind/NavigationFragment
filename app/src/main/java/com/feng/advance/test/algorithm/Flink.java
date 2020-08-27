@@ -46,20 +46,15 @@ public class Flink {
 
 
     //递归写法
-    class Solution {
-        public LinkNode reverseList(LinkNode head) {
-            return reverseListHelper(head, null);
+    public static LinkNode reverseListHelper(LinkNode head, LinkNode newHead) {
+        if (head == null) {
+            return newHead;
         }
-
-
-        private LinkNode reverseListHelper(LinkNode head, LinkNode newHead) {
-            if (head == null) {
-                return newHead;
-            }
-            LinkNode next = head.next;
-            head.next = newHead;
-            return reverseListHelper(next, head);
-        }
+        printLn("head",head);
+        printLn("newHead",newHead);
+        LinkNode next = head.next;
+        head.next = newHead;
+        return reverseListHelper(next, head);
     }
 
 
@@ -122,6 +117,10 @@ public class Flink {
                 node2 = node2.next;
             }
         }
+        while (node1 != node2) {
+            node1 = (node1 == null) ? node2 : node1;
+            node2 = (node2 == null) ? node1 : node2;
+        }
     }
 
 
@@ -134,7 +133,7 @@ public class Flink {
             quick = quick.next.next;
             slow = slow.next;
             if (quick.val == slow.val) {
-                printLn(slow);
+                printLn("", slow);
                 return true;
             }
         }
@@ -143,24 +142,6 @@ public class Flink {
 
 
     public LinkNode merge(LinkNode node1, LinkNode node2) {
-        if (node1 == null) return node2;
-        if (node2 == null) return node1;
-        LinkNode head = null;
-        if (node1.val <= node2.val) {
-            head = node1;
-            printLink(head);
-            head.next = merge(node1.next, node2);
-        } else {
-            head = node2;
-            printLink(head);
-            head.next = merge(node1, node2.next);
-        }
-        printLink(head);
-        return head;
-    }
-
-
-    public LinkNode merge2(LinkNode node1, LinkNode node2) {
         if (node1 == null) return node2;
         if (node2 == null) return node1;
         if (node1.val <= node2.val) {
@@ -240,13 +221,13 @@ public class Flink {
     }
 
 
-    public static void printLn(LinkNode node) {
+    public static void printLn(String name, LinkNode node) {
         String s = "";
         while (node != null) {
             s = s + node.val + "-";
             node = node.next;
         }
-        System.out.print("Node = " + s);
+        System.out.print(name + " = " + s);
     }
 
 
@@ -260,7 +241,7 @@ public class Flink {
                 head = head.next;
             }
         }
-        printLn(node);
+        printLn("", node);
     }
 
 
@@ -274,7 +255,7 @@ public class Flink {
                 pre = pre.next;
             }
         }
-        printLn(node);
+        printLn("", node);
     }
 
 
