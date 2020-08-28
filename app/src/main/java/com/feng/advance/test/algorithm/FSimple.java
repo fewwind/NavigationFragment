@@ -4,12 +4,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.feng.advance.bean.LinkNode;
 import com.orhanobut.logger.Logger;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FSimple {
     //合并数组
     //单调数列
+
 
     public int StrToInt(String str) {
         if (str == null || str.length() == 0) {
@@ -35,6 +37,18 @@ public class FSimple {
         return minus ? -num : num;
     }
 
+
+    //异位字母
+    public boolean isSame(String a, String b) {
+        for (char i = 'a'; i <= 'z'; i++) {
+        }
+        Arrays.sort(a.toCharArray());
+        Arrays.sort(b.toCharArray());
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) != b.charAt(i)) return false;
+        }
+        return true;
+    }
 
 
     int StrToInt3() {
@@ -102,12 +116,14 @@ public class FSimple {
             }
         }
     }
+
+
     // 数组中找出重复数字
-    void findRepeatNum(int[] arr){// 2 9 3 6 2 3
+    void findRepeatNum(int[] arr) {// 2 9 3 6 2 3
         int temp = 0;
-        int[] arrs = {2,3,1,0,2,5,3};
+        int[] arrs = { 2, 3, 1, 0, 2, 5, 3 };
         for (int i = 0; i < arr.length; i++) {
-            while (i !=arr[i]){
+            while (i != arr[i]) {
                 if (arr[i] == arr[arr[i]]) return;
                 temp = arr[i];
                 arr[i] = arr[temp];
@@ -115,6 +131,7 @@ public class FSimple {
             }
         }
     }
+
 
     void minusLeft() {
         int[] arr = { 2, -1, 3, -2, 4, -3 };
@@ -145,15 +162,17 @@ public class FSimple {
         }
     }
 
+
     //int[] = 456 123，旋转数组找到旋转起点
-    public static int findTransition(int[] arr){
+    public static int findTransition(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
-            if (arr[i+1]<arr[i]){
-                return arr[i+1];
+            if (arr[i + 1] < arr[i]) {
+                return arr[i + 1];
             }
         }
         return arr[0];
     }
+
 
     public int reverseNum(int num) {
         int i = 0;
@@ -274,23 +293,27 @@ public class FSimple {
             }
         }
     }
+
+
     // aaxbb 只出现一次的字母
-    public static char getOnlyOnce(String s){
+    public static char getOnlyOnce(String s) {
         int l = 0;
         char[] chars = s.toCharArray();
-        int h = s.length()-1;
-        while (l<=h){
-            int mid = (l+h)/2;
-            if (mid ==0 || mid == s.length()-1 || (chars[mid] != chars[mid-1] && chars[mid] !=chars[mid+1])){
+        int h = s.length() - 1;
+        while (l <= h) {
+            int mid = (l + h) / 2;
+            if (mid == 0 || mid == s.length() - 1 ||
+                    (chars[mid] != chars[mid - 1] && chars[mid] != chars[mid + 1])) {
                 return chars[mid];
-            } else if (chars[mid] != chars[mid-1]){
-                h = mid-1;
+            } else if (chars[mid] != chars[mid - 1]) {
+                h = mid - 1;
             } else {
-                l = mid+1;
+                l = mid + 1;
             }
         }
         return '0';
     }
+
 
     // 先找最左边的index，如果data[mid] == k,我们也将right = mid - 1,
     // 因为我们只要最左边的index，下面找最右边的index也是同理。
@@ -319,22 +342,27 @@ public class FSimple {
         int r = right;
         return r - l + 1;
     }
+
+
     //获取排序数组中出现次数
-    public int GetNumberOfK(int [] array , int k) {
-        return biSearch(array, k+0.5) - biSearch(array, k-0.5);
+    public int GetNumberOfK(int[] array, int k) {
+        return biSearch(array, k + 0.5) - biSearch(array, k - 0.5);
     }
-    public int biSearch(int [] array, double k){
-        int start  = 0, end = array.length - 1;
-        while(start <= end){
-            int mid = start + (end - start)/2;
-            if(array[mid] > k){
+
+
+    public int biSearch(int[] array, double k) {
+        int start = 0, end = array.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (array[mid] > k) {
                 end = mid - 1;
-            }else{
+            } else {
                 start = mid + 1;
             }
         }
         return start;
     }
+
 
     void test(int[] arr, int low, int high) {
         for (int i = 0; i < arr.length - 1; i++) {

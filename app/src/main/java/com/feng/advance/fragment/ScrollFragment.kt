@@ -6,10 +6,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.feng.advance.R
-import com.feng.advance.base.BaseFragment
-import com.feng.advance.base.CommonAdapterRV
-import com.feng.advance.base.ViewHolderRV
+import com.feng.advance.base.*
 import com.feng.advance.util.DataUtil
+import com.orhanobut.logger.Logger
+import kotlinx.android.synthetic.main.fragment_scroll_conflict.*
+import java.util.*
 
 class ScrollFragment : BaseFragment() {
 
@@ -22,12 +23,19 @@ class ScrollFragment : BaseFragment() {
 
 
     override fun getContentViewLayoutID(): Int {
-        return R.layout.fragment_scroll
+        return R.layout.fragment_scroll_conflict
     }
 
+    lateinit var mAdapter:CommonAdapter<String>
 
     override fun initViewsAndEvents(view: View) {
+        mAdapter = object :CommonAdapter<String>(requireContext(),DataUtil.creatSimlpe(100),android.R.layout.activity_list_item){
+            override fun convert(helper: ViewHolder, item: String) {
+                helper.setText(android.R.id.text1,item)
+            }
 
+        }
+        lv.adapter = mAdapter
     }
 
     /*    private boolean dispatchTouchEvent() {

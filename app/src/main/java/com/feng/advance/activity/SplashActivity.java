@@ -5,7 +5,6 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,15 +17,13 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.feng.advance.MainActivity;
 import com.feng.advance.R;
 import com.feng.advance.copy2creat.TopUtil;
-import com.feng.advance.copy2creat.download.DownLoadCenter;
+import com.feng.advance.copy2creat.thread.FThreadPool;
 import com.feng.advance.design.GenericCenter;
 import com.feng.advance.design.compentent.PermissionAOP;
 import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
-import com.feng.advance.test.kotlin.KotlinmActivity;
 import com.feng.advance.weight.touch.TouchUtil;
 import com.feng.common.ICheckLogin;
 import com.orhanobut.logger.Logger;
@@ -45,7 +42,6 @@ public class SplashActivity extends AppCompatActivity
     @Autowired
     ICheckLogin mCheckLogin;
 
-    boolean state = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +57,13 @@ public class SplashActivity extends AppCompatActivity
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (state){
-                    DownLoadCenter.INSTANCE.startLoad(DownLoadCenter.address);
-                } else {
-                    DownLoadCenter.INSTANCE.stop(DownLoadCenter.address);
-                }
-                state = !state;
+
 //                RouteDemo.getInstance().build("main").start();
-                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
+//                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
                 //Fragment fragment =
                 //        (Fragment) ARouter.getInstance().build("/main/view").navigation();
                 //Logger.v("frag" + fragment);
-                MainActivity.start(SplashActivity.this);
+                FThreadPool.creat().test();
                 Logger.e("aaa = "+mCheckLogin);
             }
         });
@@ -83,7 +74,7 @@ public class SplashActivity extends AppCompatActivity
 //        intent.setComponent(neam);
 //        startActivity(intent);
         EventBus.getDefault().register(this);
-        startActivity(new Intent(this, KotlinmActivity.class));
+        //startActivity(new Intent(this, KotlinmActivity.class));
         setToolbar();
         GenericCenter.show();
     }
