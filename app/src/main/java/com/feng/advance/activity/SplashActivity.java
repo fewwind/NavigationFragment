@@ -24,6 +24,7 @@ import com.feng.advance.design.GenericCenter;
 import com.feng.advance.design.compentent.PermissionAOP;
 import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
+import com.feng.advance.test.algorithm.FSimple;
 import com.feng.advance.weight.touch.TouchUtil;
 import com.feng.common.ICheckLogin;
 import com.orhanobut.logger.Logger;
@@ -65,6 +66,7 @@ public class SplashActivity extends AppCompatActivity
                 //Logger.v("frag" + fragment);
                 FThreadPool.creat().test();
                 Logger.e("aaa = "+mCheckLogin);
+                FSimple.maxPublic();
             }
         });
 

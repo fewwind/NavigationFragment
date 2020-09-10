@@ -2,6 +2,7 @@ package com.feng.advance.test.algorithm;
 
 import android.view.View;
 import android.view.ViewGroup;
+import com.orhanobut.logger.Logger;
 import java.util.List;
 import java.util.Stack;
 
@@ -17,22 +18,23 @@ public class FTree {
         TreeNode node32 = new TreeNode(32);
         TreeNode node33 = new TreeNode(33);
         TreeNode node34 = new TreeNode(34);
+        TreeNode node41 = new TreeNode(41);
+        TreeNode node52 = new TreeNode(52);
         root.left = node21;
         root.right = node22;
         node21.left = node31;
         node21.right = node32;
         node22.left = node33;
         node22.right = node34;
+        node33.left = node41;
+        node41.right = node52;
     }
 
 
     /**
-     * 非递归，借助栈来计算深度(层数)
-     * 比如                root，先放入栈中
-     * 5          当前栈的元素数量为1，len=1，取出栈中此时所有的元素，即5，然后将其子节点3和7放入栈中
-     * 3       7      当前栈的元素数量为2，len=2，所以连续从栈中pop两次，使栈中不在含有该层元素，同时将下层节点2和4放入栈中
-     * 2         4          当前栈的元素数量为2，len=2，所以连续从栈中pop两次
-     * 记录深度，所以每次pop出栈中所有元素(某层的所有节点)只需深度+1，即depth++
+     * 非递归，借助栈来计算深度(层数) 比如                root，先放入栈中 5          当前栈的元素数量为1，len=1，取出栈中此时所有的元素，即5，然后将其子节点3和7放入栈中
+     * 3       7      当前栈的元素数量为2，len=2，所以连续从栈中pop两次，使栈中不在含有该层元素，同时将下层节点2和4放入栈中 2         4
+     * 当前栈的元素数量为2，len=2，所以连续从栈中pop两次 记录深度，所以每次pop出栈中所有元素(某层的所有节点)只需深度+1，即depth++
      */
     public static int treeDepth2(TreeNode root) {
         if (root == null) {
@@ -146,17 +148,23 @@ public class FTree {
         int right = minDepth(node.right);
         int left = minDepth(node.left);
         if (node.right == null || node.right == null) return right + left + 1;//此时必定有个节点为0
-        return Math.min(left,right) + 1;
+        return Math.min(left, right) + 1;
     }
-    public boolean isBalance(TreeNode node){
+
+
+    public boolean isBalance(TreeNode node) {
         if (node == null) return true;
-        return isBalanceInner(node.left,node.right);
+        return isBalanceInner(node.left, node.right);
     }
-    public boolean isBalanceInner(TreeNode left,TreeNode right){
-        if (left ==null && right ==null) return true;
+
+
+    public boolean isBalanceInner(TreeNode left, TreeNode right) {
+        if (left == null && right == null) return true;
         if (left == null || right == null || left.val != right.val) return false;
-        return isBalanceInner(left.left,right.right) && isBalanceInner(left.right,right.left);
+        return isBalanceInner(left.left, right.right) && isBalanceInner(left.right, right.left);
     }
+
+
     public static class TreeNode {
         public TreeNode left;
         public TreeNode right;
@@ -166,14 +174,23 @@ public class FTree {
         public TreeNode(int val) {
             this.val = val;
         }
-        public void print(){
-            System.out.print("-"+val);
-            if (left != null){
+
+
+        public void print() {
+            System.out.print("-" + val);
+            if (left != null) {
                 left.print();
             }
-            if (right != null){
+            if (right != null) {
                 right.print();
             }
+        }
+
+
+        @Override public String toString() {
+            return "TreeNode{" +
+                    "val=" + val +
+                    '}';
         }
     }
 
@@ -207,45 +224,82 @@ public class FTree {
             findPath2(root.right, list, cur + ">");
         }
     }
-    //    fun recursionPrint(root:View) {
-    //        printView(root)
-    //        if (root is ViewGroup) {
-    //            for (childIndex in 0 until root.childCount) {
-    //                val childView = root.getChildAt(childIndex)
-    //                recursionPrint(childView)
-    //            }
-    //        }
-    //    }
-    //
-    //    fun breadthFirst(root :View){
-    //        val viewDeque = LinkedList<View>()
-    //        var view = root
-    //        viewDeque.push(view)
-    //        while (!viewDeque.isEmpty()){
-    //            view = viewDeque.poll()
-    //            printView(view)
-    //            if(view is ViewGroup){
-    //                for(childIndex in 0 until view.childCount){
-    //                    val childView = view.getChildAt(childIndex)
-    //                    viewDeque.addLast(childView)
-    //                }
-    //            }
-    //        }
-    //    }
-    //
-    //    fun depthFirst(root :View){
-    //        val viewDeque = LinkedList<View>()
-    //        var view = root
-    //        viewDeque.push(view)
-    //        while (!viewDeque.isEmpty()){
-    //            view = viewDeque.pop()
-    //            printView(view)
-    //            if(view is ViewGroup){
-    //                for(childIndex in 0 until view.childCount){
-    //                    val childView = view.getChildAt(childIndex)
-    //                    viewDeque.push(childView)
-    //                }
-    //            }
-    //        }
-    //    }
-}
+
+
+    static Integer MaxLength = 0;//记录最长路径
+
+
+    public static void getLength(TreeNode t) {
+        int length = LengthTree(t);
+        Logger.v("t = "+t+" length = "+length);
+        if (t != null) {
+            MaxLength = Math.max(length , MaxLength);
+            getLength(t.left);
+            getLength(t.right);
+        }
+    }
+
+
+    //得到当前节点的最长路径
+    public static int LengthTree(TreeNode t) {
+        if (t == null) {
+            return 0;
+        }
+        int left = heighTree(t.left);
+        int right = heighTree(t.right);
+        int CurMax = left + right;
+        return CurMax;
+    }
+
+
+    //求二叉树最大高度
+    public static int heighTree(TreeNode t) {
+        if (t == null) {
+            return 0;
+        } else {
+            return Math.max(heighTree(t.left), heighTree(t.right)) + 1;
+        }
+    }
+
+        //    fun recursionPrint(root:View) {
+        //        printView(root)
+        //        if (root is ViewGroup) {
+        //            for (childIndex in 0 until root.childCount) {
+        //                val childView = root.getChildAt(childIndex)
+        //                recursionPrint(childView)
+        //            }
+        //        }
+        //    }
+        //
+        //    fun breadthFirst(root :View){
+        //        val viewDeque = LinkedList<View>()
+        //        var view = root
+        //        viewDeque.push(view)
+        //        while (!viewDeque.isEmpty()){
+        //            view = viewDeque.poll()
+        //            printView(view)
+        //            if(view is ViewGroup){
+        //                for(childIndex in 0 until view.childCount){
+        //                    val childView = view.getChildAt(childIndex)
+        //                    viewDeque.addLast(childView)
+        //                }
+        //            }
+        //        }
+        //    }
+        //
+        //    fun depthFirst(root :View){
+        //        val viewDeque = LinkedList<View>()
+        //        var view = root
+        //        viewDeque.push(view)
+        //        while (!viewDeque.isEmpty()){
+        //            view = viewDeque.pop()
+        //            printView(view)
+        //            if(view is ViewGroup){
+        //                for(childIndex in 0 until view.childCount){
+        //                    val childView = view.getChildAt(childIndex)
+        //                    viewDeque.push(childView)
+        //                }
+        //            }
+        //        }
+        //    }
+    }

@@ -1,8 +1,5 @@
 package com.feng.advance.test.algorithm;
 
-import android.view.View;
-import android.view.ViewGroup;
-import com.feng.advance.bean.LinkNode;
 import com.orhanobut.logger.Logger;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,12 +37,24 @@ public class FSimple {
 
     //异位字母
     public boolean isSame(String a, String b) {
+        int num = 6;
+        char charNum = 6 + '0';// num6 = '6'
+        char char6 = '6';
+        int num6 = char6 - '0';// num6 = '6'
         for (char i = 'a'; i <= 'z'; i++) {
         }
         Arrays.sort(a.toCharArray());
         Arrays.sort(b.toCharArray());
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) != b.charAt(i)) return false;
+        }
+        int[] fakeMap = new int[26];
+        for (int i = 0; i < a.length(); i++) {
+            fakeMap[a.charAt(i) - 'a']++;
+            fakeMap[b.charAt(i) - 'a']--;
+        }
+        for (int res : fakeMap) {
+            if (res != 0) return false;
         }
         return true;
     }
@@ -187,6 +196,25 @@ public class FSimple {
     }
 
 
+    public static void reverseStr(String s) {
+        int l = 0;
+        int h = s.length() - 1;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (l >= h) {
+                break;
+            }
+            char a = chars[l];
+            char t = a;
+            chars[l] = chars[h];
+            chars[h] = t;
+            l++;
+            h--;
+        }
+        Logger.v("Arr = " + Arrays.toString(chars));
+    }
+
+
     public boolean isSquare(int num) {
         return (num & (num - 1)) == 0;
     }
@@ -257,6 +285,14 @@ public class FSimple {
         return res;
     }
 
+    public void arrPublicSub(int[] lArr,int[] sArr){
+        for (int i = 0; i < lArr.length; i++) {
+            int j = 0;
+            if (sArr[j] == lArr[i]){
+
+            }
+        }
+    }
 
     private int removeDuplicates(int[] arr) {//有序数组去重
         int[] array = { 0, 1, 2, 2, 5, 6, 6, 8 };
@@ -364,51 +400,76 @@ public class FSimple {
     }
 
 
-    void test(int[] arr, int low, int high) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            int index = i;
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[j] > arr[index]) index = j;
-            }
-        }
-
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length - i - 1; j++) {
-            }
-        }
-        if (low > high) return;
-        int i = low;
-        int j = high;
-        int base = arr[low];
-        while (i < j) {
-            while (i < j && base >= arr[j]) {
-                j--;
-            }
-            while (i < j && base >= arr[i]) {
-                i--;
-            }
-
-        }
-        arr[low] = arr[i];
-        arr[i] = base;
-        int l = 0;
-        int h = arr.length - 1;
-        int m = l + h / 2;
-        int val = 8;
-        while (l <= h) {
-            if (arr[m] < val) {
-                l = m + 1;
+    public static void rome2Int() {
+        String m = "MCMXCIV";
+        Map<String, Integer> map = new HashMap<>();
+        map.put("M", 1000);
+        map.put("CM", 900);
+        map.put("X", 10);
+        map.put("XC", 90);
+        map.put("IV", 4);
+        int s = 0;
+        for (int i = 0; i < m.length(); ) {
+            String substring = m.substring(i, i + 2);
+            if (i + 1 < m.length() && map.get(substring) != null) {
+                s += map.get(substring);
+                i += 2;
             } else {
-
+                s += map.get(String.valueOf(m.charAt(i)));
+                i++;
             }
         }
-        LinkNode node1, node2;
-        LinkNode head;
-        ViewGroup vg = null;
-        for (int k = 0; k < vg.getChildCount(); k++) {
-            View v = vg.getChildAt(i);
-
-        }
+        Logger.v("s = " + s);
     }
 
+
+    public static void maxPublic() {
+        String[] strs = { "flow", "fl", "flo" };
+        String one = strs[0];
+        String res = "";
+        lable:
+        for (int i = 0; i < one.length(); i++) {
+            char c = one.charAt(i);
+            for (String s : strs) {
+                if (i < s.length() && c == s.charAt(i)) {
+                } else {
+                    res = s.substring(0,i);
+                    break lable;
+                }
+            }
+        }
+        Logger.v("Str = "+res);
+    }
+
+
+    public int maxSum(int[] arr) {
+        int sum = 0;
+        int ans = 0;
+        for (int i : arr) {
+            if (sum > 0) {
+                sum += i;
+            } else {
+                sum = i;
+            }
+            ans = Math.max(ans, sum);
+        }
+        return ans;
+    }
+
+
+    public void square(int x) {
+        int l = 0;
+        int h = x;
+        int ans = 0;
+        while (l <= h) {
+            int m = (l + x);
+            if (m * m <= x) {
+                ans = m;
+                l = m + 1;
+            } else {
+                h = m - 1;
+            }
+        }
+        return;
+    }
 }

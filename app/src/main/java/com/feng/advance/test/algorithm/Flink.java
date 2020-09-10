@@ -117,9 +117,11 @@ public class Flink {
                 node2 = node2.next;
             }
         }
-        while (node1 != node2) {
-            node1 = (node1 == null) ? node2 : node1;
-            node2 = (node2 == null) ? node1 : node2;
+        LinkNode one = node1;
+        LinkNode two = node2;
+        while (one != two) {
+            one = (one == null) ? node2 : node1.next;
+            two = (two == null) ? node1 : node2.next;
         }
     }
 

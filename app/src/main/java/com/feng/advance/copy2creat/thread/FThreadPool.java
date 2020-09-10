@@ -18,7 +18,7 @@ public class FThreadPool {
         //latch.await();
         //wait 和 条件锁await（参考同步队列）都会释放锁，await就是利用lockSupport(它的park方法本身不释放锁)
         //LockSupport优势唤醒指定线程。notify唤醒是随机的
-        // 同步队列的流程时先获取锁，然后while（get==null）,调用条件锁等待,此时释放锁，等待被唤醒
+        // 同步队列的take方法先获取锁，然后while（get==null）,调用条件锁等待,此时释放锁，等待被唤醒
         //非公平锁和公平锁区别，非公平锁获取锁的时候直接尝试获取，公平锁先判断是否有等待队列
     }
 
