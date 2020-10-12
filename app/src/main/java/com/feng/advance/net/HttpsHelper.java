@@ -53,12 +53,14 @@ public class HttpsHelper {
         }
     }
 
-    private static void checkServerWrapper(X509Certificate[] chain, String authType) {
+    private static void checkServerWrapper(X509Certificate[] chain, String authType)
+            throws CertificateException {
         if (isNeedCheck()) {
             try {
                 getSystemDefault().checkServerTrusted(chain, authType);
             } catch (CertificateException e) {
                 e.printStackTrace();
+                throw e;
             }
         } else {
             if (chain == null || chain.length <= 0)
