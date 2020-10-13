@@ -1,5 +1,6 @@
 package com.feng.advance.copy2creat
 
+import com.feng.advance.bean.FragmentBean
 import com.feng.advance.copy2creat.myrxjava.FConsumer
 import com.feng.advance.copy2creat.myrxjava.FObservable
 import com.feng.advance.copy2creat.myrxjava.FObservableOnSubscribe

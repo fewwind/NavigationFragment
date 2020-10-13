@@ -8,6 +8,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -25,6 +30,7 @@ import com.feng.advance.design.compentent.PermissionAOP;
 import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
 import com.feng.advance.test.algorithm.FSimple;
+import com.feng.advance.util.data.DataCenter;
 import com.feng.advance.weight.touch.TouchUtil;
 import com.feng.common.ICheckLogin;
 import com.orhanobut.logger.Logger;
@@ -42,6 +48,10 @@ public class SplashActivity extends AppCompatActivity
     protected Toolbar toolbar;
     @Autowired
     ICheckLogin mCheckLogin;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private FragmentPagerAdapter mAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,9 +62,6 @@ public class SplashActivity extends AppCompatActivity
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         ARouter.getInstance().inject(this);
         learnListFragment = new LearnListFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, learnListFragment)
-                .commitAllowingStateLoss();
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +72,7 @@ public class SplashActivity extends AppCompatActivity
                 //        (Fragment) ARouter.getInstance().build("/main/view").navigation();
                 //Logger.v("frag" + fragment);
                 FThreadPool.creat().test();
-                Logger.e("aaa = "+mCheckLogin);
+                Logger.e("aaa = " + mCheckLogin);
                 FSimple.maxPublic();
             }
         });
@@ -79,13 +86,23 @@ public class SplashActivity extends AppCompatActivity
         //startActivity(new Intent(this, KotlinmActivity.class));
         setToolbar();
         GenericCenter.show();
+        initVp();
+    }
+
+
+    private void initVp() {
+        mViewPager = findViewById(R.id.vp);
+        mTabLayout = findViewById(R.id.tab);
+        mAdapter = new Adapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
 
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("tool");
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -112,6 +129,30 @@ public class SplashActivity extends AppCompatActivity
     public boolean onTouchEvent(MotionEvent event) {
         TouchUtil.touch(this, event);
         return super.onTouchEvent(event);
+    }
+
+
+    private class Adapter extends FragmentPagerAdapter {
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return FragmentFactory.creat(DataCenter.mDatas.get(position).fragment);
+        }
+
+        @Override
+        public int getCount() {
+            return DataCenter.mDatas.size();
+        }
+
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return DataCenter.mDatas.get(position).name;
+        }
     }
 
 

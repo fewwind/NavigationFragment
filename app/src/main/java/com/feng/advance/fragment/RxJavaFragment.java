@@ -47,7 +47,7 @@ public class RxJavaFragment extends BaseFragment {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.fragment_statistics;
+        return R.layout.fragment_main;
     }
 
 

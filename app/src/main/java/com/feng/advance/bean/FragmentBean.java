@@ -11,6 +11,7 @@ public class FragmentBean <T extends Class>{
 
     public FragmentBean(T fragment) {
         this.fragment = fragment;
+        name = fragment.getSimpleName().replace("Fragment","");
     }
 
     public FragmentBean(String name, int type) {
