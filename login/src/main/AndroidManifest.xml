@@ -4,6 +4,7 @@
 
     <application android:name="com.feng.login.LoginApp">
         <activity android:name="com.feng.login.LoginActivity"></activity>
+        <meta-data android:name="LoginAppInit" android:value="IAppInit"/>
     </application>
 
 </manifest>

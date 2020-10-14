@@ -11,6 +11,9 @@ public class AppStartDemo {
     public static ArrayList<AppInitSort> mAppSort = new ArrayList<>();
 
 
+    /**
+     * 注解处理器只能作用于module，生成的类请看 $login_AppStart
+     */
     public static void initAppStart() {
         try {
             Class<?> appStart = Class.forName("com.fewwind.learn.app_AppStart");
