@@ -6,6 +6,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -27,13 +28,13 @@ import com.feng.advance.copy2creat.TopUtil;
 import com.feng.advance.copy2creat.thread.FThreadPool;
 import com.feng.advance.design.GenericCenter;
 import com.feng.advance.design.compentent.PermissionAOP;
+import com.feng.advance.design.compentent.TraceTimeAOP;
 import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
 import com.feng.advance.test.algorithm.FSimple;
 import com.feng.advance.util.data.DataCenter;
 import com.feng.advance.weight.touch.TouchUtil;
 import com.feng.common.ICheckLogin;
-import com.orhanobut.logger.Logger;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -64,19 +65,18 @@ public class SplashActivity extends AppCompatActivity
         learnListFragment = new LearnListFragment();
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
+            @TraceTimeAOP
             public void onClick(View v) {
-
+                SystemClock.sleep(600);
 //                RouteDemo.getInstance().build("main").start();
 //                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
                 //Fragment fragment =
                 //        (Fragment) ARouter.getInstance().build("/main/view").navigation();
                 //Logger.v("frag" + fragment);
                 FThreadPool.creat().test();
-                Logger.e("aaa = " + mCheckLogin);
                 FSimple.maxPublic();
             }
         });
-
 //        Intent intent = new Intent();
 //        ComponentName neam = new ComponentName("com.chaozhuo.grow", "com.chaozhuo.grow.MainActivity");
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);

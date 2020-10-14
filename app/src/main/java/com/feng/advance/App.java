@@ -2,8 +2,8 @@ package com.feng.advance;
 
 import android.content.Context;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.feng.common.BaseApp;
 import com.feng.advance.copy2creat.processor.AppStartDemo;
+import com.feng.common.BaseApp;
 import com.feng.route_api.RouteDemo;
 
 /**
