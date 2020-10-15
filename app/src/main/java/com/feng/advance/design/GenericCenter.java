@@ -1,10 +1,13 @@
 package com.feng.advance.design;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 
 public class GenericCenter {
@@ -28,6 +31,13 @@ public class GenericCenter {
             e.printStackTrace();
         }
 
+    }
+    public static void gson2Array(){
+        String s = "[\"1\",\"2\",\"3\"]";
+        List<String> list = new Gson().fromJson(s, new TypeToken<List<String>>() {
+        }.getType());
+        String[] array = new Gson().fromJson(s, String[].class);
+        Logger.v(Arrays.toString(array)+" - " + Arrays.toString(list.toArray()));
     }
 }
 

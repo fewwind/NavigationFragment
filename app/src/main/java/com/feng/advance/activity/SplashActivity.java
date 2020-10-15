@@ -137,6 +137,7 @@ public class SplashActivity extends AppCompatActivity
             super(fm);
         }
 
+
         @Override
         public Fragment getItem(int position) {
             return FragmentFactory.creat(DataCenter.mDatas.get(position).fragment);
