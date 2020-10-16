@@ -5,8 +5,8 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -18,11 +18,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.feng.advance.MainActivity;
 import com.feng.advance.R;
 import com.feng.advance.copy2creat.TopUtil;
 import com.feng.advance.copy2creat.thread.FThreadPool;
@@ -67,7 +69,7 @@ public class SplashActivity extends AppCompatActivity
             @Override
             @TraceTimeAOP
             public void onClick(View v) {
-                SystemClock.sleep(600);
+                //SystemClock.sleep(600);
 //                RouteDemo.getInstance().build("main").start();
 //                ARouter.getInstance().build("/loginGroup/ui").navigation(SplashActivity.this);
                 //Fragment fragment =
@@ -119,6 +121,19 @@ public class SplashActivity extends AppCompatActivity
     }
 
 
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.main:
+                MainActivity.start(this);
+                break;
+            case R.id.scroll:
+                startActivity(new Intent(this, ScrollingActivity.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return super.dispatchTouchEvent(ev);
@@ -142,6 +157,7 @@ public class SplashActivity extends AppCompatActivity
         public Fragment getItem(int position) {
             return FragmentFactory.creat(DataCenter.mDatas.get(position).fragment);
         }
+
 
         @Override
         public int getCount() {

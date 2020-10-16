@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#1D7BFD</color>
     <color name="colorAccent">#00BCD4</color>
     <color name="tvWhite">#FFFFFF</color>
+    <color name="trans">#00000000</color>
 
     <color name="bottom_select">#333333</color>
     <color name="bottom_normal">#BBBBBB</color>

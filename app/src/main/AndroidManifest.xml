@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.feng.advance.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,11 +19,15 @@
         android:theme="@style/AppTheme"
         tools:replace="name">
         <activity
-            android:name="com.feng.advance.MainActivity"
+            android:name=".activity.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppThemeTrans"></activity>
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|keyboard|smallestScreenSize|layoutDirection|screenLayout|navigation"
             android:screenOrientation="portrait" />
-        <activity android:name="com.feng.advance.activity.Sub0Activity" />
-        <activity android:name="com.feng.advance.activity.SplashActivity">
+        <activity android:name=".activity.Sub0Activity" />
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.feng.advance.test.kotlin.KotlinmActivity"
+            android:name=".test.kotlin.KotlinmActivity"
             android:label="@string/title_activity_kotlinm" />
     </application>
 

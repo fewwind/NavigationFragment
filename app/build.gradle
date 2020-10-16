@@ -61,6 +61,17 @@ kotlin {
     }
 }
 
+gradle.taskGraph.whenReady {
+    it.allTasks.each { task ->
+        println("Task Name : ${task.name}")
+        task.dependsOn.each{ t->
+            println "-----${t.class}"
+        }
+        //def outputFileStr = task.outputs.files.getAsPath();
+        //def inputFileStr = task.inputs.files.getAsPath()
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // implementation 只给当前项目使用 api 可以给第三方
