@@ -177,10 +177,10 @@ public class SplashActivity extends AppCompatActivity
     @Override
     public void click(Class type) {
         mType = type;
-        getSupportFragmentManager().beginTransaction()
-                .hide(learnListFragment)
-                .add(R.id.container, FragmentFactory.creat(mType))
-                .commitAllowingStateLoss();
+        //getSupportFragmentManager().beginTransaction()
+        //        .hide(learnListFragment)
+        //        .add(R.id.container, FragmentFactory.creat(mType))
+        //        .commitAllowingStateLoss();
         TopUtil.rxJava();
     }
 
