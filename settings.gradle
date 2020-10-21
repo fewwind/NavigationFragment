@@ -1,1 +1,2 @@
+include ':plugin'
 include ':app', ':login', ':common', ':route_annotation', ':route_api', ':RouteProcess'

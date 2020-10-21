@@ -71,6 +71,18 @@ gradle.taskGraph.whenReady {
         //def inputFileStr = task.inputs.files.getAsPath()
     }
 }
+apply plugin: 'fewwind.plugin'
+buildscript {
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+    }
+    //加载自定义插件 group + module + version
+    dependencies {
+        classpath 'fewwind.gradle.plugin:plugin:1.0.0'
+    }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
