@@ -74,6 +74,8 @@ gradle.taskGraph.whenReady {
 apply plugin: 'fewwind.plugin'
 buildscript {
     repositories {
+            jcenter()
+            google()
         maven {
             url uri('../repo')
         }
