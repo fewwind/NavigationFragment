@@ -16,15 +16,12 @@ class LeetCode {
             max++
             var size = stack.size
             while (size-- > 0) {
-                var pop = stack.pop()
+                //用pop是广度,pollLast是前序遍历，pop和poll逻辑都是取first。但是一个是栈一个队列
+//                var pop = stack.pop()
+                var pop = stack.pollLast()
                 println(pop.`val`)
-                //用push是深度，addLast是广度，pop和poll逻辑都是取first。但是一个是栈一个队列
-                if (pop.right != null) stack.push(pop.right)
-                if (pop.left != null) stack.push(pop.left)
-//                var pop = stack.poll()
-//                println(pop.`val`)
-//                if (pop.right != null) stack.addLast(pop.right)
-//                if (pop.left != null) stack.addLast(pop.left)
+                if (pop.right != null) stack.addLast(pop.right)
+                if (pop.left != null) stack.addLast(pop.left)
             }
         }
         return max
@@ -50,11 +47,11 @@ fun main(args: Array<String>) {
     var tree = FTree()
     var head = LinkNode(1, LinkNode(1, LinkNode(2, LinkNode(2, LinkNode(3, null)))))
     var cycle = LinkNode(1, LinkNode(2, LinkNode(3, LinkNode(4, LinkNode(5, null)))))
-    Flink.reverseListHelper(cycle,null)
+    Flink.reverseListHelper(cycle, null)
 //    1
 //  21    22
 // 31 32 33 34
-//    leetCode.treeMaxPath(FTree.root)
+    leetCode.treeMaxPath(FTree.root)
 //    simple.indexAdd(3, intArrayOf(0,2,1,5))
 //    simple.reverseNum(123)
 //    var res = simple.isOrderArray(intArrayOf(1,1,2,0))
