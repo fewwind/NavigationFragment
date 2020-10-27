@@ -2,8 +2,6 @@ package com.feng.advance.test.algorithm;
 
 import com.feng.advance.bean.LinkNode;
 import com.orhanobut.logger.Logger;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Stack;
 
 public class Flink {
@@ -79,22 +77,6 @@ public class Flink {
         }
     }
 
-
-    //判断链表是否有环
-    private boolean isNodeCycle(LinkNode node) {
-        Set<LinkNode> set = new HashSet<>();
-        while (node != null) {
-            if (set.contains(node)) {
-                return true;
-            } else {
-                set.add(node);
-                node = node.next;
-            }
-        }
-        return false;
-    }
-
-
     private LinkNode findMid(LinkNode node) {
         LinkNode quick = node;
         LinkNode slow = node;
@@ -120,8 +102,8 @@ public class Flink {
         LinkNode one = node1;
         LinkNode two = node2;
         while (one != two) {
-            one = (one == null) ? node2 : node1.next;
-            two = (two == null) ? node1 : node2.next;
+            one = (one == null) ? node2 : one.next;
+            two = (two == null) ? node1 : two.next;
         }
     }
 
@@ -138,6 +120,11 @@ public class Flink {
                 printLn("", slow);
                 return true;
             }
+        }
+        //找到环的入口节点,12345673，交点在6,然后同时走2步，在3相遇就是入口
+        while (slow != node){
+            slow = slow.next;
+            node = node.next;
         }
         return false;
     }
@@ -159,22 +146,22 @@ public class Flink {
     public LinkNode mergeTwoLists(LinkNode l1, LinkNode l2) {
         // 在返回节点之前维护对节点的不变引用。（？？？）
         LinkNode prehead = new LinkNode(-1);
-
-        LinkNode prev = prehead;
+        LinkNode tem = prehead;
+        //为什么不让tem直接等于小节点而是next？因为prehead=tem。如果tem等于head1那么prehead就是空值
         while (l1 != null && l2 != null) {
             if (l1.val <= l2.val) {
-                prev.next = l1;
+                tem.next = l1;
                 l1 = l1.next;
             } else {
-                prev.next = l2;
+                tem.next = l2;
                 l2 = l2.next;
             }
-            prev = prev.next;
+            tem = tem.next;
         }
 
         // l1和l2中正好有一个在这一点上可以是非空的，所以连接
         //非空列表到合并列表的末尾。
-        prev.next = l1 == null ? l2 : l1;
+        tem.next = l1 == null ? l2 : l1;
 
         return prehead.next;
     }
