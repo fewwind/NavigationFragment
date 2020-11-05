@@ -34,9 +34,11 @@ import com.feng.advance.design.compentent.TraceTimeAOP;
 import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
 import com.feng.advance.test.algorithm.FSimple;
+import com.feng.advance.test.algorithm.FTree;
 import com.feng.advance.util.data.DataCenter;
 import com.feng.advance.weight.touch.TouchUtil;
 import com.feng.common.ICheckLogin;
+import java.util.ArrayList;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -77,6 +79,7 @@ public class SplashActivity extends AppCompatActivity
                 //Logger.v("frag" + fragment);
                 FThreadPool.creat().test();
                 FSimple.maxPublic();
+                FTree.findPath(FTree.root,new ArrayList<String>(),">");
             }
         });
 //        Intent intent = new Intent();

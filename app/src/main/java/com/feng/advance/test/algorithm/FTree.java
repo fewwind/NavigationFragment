@@ -3,6 +3,7 @@ package com.feng.advance.test.algorithm;
 import android.view.View;
 import android.view.ViewGroup;
 import com.orhanobut.logger.Logger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -195,8 +196,9 @@ public class FTree {
     }
 
 
-    private void findPath(TreeNode node, List<String> list, String s) {
+    public static void findPath(TreeNode node, List<String> list, String s) {
         if (node == null) return;
+        Logger.v("node = " + node.val + " list= " + Arrays.toString(list.toArray()) + " s= " + s);
         if (node.left == null && node.right == null) {
             list.add(s + node.val);
             return;
@@ -231,9 +233,9 @@ public class FTree {
 
     public static void getLength(TreeNode t) {
         int length = LengthTree(t);
-        Logger.v("t = "+t+" length = "+length);
+        Logger.v("t = " + t + " length = " + length);
         if (t != null) {
-            MaxLength = Math.max(length , MaxLength);
+            MaxLength = Math.max(length, MaxLength);
             getLength(t.left);
             getLength(t.right);
         }
@@ -261,45 +263,45 @@ public class FTree {
         }
     }
 
-        //    fun recursionPrint(root:View) {
-        //        printView(root)
-        //        if (root is ViewGroup) {
-        //            for (childIndex in 0 until root.childCount) {
-        //                val childView = root.getChildAt(childIndex)
-        //                recursionPrint(childView)
-        //            }
-        //        }
-        //    }
-        //
-        //    fun breadthFirst(root :View){
-        //        val viewDeque = LinkedList<View>()
-        //        var view = root
-        //        viewDeque.push(view)
-        //        while (!viewDeque.isEmpty()){
-        //            view = viewDeque.poll()
-        //            printView(view)
-        //            if(view is ViewGroup){
-        //                for(childIndex in 0 until view.childCount){
-        //                    val childView = view.getChildAt(childIndex)
-        //                    viewDeque.addLast(childView)
-        //                }
-        //            }
-        //        }
-        //    }
-        //
-        //    fun depthFirst(root :View){
-        //        val viewDeque = LinkedList<View>()
-        //        var view = root
-        //        viewDeque.push(view)
-        //        while (!viewDeque.isEmpty()){
-        //            view = viewDeque.pop()
-        //            printView(view)
-        //            if(view is ViewGroup){
-        //                for(childIndex in 0 until view.childCount){
-        //                    val childView = view.getChildAt(childIndex)
-        //                    viewDeque.push(childView)
-        //                }
-        //            }
-        //        }
-        //    }
-    }
+    //    fun recursionPrint(root:View) {
+    //        printView(root)
+    //        if (root is ViewGroup) {
+    //            for (childIndex in 0 until root.childCount) {
+    //                val childView = root.getChildAt(childIndex)
+    //                recursionPrint(childView)
+    //            }
+    //        }
+    //    }
+    //
+    //    fun breadthFirst(root :View){
+    //        val viewDeque = LinkedList<View>()
+    //        var view = root
+    //        viewDeque.push(view)
+    //        while (!viewDeque.isEmpty()){
+    //            view = viewDeque.poll()
+    //            printView(view)
+    //            if(view is ViewGroup){
+    //                for(childIndex in 0 until view.childCount){
+    //                    val childView = view.getChildAt(childIndex)
+    //                    viewDeque.addLast(childView)
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+    //    fun depthFirst(root :View){
+    //        val viewDeque = LinkedList<View>()
+    //        var view = root
+    //        viewDeque.push(view)
+    //        while (!viewDeque.isEmpty()){
+    //            view = viewDeque.pop()
+    //            printView(view)
+    //            if(view is ViewGroup){
+    //                for(childIndex in 0 until view.childCount){
+    //                    val childView = view.getChildAt(childIndex)
+    //                    viewDeque.push(childView)
+    //                }
+    //            }
+    //        }
+    //    }
+}

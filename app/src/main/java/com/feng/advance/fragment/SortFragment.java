@@ -298,4 +298,18 @@ public class SortFragment extends BaseFragment {
         quickSort(arr, j + 1, high);
     }
 
+    public static void mergeSort(int[] arr){
+        int[] tem = new int[arr.length];
+    }
+    private static void innerMergeSort(int[]a,int[] b,int left,int right){
+        if (left<right){
+            int m = (left+right)/2;
+            innerMergeSort(a,b,left,m);
+            innerMergeSort(a,b,m+1,right);
+        }
+    }
+    private static void mergeSortArray(int[] arr,int[] tem,int left,int middle,int right){
+
+    }
+
 }
