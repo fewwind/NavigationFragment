@@ -253,6 +253,37 @@ public class FTree {
         return CurMax;
     }
 
+    class Solution {
+        int max = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            dfs(root);
+            return max;
+        }
+
+        private int dfs(TreeNode root) {
+            if (root.left == null && root.right == null) {
+                return 0;
+            }
+            int leftSize = root.left == null? 0: dfs(root.left) + 1;
+            int rightSize = root.right == null? 0: dfs(root.right) + 1;
+            max = Math.max(max, leftSize + rightSize);
+            return Math.max(leftSize, rightSize);
+        }
+
+        public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+            if(t1 == null)
+                return t2;
+            if(t2 == null)
+                return t1;
+            t1.val = t1.val + t2.val;
+            t1.left = mergeTrees(t1.left,t2.left);
+            t1.right = mergeTrees(t1.right,t2.right);
+            return t1;
+        }
+    }
 
     //求二叉树最大高度
     public static int heighTree(TreeNode t) {

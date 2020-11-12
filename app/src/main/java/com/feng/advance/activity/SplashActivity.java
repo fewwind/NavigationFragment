@@ -33,6 +33,7 @@ import com.feng.advance.design.compentent.PermissionAOP;
 import com.feng.advance.design.compentent.TraceTimeAOP;
 import com.feng.advance.fragment.FragmentFactory;
 import com.feng.advance.fragment.LearnListFragment;
+import com.feng.advance.test.algorithm.FHot;
 import com.feng.advance.test.algorithm.FSimple;
 import com.feng.advance.test.algorithm.FTree;
 import com.feng.advance.util.data.DataCenter;
@@ -80,6 +81,7 @@ public class SplashActivity extends AppCompatActivity
                 FThreadPool.creat().test();
                 FSimple.maxPublic();
                 FTree.findPath(FTree.root,new ArrayList<String>(),">");
+                FHot.maxSum();
             }
         });
 //        Intent intent = new Intent();
