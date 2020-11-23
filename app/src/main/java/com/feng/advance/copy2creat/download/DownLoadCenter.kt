@@ -10,12 +10,15 @@ import java.io.IOException
 import java.io.RandomAccessFile
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 
 object DownLoadCenter {
     const val TABLE = "LoadInfo"
     var path: String = App.app.externalCacheDir.absolutePath + File.separator + "shuo.apk"
     const val address = "http://files.360shuo.cn/app/ruzuo_private_beta_v0.9.6_07301340.apk"
+    const val wzry = "https://dlied4.myapp.com/myapp/1104466820/cos.release-40109/10040714_com.tencent.tmgp.sgame_a952605_1.61.1.6_uifan3.apk"
     var mTasks = mutableListOf<DownLoadTask>()
     val client: OkHttpClient by lazy {
         OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES).connectTimeout(3, TimeUnit.MINUTES).build()
@@ -72,6 +75,42 @@ object DownLoadCenter {
         }
         Logger.e("${mTasks.size}")
     }
+
+
+    fun downFile() {
+        pool.submit(task)
+    }
+    fun stopFile() {
+        (pool as ThreadPoolExecutor).remove(task)
+    }
+
+    var task = object : Runnable {
+        override fun run() {
+            var call = client.newCall(Request.Builder().url(wzry).build())
+            var response = call.execute()
+            Logger.w(" ${response}")
+            response.body().toString()
+            var isByte = response.body()?.byteStream()
+            var bis = BufferedInputStream(isByte)
+            var file = File(path)
+            var randomAccess = RandomAccessFile(file, "rwd")
+            var buffer = ByteArray(2048)
+            var len = 0
+            try {
+                while (len != -1 && !Thread.currentThread().isInterrupted) {
+                    len = bis.read(buffer)
+                    randomAccess.write(buffer, 0, len)
+                    Logger.v(" ${len}  <> ${randomAccess.length()}")
+                }
+            } catch (e: Exception) {
+                Logger.e("e = $e")
+            } finally {
+                isByte?.close()
+                randomAccess.close()
+                bis.close()
+            }
+        }
+    }
 }
 
 class DownLoadTask(var stop: Boolean = false, var info: LoadInfo) : Runnable {
@@ -111,7 +150,5 @@ class DownLoadTask(var stop: Boolean = false, var info: LoadInfo) : Runnable {
             randomAccess.close()
             bis.close()
         }
-
     }
-
 }

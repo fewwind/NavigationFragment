@@ -27,6 +27,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.feng.advance.MainActivity;
 import com.feng.advance.R;
 import com.feng.advance.copy2creat.TopUtil;
+import com.feng.advance.copy2creat.download.DownLoadCenter;
 import com.feng.advance.copy2creat.thread.FThreadPool;
 import com.feng.advance.design.GenericCenter;
 import com.feng.advance.design.compentent.PermissionAOP;
@@ -36,6 +37,7 @@ import com.feng.advance.fragment.LearnListFragment;
 import com.feng.advance.test.algorithm.FHot;
 import com.feng.advance.test.algorithm.FSimple;
 import com.feng.advance.test.algorithm.FTree;
+import com.feng.advance.util.StringUtil;
 import com.feng.advance.util.data.DataCenter;
 import com.feng.advance.weight.touch.TouchUtil;
 import com.feng.common.ICheckLogin;
@@ -82,6 +84,7 @@ public class SplashActivity extends AppCompatActivity
                 FSimple.maxPublic();
                 FTree.findPath(FTree.root,new ArrayList<String>(),">");
                 FHot.maxSum();
+                DownLoadCenter.INSTANCE.stopFile();
             }
         });
 //        Intent intent = new Intent();
@@ -94,6 +97,7 @@ public class SplashActivity extends AppCompatActivity
         setToolbar();
         GenericCenter.show();
         initVp();
+        StringUtil.findUrl();
     }
 
 
